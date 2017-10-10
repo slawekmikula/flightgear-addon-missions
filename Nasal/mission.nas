@@ -10,20 +10,28 @@ var handlers        = [];
 var hasmember = view.hasmember;
 
 var addExtension = func (type, h) {
-	if (type == "MissionObject")
+	if (type == "MissionObject") {
 		append (objects, h);
-	elsif (type == "Handler")
+	} elsif (type == "Handler") {
 		append (handlers, h);
+    }
 }
 
 var extension_list = func {
 	var v = [];
-	var path = getprop("/sim/fg-root") ~ "/Nasal/mission/extensions";
-	if((var dir = directory(path)) == nil) return;
-	foreach(var file; sort(dir, cmp))
-		if(size(file) > 4)
-			if (substr(file, -4) == ".nas")
+	var path = getprop("/sim/mission/root_path") ~ "/Nasal/extensions";
+	if((var dir = directory(path)) == nil) {
+        return;
+    }
+
+	foreach(var file; sort(dir, cmp)) {
+		if(size(file) > 4) {
+			if (substr(file, -4) == ".nas") {
 				append(v, file);
+            }
+        }
+    }
+
 	return v;
 }
 
@@ -33,11 +41,13 @@ var load_nasal = func(file, module) {    # (copy-paste from io.nas)
 	if (size(err)) {
 		if (substr(err[0], 0, 12) == "Parse error:") { # hack around Nasal feature
 			var e = split(" at line ", err[0]);
-			if (size(e) == 2)
+			if (size(e) == 2) {
 				err[0] = string.join("", [e[0], "\n  at ", file, ", line ", e[1], "\n "]);
+            }
 		}
-		for (var i = 1; (var c = caller(i)) != nil; i += 1)
+		for (var i = 1; (var c = caller(i)) != nil; i += 1) {
 			err ~= subvec(c, 2, 2);
+        }
 		debug.printerror(err);
 		return 0;
 	}
@@ -56,8 +66,11 @@ var load_preferences = func() {
 var start_mission = func(name) {
 	if (mission_started) return;
 
-	mission_root = resolvepath("Missions/" ~ name);
-	if (mission_root == "") return;
+    # FIXME - ResourceLoader in FG Source
+	mission_root = resolvepath("/Aircraft/Missions/" ~ name);
+	if (mission_root == "") {
+        return;
+    }
 
 	load_preferences();
 
@@ -71,9 +84,9 @@ var start_mission = func(name) {
 	}
 
 	var timeofday = mission_node.getChild("timeofday");
-	if (timeofday != nil)
+	if (timeofday != nil) {
 		fgcommand("timeofday", props.Node.new({ "timeofday" : timeofday.getValue() }));
-
+    }
 
 	globals["__mission"] = {};
 
@@ -101,14 +114,19 @@ var _start_mission = func {
 		return;
 	}
 
-	foreach (var h; handlers)
-		if( hasmember(h, "init") )
+	foreach (var h; handlers) {
+		if( hasmember(h, "init") ) {
 			h.init();
+        }
+    }
 
-	foreach(var c; mission_node.getChildren("object"))
-		foreach(var obj; objects)
-			if (c.getValue("type") == obj.type)
+	foreach(var c; mission_node.getChildren("object")) {
+		foreach(var obj; objects) {
+			if (c.getValue("type") == obj.type) {
 				append(mission_objects, obj.new(c));
+            }
+        }
+    }
 
 	foreach(var obj; mission_objects)
 		if( hasmember(obj, "init") )
@@ -231,7 +249,7 @@ var scr_x = func getprop("/sim/startup/xsize");
 var scr_y = func getprop("/sim/startup/ysize");
 
 var init_gui = func {
-	gui.Dialog.new("/sim/gui/dialogs/mission-browser/dialog", "Nasal/mission/GUI/mission_browser.xml");
+	gui.Dialog.new("/sim/gui/dialogs/mission-browser/dialog", getprop("/sim/mission/root_path") ~ "/GUI/mission_browser.xml");
 
 	#reset handling
 	foreach(var menu; props.getNode("/sim/menubar/default").getChildren("menu"))
@@ -294,8 +312,13 @@ var load_data = func {
 
 ###
 
-_setlistener("/nasal/mission/loaded", func {
+var fdm_init_listener = _setlistener("/sim/signals/fdm-initialized", func {
+	removelistener(fdm_init_listener);
 	setprop("/sim/sound/chatter/enabled", 1);
 	setprop("/sim/sound/chatter/volume", 1.0);
 	init_gui();
+
+    print("Mission initalized");
 });
+
+print("Mission loaded");

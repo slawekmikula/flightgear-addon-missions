@@ -137,7 +137,7 @@
 			var update_list = func {
 				list.removeChildren("value");
 
-				var dir = directory(getprop("/sim/fg-root") ~ "/Missions");
+				var dir = directory(getprop("/sim/mission/root_path") ~ "/Missions");
 				foreach (var a; dir)
 					if (a != "." and a != ".." and a != "Generic")
 						list.addChild("value").setValue(a);
@@ -147,7 +147,7 @@
 
 			var select_mission = func {
 				selected_mission = getprop("/sim/mission/gui/selected-mission");
-				mission_root = getprop("/sim/fg-root") ~ "/Missions/" ~ selected_mission;
+				mission_root = getprop("/sim/mission/root_path") ~ "/Missions/" ~ selected_mission;
 
 				data_node.setValues({description: ""});
 				io.read_properties(mission_root ~ "/metadata.xml", data_node);
@@ -155,7 +155,7 @@
 
 
 				img.set("src", mission_root ~ "/image.png").setSize(250, 250);
-				
+
 			}
 
 			update_list();
