@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+	<path type="string">num_9.ac</path>
+	<animation>
+		<enable-hot type="string">false</enable-hot>
+	</animation>
+	<animation>
+		<type>noshadow</type>
+	</animation>
+</PropertyList>

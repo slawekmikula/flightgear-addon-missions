@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+  <path type="string">gate-40x20.ac</path>
+  <animation>
+    <object-name type="string">gate-red</object-name>
+    <object-name n="1" type="string">gate-green</object-name>
+    <enable-hot type="string">false</enable-hot>
+  </animation>
+  <animation n="1">
+    <type type="string">select</type>
+    <object-name type="string">gate-red</object-name>
+    <condition>
+      <property type="string">/sim/mission/objects/gate[66]/finished</property>
+    </condition>
+  </animation>
+  <animation n="2">
+    <type type="string">select</type>
+    <object-name type="string">gate-green</object-name>
+    <condition>
+      <not>
+        <property type="string">/sim/mission/objects/gate[66]/finished</property>
+      </not>
+    </condition>
+  </animation>
+</PropertyList>

@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+	<path>bounding_box.ac</path>
+
+
+	<animation>
+		<type>scale</type>
+		<object-name>box</object-name>
+		<property>/bbox/height</property>
+		<x-min>0.1</x-min>
+		<y-min>0.1</y-min>
+		<z-min>0.1</z-min>
+		<x-factor>0.0</x-factor>
+		<y-factor>0.0</y-factor>
+		<z-factor>100.0</z-factor>
+	</animation>
+	<animation>
+		<type>scale</type>
+		<object-name>box</object-name>
+		<property>/bbox/width</property>
+		<x-min>0.1</x-min>
+		<y-min>0.1</y-min>
+		<z-min>0.1</z-min>
+		<x-factor>0.0</x-factor>
+		<y-factor>100.0</y-factor>
+		<z-factor>0.0</z-factor>
+	</animation>
+
+	<animation>
+		<type>scale</type>
+		<object-name>box</object-name>
+		<property>/bbox/length</property>
+		<x-min>0.1</x-min>
+		<y-min>0.1</y-min>
+		<z-min>0.1</z-min>
+		<x-factor>100.0</x-factor>
+		<y-factor>0.0</y-factor>
+		<z-factor>0.0</z-factor>
+	</animation>
+
+</PropertyList>

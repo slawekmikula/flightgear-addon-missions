@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+  <path type="string">hoop-40x40.ac</path>
+	<animation>
+		<enable-hot type="string">false</enable-hot>
+	</animation>
+  <animation>
+    <type type="string">select</type>
+    <object-name type="string">hoop-red</object-name>
+  </animation>
+	<animation>
+		<type>noshadow</type>
+		<object-name>hoop-green</object-name>
+	</animation>
+</PropertyList>

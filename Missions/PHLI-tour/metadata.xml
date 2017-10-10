@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<PropertyList>
+
+	<name>PHLI tour</name>
+
+	<skill-level>2</skill-level>
+
+	<description>
+Fly the tourist to PHLI airport.
+	</description>
+
+</PropertyList>

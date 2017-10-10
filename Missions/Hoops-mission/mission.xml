@@ -1,0 +1,550 @@
+<?xml version="1.0"?>
+<PropertyList>
+
+	<!--presets>
+		<airport-id>KLVK</airport-id>
+		<altitude>-9999</altitude>
+		<altitude-ft>-9999</altitude-ft>
+		<latitude-deg>-9999</latitude-deg>
+		<longitude-deg>-9999</longitude-deg>
+	</presets>
+
+	<timeofday>noon</timeofday-->
+
+	<!--object>
+		<name>Timer 1</name>
+		<type>timer-trigger</type>
+		<activated>1</activated>
+		<single-shot>1</single-shot>
+		<stop-time>5.0</stop-time>
+		<actions>
+			<object-reference>Intro 1</object-reference>
+			<object-reference>Timer 2</object-reference>
+		</actions>
+	</object>
+
+	<object>
+		<name>Timer 2</name>
+		<type>timer-trigger</type>
+		<activated>0</activated>
+		<single-shot>1</single-shot>
+		<stop-time>4.0</stop-time>
+		<actions>
+			<object-reference>Intro 2</object-reference>
+			<object-reference>Timer 3</object-reference>
+			<object-reference>Show_all_hoops</object-reference>
+		</actions>
+	</object>
+
+	<object>
+		<name>Timer 3</name>
+		<type>timer-trigger</type>
+		<activated>0</activated>
+		<single-shot>1</single-shot>
+		<stop-time>3.0</stop-time>
+		<actions>
+			<object-reference>Intro 3</object-reference>
+			<object-reference>Proximity_Hoop1</object-reference>
+		</actions>
+	</object>
+
+	<object>
+		<name>Timer 4</name>
+		<type>timer-trigger</type>
+		<activated>0</activated>
+		<single-shot>1</single-shot>
+		<stop-time>2.0</stop-time>
+		<actions>
+			<object-reference>End 1</object-reference>
+		</actions>
+	</object>
+
+	<object>
+		<name>Timer_Onscreen</name>
+		<type>timer-trigger</type>
+		<activated>0</activated>
+		<single-shot>1</single-shot>
+		<on-screen-timer>1</on-screen-timer>
+		<stop-time>10000.0</stop-time>
+	</object>
+
+	<object>
+		<name>Intro 1</name>
+		<type>dialog-action</type>
+		<text>Welcome to the FlightGear flight simulator!</text>
+		<sound-file>Welcome.wav</sound-file>
+		<delay-sec>3</delay-sec>
+	</object>
+
+	<object>
+		<name>Intro 2</name>
+		<type>dialog-action</type>
+		<text>This is the test mission.</text>
+		<sound-file>msg1.wav</sound-file>
+		<delay-sec>2</delay-sec>
+	</object>
+
+	<object>
+		<name>Intro 3</name>
+		<type>dialog-action</type>
+		<text>Fly through all the hoops.</text>
+		<sound-file>msg2.wav</sound-file>
+		<delay-sec>2</delay-sec>
+	</object>
+
+	<object>
+		<name>End 1</name>
+		<type>dialog-action</type>
+		<text>Congratulations! You have completed your first mission.</text>
+		<sound-file>msg4a.wav</sound-file>
+		<delay-sec>3</delay-sec>
+	</object>
+
+	<object>
+		<name>SHOW_Onscreen_timer</name>
+		<type>object-activation-action</type>
+		<object-state>1</object-state>
+		<reference-list>
+			<object-reference>Timer_Onscreen</object-reference>
+		</reference-list>
+	</object>
+	<object>
+		<name>HIDE_Onscreen_timer</name>
+		<type>object-activation-action</type>
+		<object-state>0</object-state>
+		<reference-list>
+			<object-reference>Timer_Onscreen</object-reference>
+		</reference-list>
+	</object>
+
+	<object>
+		<name>Show_all_hoops</name>
+		<type>object-activation-action</type>
+		<object-state>1</object-state>
+		<reference-list>
+			<object-reference>Hoop1_active</object-reference>
+			<object-reference>Hoop2_inactive</object-reference>
+			<object-reference>POI_hoop1</object-reference>
+		</reference-list>
+	</object>
+
+	<object>
+		<name>SHOW_Hoop1_active</name>
+		<type>object-activation-action</type>
+		<object-state>1</object-state>
+		<reference-list>
+			<object-reference>Hoop1_active</object-reference>
+			<object-reference>Proximity_Hoop1</object-reference>
+			<object-reference>POI_hoop1</object-reference>
+		</reference-list>
+	</object>
+	<object>
+		<name>HIDE_Hoop1_active</name>
+		<type>object-activation-action</type>
+		<object-state>0</object-state>
+		<reference-list>
+			<object-reference>Hoop1_active</object-reference>
+			<object-reference>Proximity_Hoop1</object-reference>
+			<object-reference>POI_hoop1</object-reference>
+		</reference-list>
+	</object>
+	<object>
+		<name>HIDE_Hoop1_inactive</name>
+		<type>object-activation-action</type>
+		<object-state>0</object-state>
+		<reference-list>
+			<object-reference>Hoop1_inactive</object-reference>
+		</reference-list>
+	</object>
+	<object>
+		<name>HIDE_Hoop2_active</name>
+		<type>object-activation-action</type>
+		<object-state>0</object-state>
+		<reference-list>
+			<object-reference>Hoop2_active</object-reference>
+			<object-reference>Proximity_Hoop2</object-reference>
+			<object-reference>POI_hoop2</object-reference>
+		</reference-list>
+	</object>
+	<object>
+		<name>HIDE_Hoop2_inactive</name>
+		<type>object-activation-action</type>
+		<object-state>0</object-state>
+		<reference-list>
+			<object-reference>Hoop2_inactive</object-reference>
+		</reference-list>
+	</object>
+	<object>
+		<name>SHOW_Hoop2_active</name>
+		<type>object-activation-action</type>
+		<object-state>1</object-state>
+		<reference-list>
+			<object-reference>Hoop2_active</object-reference>
+			<object-reference>Proximity_Hoop2</object-reference>
+			<object-reference>SHOW_Onscreen_timer</object-reference>
+			<object-reference>POI_hoop2</object-reference>
+		</reference-list>
+	</object>
+
+	<object>
+		<name>Proximity_Hoop1</name>
+		<type>proximity-trigger</type>
+		<activated>0</activated>
+		<on-enter-actions>
+			<object-reference>SingleShot_Hoop_SFX</object-reference>
+			<object-reference>HIDE_Hoop1_active</object-reference>
+			<object-reference>Hoop1_inactive</object-reference>
+			<object-reference>HIDE_Hoop2_inactive</object-reference>
+			<object-reference>SHOW_Hoop2_active</object-reference>
+		</on-enter-actions>
+		<areas>
+			<object-reference>Area_Hoop1</object-reference>
+		</areas>
+	</object>
+	<object>
+		<name>Proximity_Hoop2</name>
+		<type>proximity-trigger</type>
+		<activated>0</activated>
+		<on-enter-actions>
+			<object-reference>SingleShot_Hoop_SFX</object-reference>
+			<object-reference>HIDE_Hoop2_active</object-reference>
+			<object-reference>Hoop2_inactive</object-reference>
+			<object-reference>HIDE_Hoop1_inactive</object-reference>
+			<object-reference>SHOW_Hoop1_active</object-reference>
+			<object-reference>HIDE_Onscreen_timer</object-reference>
+			<object-reference>Timer 4</object-reference>
+		</on-enter-actions>
+		<areas>
+			<object-reference>Area_Hoop2</object-reference>
+		</areas>
+	</object>
+
+	<object>
+		<name>Area_Hoop1</name>
+		<type>rectangle-area</type>
+		<width>100.0</width>
+		<height>100.0</height>
+		<length>25.0</length>
+		<orientation>
+			<heading-deg>88.0</heading-deg>
+			<pitch-deg>0.0</pitch-deg>
+			<roll-deg>0.0</roll-deg>
+		</orientation>
+		<attached-world-position>
+			<latitude-deg>37.69387904</latitude-deg>
+			<longitude-deg>-121.8223982</longitude-deg>
+			<altitude-m>213.8884859</altitude-m>
+			<altitude-is-AGL>0</altitude-is-AGL>
+		</attached-world-position>
+	</object>
+	<object>
+		<name>Area_Hoop2</name>
+		<type>rectangle-area</type>
+		<width>100.0</width>
+		<height>100.0</height>
+		<length>25.0</length>
+		<orientation>
+			<heading-deg>56.0</heading-deg>
+			<pitch-deg>0.0</pitch-deg>
+			<roll-deg>0.0</roll-deg>
+		</orientation>
+		<attached-world-position>
+			<latitude-deg>37.6936749</latitude-deg>
+			<longitude-deg>-121.8302028</longitude-deg>
+			<altitude-m>245.7999165</altitude-m>
+			<altitude-is-AGL>0</altitude-is-AGL>
+		</attached-world-position>
+	</object>
+
+	<object>
+		<name>Hoop1_active</name>
+		<type>model</type>
+		<activated>0</activated>
+		<path>Missions/Generic/Models/hoop-40x40.xml</path>
+		<orientation>
+			<heading-deg>88.0</heading-deg>
+			<pitch-deg>0.0</pitch-deg>
+			<roll-deg>0.0</roll-deg>
+		</orientation>
+		<world-position>
+			<latitude-deg>37.69387904</latitude-deg>
+			<longitude-deg>-121.8223982</longitude-deg>
+			<altitude-m>213.8884859</altitude-m>
+			<altitude-is-AGL>0</altitude-is-AGL>
+		</world-position>
+	</object>
+	<object>
+		<name>Hoop1_active</name>
+		<type>model</type>
+		<activated>0</activated>
+		<path>Missions/Generic/Models/Numbers/num_1.xml</path>
+		<orientation>
+			<heading-deg>88.0</heading-deg>
+			<pitch-deg>0.0</pitch-deg>
+			<roll-deg>0.0</roll-deg>
+		</orientation>
+		<world-position>
+			<latitude-deg>37.69387904</latitude-deg>
+			<longitude-deg>-121.8223982</longitude-deg>
+			<altitude-m>213.8884859</altitude-m>
+			<altitude-is-AGL>0</altitude-is-AGL>
+		</world-position>
+	</object>
+	<object>
+		<name>Hoop1_inactive</name>
+		<type>model</type>
+		<activated>0</activated>
+		<path>Missions/Generic/Models/hoop-100x100-red.xml</path>
+		<orientation>
+			<heading-deg>88.0</heading-deg>
+			<pitch-deg>0.0</pitch-deg>
+			<roll-deg>0.0</roll-deg>
+		</orientation>
+		<world-position>
+			<latitude-deg>37.69387904</latitude-deg>
+			<longitude-deg>-121.8223982</longitude-deg>
+			<altitude-m>213.8884859</altitude-m>
+			<altitude-is-AGL>0</altitude-is-AGL>
+		</world-position>
+	</object>
+
+	<object>
+		<name>Hoop2_active</name>
+		<type>model</type>
+		<activated>0</activated>
+		<path>Missions/Generic/Models/hoop-40x40.xml</path>
+		<orientation>
+			<heading-deg>56.0</heading-deg>
+			<pitch-deg>0.0</pitch-deg>
+			<roll-deg>0.0</roll-deg>
+		</orientation>
+		<world-position>
+			<latitude-deg>37.6936749</latitude-deg>
+			<longitude-deg>-121.8302028</longitude-deg>
+			<altitude-m>245.7999165</altitude-m>
+			<altitude-is-AGL>0</altitude-is-AGL>
+		</world-position>
+	</object>
+	<object>
+		<name>Hoop2_active</name>
+		<type>model</type>
+		<activated>0</activated>
+		<path>Missions/Generic/Models/Numbers/num_2.xml</path>
+		<orientation>
+			<heading-deg>56.0</heading-deg>
+			<pitch-deg>0.0</pitch-deg>
+			<roll-deg>0.0</roll-deg>
+		</orientation>
+		<world-position>
+			<latitude-deg>37.6936749</latitude-deg>
+			<longitude-deg>-121.8302028</longitude-deg>
+			<altitude-m>245.7999165</altitude-m>
+			<altitude-is-AGL>0</altitude-is-AGL>
+		</world-position>
+	</object>
+	<object>
+		<name>Hoop2_inactive</name>
+		<type>model</type>
+		<activated>0</activated>
+		<path>Missions/Generic/Models/hoop-100x100-red.xml</path>
+		<orientation>
+			<heading-deg>56.0</heading-deg>
+			<pitch-deg>0.0</pitch-deg>
+			<roll-deg>0.0</roll-deg>
+		</orientation>
+		<world-position>
+			<latitude-deg>37.6936749</latitude-deg>
+			<longitude-deg>-121.8302028</longitude-deg>
+			<altitude-m>245.7999165</altitude-m>
+			<altitude-is-AGL>0</altitude-is-AGL>
+		</world-position>
+	</object>
+
+	<object>
+		<name>SingleShot_Hoop_SFX</name>
+		<type>single-shot-sound-action</type>
+		<sound-file>glassbell.wav</sound-file>
+	</object>
+
+	<object>
+		<name>POI_hoop1</name>
+		<type>point-of-interest</type>
+		<activated>0</activated>
+		<target-name>Gate 1</target-name>
+		<attached-world-object>
+			<object-reference>Hoop1_active</object-reference>
+			<x-offset-m>0.0</x-offset-m>
+			<y-offset-m>0.0</y-offset-m>
+			<z-offset-m>70.0</z-offset-m>
+		</attached-world-object>
+	</object>
+
+	<object>
+		<name>POI_hoop2</name>
+		<type>point-of-interest</type>
+		<activated>0</activated>
+		<target-name>Gate 2</target-name>
+		<attached-world-object>
+			<object-reference>Hoop2_active</object-reference>
+			<x-offset-m>0.0</x-offset-m>
+			<y-offset-m>0.0</y-offset-m>
+			<z-offset-m>70.0</z-offset-m>
+		</attached-world-object>
+	</object-->
+
+	<object>
+		<name>MSG_KLVK</name>
+		<type>dialog-action</type>
+		<text>Welcome to KLVK</text>
+		<sound-file>glassbell.wav</sound-file>
+		<delay-sec>3</delay-sec>
+	</object>
+
+	<object>
+		<name>KLVK_landing</name>
+		<type>airport-landing-trigger</type>
+		<activated>0</activated>
+		<single-shot>0</single-shot>
+		<airport-id>KLVK</airport-id>
+		<!--runway>25R</runway>
+		<runway>25L</runway-->
+		<landing-type>full stop</landing-type>
+		<actions>
+			<object-reference>MSG_KLVK</object-reference>
+			<object-reference>ENABLE_property_trigger</object-reference>
+		</actions>
+	</object>
+
+	<object>
+		<name>helipad_landing</name>
+		<type>area-landing-trigger</type>
+		<activated>1</activated>
+		<areas>
+			<object-reference>area_helipad1</object-reference>
+			<object-reference>area_helipad2</object-reference>
+		</areas>
+		<landing-type>full stop</landing-type>
+		<actions>
+			<object-reference>MSG_KLVK</object-reference>
+			<object-reference>ENABLE_property_trigger</object-reference>
+			<object-reference>Goal_completed</object-reference>
+		</actions>
+	</object>
+
+	<object>
+		<name>PROP_TRIGGER_landing_KLVK</name>
+		<type>property-trigger</type>
+		<activated>1</activated>
+		<condition>
+			<greater-than>
+				<property>/position/altitude-agl-ft</property>
+				<value>50.0</value>
+			</greater-than>
+		</condition>
+		<actions>
+			<object-reference>ENABLE_landing_trigger</object-reference>
+		</actions>
+	</object>
+
+	<object>
+		<name>ENABLE_landing_trigger</name>
+		<type>object-activation-action</type>
+		<object-state>1</object-state>
+		<reference-list>
+			<object-reference>helipad_landing</object-reference>
+		</reference-list>
+	</object>
+
+	<object>
+		<name>ENABLE_property_trigger</name>
+		<type>object-activation-action</type>
+		<object-state>1</object-state>
+		<reference-list>
+			<object-reference>PROP_TRIGGER_landing_KLVK</object-reference>
+		</reference-list>
+	</object>
+
+	<object>
+		<name>area_helipad1</name>
+		<type>rectangle-area</type>
+		<width>20.0</width>
+		<height>20.0</height>
+		<length>20.0</length>
+		<orientation>
+			<heading-deg>0.0</heading-deg>
+			<pitch-deg>0.0</pitch-deg>
+			<roll-deg>0.0</roll-deg>
+		</orientation>
+		<attached-world-position>
+			<latitude-deg>37.69558033</latitude-deg>
+			<longitude-deg>-121.8204298</longitude-deg>
+			<altitude-m>116.4220694</altitude-m>
+			<altitude-is-AGL>0</altitude-is-AGL>
+		</attached-world-position>
+	</object>
+
+	<object>
+		<name>area_helipad2</name>
+		<type>rectangle-area</type>
+		<width>20.0</width>
+		<height>20.0</height>
+		<length>20.0</length>
+		<orientation>
+			<heading-deg>0.0</heading-deg>
+			<pitch-deg>0.0</pitch-deg>
+			<roll-deg>0.0</roll-deg>
+		</orientation>
+		<attached-world-position>
+			<latitude-deg>37.69023415</latitude-deg>
+			<longitude-deg>-121.8233606</longitude-deg>
+			<altitude-m>116.0338283</altitude-m>
+			<altitude-is-AGL>0</altitude-is-AGL>
+		</attached-world-position>
+	</object>
+
+	<object>
+		<name>POI_helipad1</name>
+		<type>point-of-interest</type>
+		<activated>1</activated>
+		<target-name>Helipad 1</target-name>
+		<attached-world-position>
+			<latitude-deg>37.69558033</latitude-deg>
+			<longitude-deg>-121.8204298</longitude-deg>
+			<altitude-m>116.4220694</altitude-m>
+			<altitude-is-AGL>0</altitude-is-AGL>
+		</attached-world-position>
+	</object>
+
+	<object>
+		<name>POI_helipad2</name>
+		<type>point-of-interest</type>
+		<activated>1</activated>
+		<target-name>Helipad 2</target-name>
+		<attached-world-position>
+			<latitude-deg>37.69023415</latitude-deg>
+			<longitude-deg>-121.8233606</longitude-deg>
+			<altitude-m>116.0338283</altitude-m>
+			<altitude-is-AGL>0</altitude-is-AGL>
+		</attached-world-position>
+	</object>
+
+	<object>
+		<name>Goal_land</name>
+		<type>goal</type>
+		<activated>1</activated>
+		<goal-state>pending</goal-state>
+		<text>Land on any helipad.</text>
+		<order>0</order>
+	</object>
+
+	<object>
+		<name>Goal_completed</name>
+		<type>goal-resolution-action</type>
+		<goal-resolution>completed</goal-resolution>
+		<goals>
+			<object-reference>Goal_land</object-reference>
+		</goals>
+	</object>
+
+
+</PropertyList>

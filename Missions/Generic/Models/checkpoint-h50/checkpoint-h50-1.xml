@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+	<path>checkpoint-h50.ac</path>
+	<animation>
+		<type>rotate</type>
+		<object-name>pointer</object-name>
+		<property>/sim/time/elapsed-sec</property>
+		<factor>30</factor>
+		<axis>
+			<x>0.0</x>
+			<y>0.0</y>
+			<z>1.0</z>
+		</axis>
+		<center>
+			<x-m>0</x-m>
+			<y-m>0</y-m>
+			<z-m>0</z-m>
+		</center>
+	</animation>
+	<animation>
+		<type>dist-scale</type>
+		<object-name>pointer</object-name>
+		<interpolation>
+			<entry>
+				<ind>0</ind>
+				<dep>1</dep>
+			</entry>
+			<entry>
+				<ind>1000</ind>
+				<dep>2</dep>
+			</entry>
+			<entry>
+				<ind>5000</ind>
+				<dep>4</dep>
+			</entry>
+			<entry>
+				<ind>10000</ind>
+				<dep>8</dep>
+			</entry>
+		</interpolation>
+	</animation>
+	<animation>
+		<object-name>pointer</object-name>
+		<enable-hot type="bool">false</enable-hot>
+	</animation>
+
+	<animation>
+		<type>select</type> 
+		<object-name>pointer</object-name>
+		<condition>
+			<not>
+				<property>/sim/mission/objects/checkpoint[1]/finished</property>
+			</not>
+		</condition>
+	</animation>
+</PropertyList>
