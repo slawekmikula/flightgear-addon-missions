@@ -82,7 +82,7 @@ var loop = func {
 	poi("hdg", crs - getprop("/orientation/heading-deg"));
 }
 
-mission.addExtension("Handler", {
+mission.extension_add("Handler", {
 	init: func {
 		listeners = [
 			setlistener("/sim/mission/point-of-interest/signals/POI-changed", func update()),

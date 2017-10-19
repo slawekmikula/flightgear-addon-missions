@@ -2,7 +2,7 @@
 var play_sound = nil;
 var show_message = nil;
 
-mission.addExtension("Handler", {
+mission.extension_add("Handler", {
 	init: func {
 		#me.DELAY = 4;
 		me.timer = maketimer(0, func me._hide_msg());

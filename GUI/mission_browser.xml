@@ -3,22 +3,12 @@
 <PropertyList>
 	<name>mission-browser</name>
 	<layout>vbox</layout>
-	<!--width>850</width-->
-	<!--height>600</height-->
-	<!--color>
-		<alpha>0.0</alpha>
-	</color-->
-	<!--x>20</x>
-	<y>10</y>
-	<draggable>false</draggable>
-	<resizable>false</resizable-->
 
 	<group>
 		<layout>hbox</layout>
 		<empty><stretch>1</stretch></empty>
 		<text>
 			<label>Mission browser</label>
-			<!--halign>center</halign-->
 		</text>
 		<empty><stretch>1</stretch></empty>
 		<button>
@@ -51,13 +41,9 @@
 			<binding>
 				<command>nasal</command>
 				<script>
-					#mission.start_mission(getprop("/sim/mission/gui/selected-mission"))
 					select_mission();
 				</script>
 			</binding>
-			<!--binding>
-				<command>dialog-close</command>
-			</binding-->
 			<value>...</value>
 			<value>...</value>
 		</list>
@@ -68,7 +54,6 @@
 				<name>mission-image</name>
 				<valign>fill</valign>
 				<halign>fill</halign>
-				<!-- stretch>true</stretch -->
 				<pref-width>250</pref-width>
 				<pref-height>250</pref-height>
 				<nasal>
@@ -76,16 +61,11 @@
 						var myCanvas1 = canvas.get( cmdarg() );
 						myCanvas1.setColorBackground(1,1,1,0);
 						var img = myCanvas1.createGroup().createChild("image");
-						#img.setFile(mission.mission_root ~ "/image.png")
-						#	.setSize(250, 250);
-
 					]]> </load>
 				</nasal>
 			</canvas>
 		</group>
 	</group>
-
-			<!--hrule/-->
 
 	<textbox>
 		<name>mission_description</name>
@@ -108,11 +88,11 @@
 		<pref-height>30</pref-height>
 		<binding>
 			<command>nasal</command>
-			<script>fgcommand("dialog-close", {"dialog-name":"mission-browser"});mission.start_mission(selected_mission)</script>
+			<script>
+                fgcommand("dialog-close", {"dialog-name" : "mission-browser"});
+                mission.start_mission(selected_mission);
+            </script>
 		</binding>
-		<!--binding>
-			<command>dialog-close</command>
-		</binding-->
 	</button>
 
 	<nasal>
@@ -122,7 +102,6 @@
 			var selected_mission = "";
 			var data_node = props.getNode("sim/mission/gui/data", 1);
 			data_node.setValues({description: ""});
-
 
 			var dialog_update = func () {
 				forindex (var i; arg) {
@@ -137,10 +116,16 @@
 			var update_list = func {
 				list.removeChildren("value");
 
-				var dir = directory(getprop("/sim/mission/root_path") ~ "/Missions");
-				foreach (var a; dir)
-					if (a != "." and a != ".." and a != "Generic")
-						list.addChild("value").setValue(a);
+				var mission_path = getprop("/sim/mission/root_path") ~ "/Missions";
+				foreach (var a; directory(mission_path)) {
+                    if (a != "." and a != ".." and a != "Generic") {
+                        foreach (var b; directory(mission_path ~ "/" ~ a)) {
+                            if (b != "." and b != "..") {
+                                list.addChild("value").setValue(a ~ "/" ~ b);
+                            }
+                        }
+                    }
+                }
 
 				dialog_update("mission_list");
 			}
@@ -153,9 +138,7 @@
 				io.read_properties(mission_root ~ "/metadata.xml", data_node);
 				dialog_update("mission_description");
 
-
 				img.set("src", mission_root ~ "/image.png").setSize(250, 250);
-
 			}
 
 			update_list();

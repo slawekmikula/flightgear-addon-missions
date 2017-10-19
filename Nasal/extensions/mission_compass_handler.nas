@@ -1,6 +1,6 @@
 
 
-mission.addExtension("Handler", {
+mission.extension_add("Handler", {
 	init: func {
 		me.timer = maketimer(0.1, func me._loop());
 		me.timer.start();

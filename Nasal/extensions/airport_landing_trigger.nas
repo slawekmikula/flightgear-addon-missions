@@ -14,7 +14,7 @@ var ground_speed = func getprop("/velocities/groundspeed-kt");
 
 var full_stop = func math.abs(ground_speed()) <= 1;
 
-mission.addExtension("MissionObject", {
+mission.extension_add("MissionObject", {
 	type: "airport-landing-trigger",
 
 	new: func(n) {

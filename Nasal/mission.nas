@@ -9,64 +9,21 @@ var handlers        = [];
 
 var hasmember = view.hasmember;
 
-var addExtension = func (type, h) {
-	if (type == "MissionObject") {
-		append (objects, h);
-	} elsif (type == "Handler") {
-		append (handlers, h);
-    }
-}
-
-var extension_list = func {
-	var v = [];
-	var path = getprop("/sim/mission/root_path") ~ "/Nasal/extensions";
-	if((var dir = directory(path)) == nil) {
-        return;
-    }
-
-	foreach(var file; sort(dir, cmp)) {
-		if(size(file) > 4) {
-			if (substr(file, -4) == ".nas") {
-				append(v, file);
-            }
-        }
-    }
-
-	return v;
-}
-
-
-var load_nasal = func(file, module) {    # (copy-paste from io.nas)
-	var code = call(func compile(io.readfile(file), file), nil, var err = []);
-	if (size(err)) {
-		if (substr(err[0], 0, 12) == "Parse error:") { # hack around Nasal feature
-			var e = split(" at line ", err[0]);
-			if (size(e) == 2) {
-				err[0] = string.join("", [e[0], "\n  at ", file, ", line ", e[1], "\n "]);
-            }
-		}
-		for (var i = 1; (var c = caller(i)) != nil; i += 1) {
-			err ~= subvec(c, 2, 2);
-        }
-		debug.printerror(err);
-		return 0;
-	}
-	call(bind(code, globals), nil, nil, globals.__mission[module], err);
-	debug.printerror(err);
-}
-
 var load_preferences = func() {
-	foreach (var a; directory(mission_root))
-		if (a == "preferences.xml") {
-			io.read_properties(mission_root ~ "/preferences.xml", props.getNode(""));
-			break;
-		}
+    foreach (var a; directory(mission_root)) {
+        if (a == "preferences.xml") {
+            io.read_properties(mission_root ~ "/preferences.xml", props.getNode(""));
+            break;
+        }
+    }
 }
 
 var start_mission = func(name) {
-	if (mission_started) return;
+	if (mission_started) {
+        return;
+    }
 
-    # FIXME - ResourceLoader in FG Source
+    # FIXME - FIX ResourceLoader in FG Source
 	mission_root = resolvepath("/Aircraft/Missions/" ~ name);
 	if (mission_root == "") {
         return;
@@ -78,32 +35,18 @@ var start_mission = func(name) {
 	io.read_properties(mission_root ~ "/mission.xml", mission_node);
 
 	var presets = mission_node.getChild("presets");
-	if (presets != nil) {
-		props.copy(presets, props.getNode("/sim/presets"));
-		fgcommand("reposition");
-	}
+# causes FG reload and reinit all data
+#	if (presets != nil) {
+#		props.copy(presets, props.getNode("/sim/presets"));
+#		fgcommand("reposition");
+#	}
 
 	var timeofday = mission_node.getChild("timeofday");
 	if (timeofday != nil) {
 		fgcommand("timeofday", props.Node.new({ "timeofday" : timeofday.getValue() }));
     }
 
-	globals["__mission"] = {};
-
-	#load_extensions();
-
-	var i = 0;
-	var k = "";
-	foreach(var script; mission_node.getChildren("include")) {
-		globals["__mission"][k = "__" ~ i] = {};
-		load_nasal(mission_root ~ "/extensions/" ~ script.getValue(), k);
-		i += 1;
-	}
-	foreach(var script; extension_list()) {
-		globals["__mission"][k = "__" ~ i] = {};
-		load_nasal(getprop("/sim/fg-root") ~ "/Nasal/mission/extensions/" ~ script, k);
-		i += 1;
-	}
+	extensions_load();
 
 	settimer (func _start_mission(), 0);
 }
@@ -128,9 +71,11 @@ var _start_mission = func {
         }
     }
 
-	foreach(var obj; mission_objects)
-		if( hasmember(obj, "init") )
+	foreach(var obj; mission_objects) {
+		if( hasmember(obj, "init") ) {
 			obj.init();
+        }
+    }
 
 	mission_started = 1;
 }
@@ -142,16 +87,23 @@ var splash_screen = func {
 }
 
 var stop_mission = func {
-	if (!mission_started) return;
+	if (!mission_started) {
+        return;
+    }
 
-	foreach(var obj; mission_objects) obj.del();
+
+	foreach(var obj; mission_objects) {
+        obj.del();
+    }
 
 	setsize(mission_objects, 0);
 	setsize(objects, 0);
 
-	foreach (var h; handlers)
-		if (hasmember(h, "stop"))
+	foreach (var h; handlers) {
+		if (hasmember(h, "stop")) {
 			h.stop();
+        }
+    }
 	setsize(handlers, 0);
 
 	delete(globals, "__mission");
@@ -161,15 +113,19 @@ var stop_mission = func {
 
 
 var activate_object = func(name, start = 1) {
-	if (name == nil)
+	if (name == nil) {
 		return;
-	foreach(var obj; mission_objects)
+    }
+
+	foreach(var obj; mission_objects) {
 		if (obj.name == name) {
-			if (start)
+			if (start) {
 				obj.start();
-			else
+			} else {
 				obj.stop();
+            }
 		}
+    }
 }
 
 
@@ -192,11 +148,12 @@ var put_model = func(path, coord, heading = 0, pitch = 0, roll = 0) {
 	var models = props.getNode("/models");
 	var model = nil;
 
-	for (var i = 0; 1; i += 1)
+	for (var i = 0; 1; i += 1) {
 		if (models.getChild("model", i, 0) == nil) {
 			model = models.getChild("model", i, 1);
 			break;
 		}
+    }
 
 	var model_path = model.getPath();
 
@@ -231,9 +188,11 @@ var model = {
 };
 
 var get = func(node, path, default = nil) {
-	if ( (var value = node.getValue(path)) == nil)
+	if ( (var value = node.getValue(path)) == nil) {
 		default;
-	else value;
+    } else {
+        value;
+    }
 }
 
 var play_sound = func (file) {
@@ -244,81 +203,5 @@ var play_sound = func (file) {
 	};
 	fgcommand("play-audio-sample", props.Node.new(sound));
 }
-
-var scr_x = func getprop("/sim/startup/xsize");
-var scr_y = func getprop("/sim/startup/ysize");
-
-var init_gui = func {
-	gui.Dialog.new("/sim/gui/dialogs/mission-browser/dialog", getprop("/sim/mission/root_path") ~ "/GUI/mission_browser.xml");
-
-	#reset handling
-	foreach(var menu; props.getNode("/sim/menubar/default").getChildren("menu"))
-		if (menu.getValue("label") == "Missions")
-			return;
-	#/reset handling
-
-	var h = {
-		label: "Missions",
-		item: [
-			{ #0
-				label: "Mission browser",
-				binding: {
-					command: "nasal",
-					script: "gui.showDialog('mission-browser')",
-				},
-			},
-			{ #1
-				label: "Toggle compass",
-			},
-			{ #2
-				label: "Stop mission",
-				binding: {
-					command: "nasal",
-					script: "mission.stop_mission()",
-				},
-			},
-		],
-	};
-	props.getNode("/sim/menubar/default").addChild("menu").setValues(h);
-	fgcommand("gui-redraw");
-}
-
-###
-var save_data = func {
-	var path = getprop("/sim/fg-home") ~ "/Export/state.xml";
-
-	var fdm_node      = props.getNode("fdm");
-	var engines_node  = props.getNode("engines");
-	var rotors_node   = props.getNode("rotors");
-	var systems_node  = props.getNode("systems");
-	var controls_node = props.getNode("controls");
-
-	var data = props.Node.new();
-
-	props.copy(fdm_node, data.getNode("fdm", 1));
-	props.copy(engines_node, data.getNode("engines", 1));
-	props.copy(rotors_node, data.getNode("rotors", 1));
-	props.copy(systems_node, data.getNode("systems", 1));
-	props.copy(controls_node, data.getNode("controls", 1));
-
-	io.write_properties(path, data);
-	data.remove();
-}
-
-var load_data = func {
-	var path = getprop("/sim/fg-home") ~ "/Export/state.xml";
-	io.read_properties(path, "/");
-}
-
-###
-
-var fdm_init_listener = _setlistener("/sim/signals/fdm-initialized", func {
-	removelistener(fdm_init_listener);
-	setprop("/sim/sound/chatter/enabled", 1);
-	setprop("/sim/sound/chatter/volume", 1.0);
-	init_gui();
-
-    print("Mission initalized");
-});
 
 print("Mission loaded");

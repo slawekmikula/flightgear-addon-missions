@@ -1,5 +1,5 @@
 
-mission.addExtension("MissionObject", {
+mission.extension_add("MissionObject", {
 	type: "model",
 
 	new: func(n) {
@@ -18,7 +18,7 @@ mission.addExtension("MissionObject", {
 		#m.object_N = props.getNode("/sim/mission/objects", 1).addChild("model");
 		#m.position_N = n.getNode("world-position");
 
-		m.model = mission.put_model(m._path, m._coord, m._heading, m._pitch, m._roll);
+		m.model = mission.put_model(getprop("/sim/mission/root_path") ~ m._path, m._coord, m._heading, m._pitch, m._roll);
 
 		if (!m._activated)
 			m._hide();

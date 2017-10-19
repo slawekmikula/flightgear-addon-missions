@@ -53,4 +53,4 @@ var random_action = {
 	del: func,
 };
 
-mission.addExtension("MissionObject", random_action);
+mission.extension_add("MissionObject", random_action);

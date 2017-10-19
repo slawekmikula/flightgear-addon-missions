@@ -33,7 +33,7 @@ var draw_message = func (s = 1) {
 	window.show();
 }
 
-mission.addExtension("Handler", {
+mission.extension_add("Handler", {
 	init: func {
 		me.listeners = [
 			setlistener(me.node.getNode("goal-state-changed", 1), func me.update()),

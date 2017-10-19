@@ -1,6 +1,6 @@
 
 
-mission.addExtension("MissionObject", {
+mission.extension_add("MissionObject", {
 
 	type: "point-of-interest",
 
@@ -49,7 +49,7 @@ mission.addExtension("MissionObject", {
 			];
 			me._apply_offsets();
 		}
-		me._model = mission.put_model(getprop("/sim/fg-root") ~ me._path, me._mdl_coord);
+		me._model = mission.put_model(getprop("/sim/mission/root_path") ~ me._path, me._mdl_coord);
 		me.node.setValues({
 			"latitude-deg"  : me._coord.lat(),
 			"longitude-deg" : me._coord.lon(),

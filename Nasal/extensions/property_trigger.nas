@@ -10,7 +10,7 @@
 #	</object>
 #
 
-mission.addExtension("MissionObject", {
+mission.extension_add("MissionObject", {
 
 	type: "property-trigger",
 

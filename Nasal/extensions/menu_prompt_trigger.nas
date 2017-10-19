@@ -129,4 +129,4 @@ var menu_prompt_trigger = {
 	del: func me._window.del(),
 };
 
-mission.addExtension("MissionObject", menu_prompt_trigger);
+mission.extension_add("MissionObject", menu_prompt_trigger);

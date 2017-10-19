@@ -1,6 +1,6 @@
 var get = mission.get;
 
-mission.addExtension("MissionObject", {
+mission.extension_add("MissionObject", {
 	type: "object-activation-action",
 
 	new: func(n) {

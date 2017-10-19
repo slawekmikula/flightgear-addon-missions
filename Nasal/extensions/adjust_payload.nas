@@ -48,4 +48,4 @@ var adjust_payload_action = {
 	del: func,
 };
 
-mission.addExtension("MissionObject", adjust_payload_action);
+mission.extension_add("MissionObject", adjust_payload_action);

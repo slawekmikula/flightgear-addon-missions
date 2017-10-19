@@ -12,7 +12,7 @@ var goal_group_status = func (group, status) {
 		goal_status(ref.getValue(), status);
 }
 
-mission.addExtension("MissionObject", {
+mission.extension_add("MissionObject", {
 	type: "goal-resolution-action",
 
 	new: func(n) {

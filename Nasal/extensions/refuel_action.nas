@@ -37,4 +37,4 @@ var refuel_action = {
 	del: func,
 };
 
-mission.addExtension("MissionObject", refuel_action);
+mission.extension_add("MissionObject", refuel_action);

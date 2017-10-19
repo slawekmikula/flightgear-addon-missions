@@ -3,7 +3,7 @@ __mission.timer = {current_time: nil};
 
 var dtN = props.getNode("/sim/time/delta-sec");
 
-mission.addExtension("MissionObject", {
+mission.extension_add("MissionObject", {
 	type: "timer-trigger",
 
 	new: func(n) {

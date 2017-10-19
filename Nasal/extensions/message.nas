@@ -13,11 +13,12 @@ var show_message = func (m, delay, snd = nil) {
 	setprop("/sim/mission/message/message-delay", delay);
 	setprop("/sim/mission/message/show-message", 1);
 
-	if (snd != nil)
+	if (snd != nil) {
 		mission.play_sound(snd);
+    }
 }
 
-mission.addExtension("MissionObject", {
+mission.extension_add("MissionObject", {
 	type: "dialog-action",
 
 	new: func(n) {

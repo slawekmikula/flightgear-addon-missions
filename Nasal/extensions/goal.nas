@@ -1,5 +1,5 @@
 
-mission.addExtension("MissionObject", {
+mission.extension_add("MissionObject", {
 	type: "goal",
 
 	new: func(n) {
