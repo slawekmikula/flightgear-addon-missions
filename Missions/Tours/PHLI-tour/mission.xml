@@ -77,7 +77,7 @@
 		<name>Intro_msg</name>
 		<type>dialog-action</type>
 		<text>A tourist is ready to fly to the airport.</text>
-		<sound-file>Intro1.wav</sound-file>
+		<speak>1</speak>
 		<delay-sec>3</delay-sec>
 	</object>
 
@@ -85,7 +85,7 @@
 		<name>Start_engines_msg</name>
 		<type>dialog-action</type>
 		<text>Start the engines</text>
-		<sound-file>start_the_engines.wav</sound-file>
+		<speak>1</speak>
 		<delay-sec>2</delay-sec>
 	</object>
 
@@ -93,7 +93,7 @@
 		<name>Cleared_to_take_off_msg</name>
 		<type>dialog-action</type>
 		<text>You are cleared to take-off</text>
-		<sound-file>cleared_to_take_off.wav</sound-file>
+		<speak>1</speak>
 		<delay-sec>3</delay-sec>
 	</object>
 
@@ -101,7 +101,7 @@
 		<name>Follow_compass_msg</name>
 		<type>dialog-action</type>
 		<text>Follow the mission compass.</text>
-		<sound-file>follow_compass.wav</sound-file>
+		<speak>1</speak>
 		<delay-sec>3</delay-sec>
 	</object>
 
@@ -357,7 +357,7 @@
 		<name>Tourist</name>
 		<type>model</type>
 		<activated>1</activated>
-		<path>Missions/PHLI-tour/Models/scientist.xml</path>
+		<path>/Missions/Generic/Models/People/scientist.xml</path>
 		<orientation>
 			<heading-deg>150.0</heading-deg>
 			<pitch-deg>0.0</pitch-deg>
@@ -375,7 +375,7 @@
 		<name>Tourist-2</name>
 		<type>model</type>
 		<activated>0</activated>
-		<path>Missions/PHLI-tour/Models/scientist.xml</path>
+		<path>/Missions/Generic/Models/People/scientist.xml</path>
 		<orientation>
 			<heading-deg>30.0</heading-deg>
 			<pitch-deg>0.0</pitch-deg>

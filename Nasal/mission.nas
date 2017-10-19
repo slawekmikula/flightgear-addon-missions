@@ -91,7 +91,6 @@ var stop_mission = func {
         return;
     }
 
-
 	foreach(var obj; mission_objects) {
         obj.del();
     }
@@ -130,8 +129,9 @@ var activate_object = func(name, start = 1) {
 
 
 var activate_object_group = func(group, start = 1) {
-	foreach(var ref; group.getChildren("object-reference"))
+	foreach(var ref; group.getChildren("object-reference")) {
 		activate_object(ref.getValue(), start);
+    }
 }
 
 
@@ -195,13 +195,27 @@ var get = func(node, path, default = nil) {
     }
 }
 
+var file_found = func(filename) {
+    return call(io.readfile, [filename], nil, nil, var err=[]);
+}
+
 var play_sound = func (file) {
+
+    var filepath = mission_root ~ "/Sounds/";
+    if (!file_found(filepath ~ "/" ~ file)) {
+        filepath = getprop("/sim/mission/root_path") ~ "/Missions/Generic/Sounds";
+    }
+
 	var sound = {
-		path : mission_root ~ "/Sounds",
+		path : filepath,
 		file : file,
 		volume : 1
 	};
 	fgcommand("play-audio-sample", props.Node.new(sound));
+}
+
+var speak = func (text) {
+    setprop("/sim/sound/voices/atc", text);
 }
 
 print("Mission loaded");

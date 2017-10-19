@@ -73,7 +73,7 @@
 		<name>Intro 1</name>
 		<type>dialog-action</type>
 		<text>Welcome to the FlightGear flight simulator!</text>
-		<sound-file>Welcome.wav</sound-file>
+        <speak>1</speak>
 		<delay-sec>3</delay-sec>
 	</object>
 
@@ -81,7 +81,7 @@
 		<name>Intro 2</name>
 		<type>dialog-action</type>
 		<text>This is the test mission.</text>
-		<sound-file>msg1.wav</sound-file>
+        <speak>1</speak>
 		<delay-sec>2</delay-sec>
 	</object>
 
@@ -89,7 +89,7 @@
 		<name>Intro 3</name>
 		<type>dialog-action</type>
 		<text>Fly through all the hoops.</text>
-		<sound-file>msg2.wav</sound-file>
+        <speak>1</speak>
 		<delay-sec>2</delay-sec>
 	</object>
 
@@ -97,7 +97,7 @@
 		<name>End 1</name>
 		<type>dialog-action</type>
 		<text>Congratulations! You have completed your first mission.</text>
-		<sound-file>msg4a.wav</sound-file>
+		<speak>1</speak>
 		<delay-sec>3</delay-sec>
 	</object>
 

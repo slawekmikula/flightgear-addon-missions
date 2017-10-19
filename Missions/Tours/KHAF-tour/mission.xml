@@ -7,8 +7,6 @@
 		<heading-deg>180</heading-deg>
 		<latitude-deg>37.71937556</latitude-deg>
 		<longitude-deg>-122.4988623</longitude-deg>
-		<!--latitude-deg type="double">53.63305452</latitude-deg>
-		<longitude-deg type="double">-3.175471265</longitude-deg-->
 	</presets>
 
 	<timeofday>afternoon</timeofday>
@@ -44,7 +42,7 @@
 		<name>Intro_msg</name>
 		<type>dialog-action</type>
 		<text>A tourist is ready to fly to the airport.</text>
-		<sound-file>Intro1.wav</sound-file>
+		<speak>1</speak>
 		<delay-sec>3</delay-sec>
 	</object>
 
@@ -134,7 +132,7 @@
 		<name>Tourist</name>
 		<type>model</type>
 		<activated>1</activated>
-		<path>Missions/Flight-to-KHAF/Models/scientist.xml</path>
+		<path>/Missions/Generic/Models/People/scientist.xml</path>
 		<orientation>
 			<heading-deg>180.0</heading-deg>
 			<pitch-deg>0.0</pitch-deg>

@@ -24,9 +24,6 @@ var init_gui = func {
 				},
 			},
 			{ #1
-				label: "Toggle compass",
-			},
-			{ #2
 				label: "Stop mission",
 				binding: {
 					command: "nasal",

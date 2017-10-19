@@ -357,7 +357,7 @@
 		<name>Tourist</name>
 		<type>model</type>
 		<activated>1</activated>
-		<path>Missions/PHLI-tour/Models/scientist.xml</path>
+		<path>/Missions/Generic/Models/People/scientist.xml</path>
 		<orientation>
 			<heading-deg>150.0</heading-deg>
 			<pitch-deg>0.0</pitch-deg>
@@ -375,7 +375,7 @@
 		<name>Tourist-2</name>
 		<type>model</type>
 		<activated>0</activated>
-		<path>Missions/PHLI-tour/Models/scientist.xml</path>
+		<path>/Missions/Generic/Models/People/scientist.xml</path>
 		<orientation>
 			<heading-deg>30.0</heading-deg>
 			<pitch-deg>0.0</pitch-deg>

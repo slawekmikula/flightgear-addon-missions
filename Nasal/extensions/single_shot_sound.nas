@@ -14,15 +14,6 @@ mission.extension_add("MissionObject", {
 		return m;
 	},
 
-#	_play_sound: func {
-#		var sound = {
-#			path : me._sound_path,
-#			file : me._sound_file, #file,
-#			volume : 1
-#		};
-#		fgcommand("play-audio-sample", props.Node.new(sound));
-#	},
-
 	start: func mission.play_sound(me._sound_file),
 
 	stop: func,

@@ -15,8 +15,7 @@
 		<activated>0</activated>
 		<single-shot>0</single-shot>
 		<airport-id>KLVK</airport-id>
-		<!--runway>25R</runway>
-		<runway>25L</runway-->
+		<runway>25L</runway>
 		<landing-type>full stop</landing-type>
 		<actions>
 			<object-reference>MSG_KLVK</object-reference>

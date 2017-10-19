@@ -83,7 +83,7 @@
 		<name>Intro 1</name>
 		<type>dialog-action</type>
 		<text>Welcome to the FlightGear flight simulator!</text>
-		<sound-file>Welcome.wav</sound-file>
+		<speak>1</speak>
 		<delay-sec>3</delay-sec>
 	</object>
 
@@ -91,7 +91,7 @@
 		<name>Intro 2</name>
 		<type>dialog-action</type>
 		<text>This is the test mission.</text>
-		<sound-file>msg1.wav</sound-file>
+		<speak>1</speak>
 		<delay-sec>2</delay-sec>
 	</object>
 
@@ -99,7 +99,7 @@
 		<name>Intro 3</name>
 		<type>dialog-action</type>
 		<text>Fly through all the hoops.</text>
-		<sound-file>msg2.wav</sound-file>
+		<speak>1</speak>
 		<delay-sec>2</delay-sec>
 	</object>
 
@@ -266,7 +266,7 @@
 		<name>Hoop1_active</name>
 		<type>model</type>
 		<activated>0</activated>
-		<path>Aircraft/Missions/Generic/Models/hoop-40x40.xml</path>
+		<path>/Missions/Generic/Models/hoop-40x40.xml</path>
 		<orientation>
 			<heading-deg>88.0</heading-deg>
 			<pitch-deg>0.0</pitch-deg>
@@ -283,7 +283,7 @@
 		<name>Hoop1_active</name>
 		<type>model</type>
 		<activated>0</activated>
-		<path>Aircraft/Missions/Generic/Models/Numbers/num_1.xml</path>
+		<path>/Missions/Generic/Models/Numbers/num_1.xml</path>
 		<orientation>
 			<heading-deg>88.0</heading-deg>
 			<pitch-deg>0.0</pitch-deg>
@@ -300,7 +300,7 @@
 		<name>Hoop1_inactive</name>
 		<type>model</type>
 		<activated>0</activated>
-		<path>Aircraft/Missions/Generic/Models/hoop-100x100-red.xml</path>
+		<path>/Missions/Generic/Models/hoop-100x100-red.xml</path>
 		<orientation>
 			<heading-deg>88.0</heading-deg>
 			<pitch-deg>0.0</pitch-deg>
@@ -318,7 +318,7 @@
 		<name>Hoop2_active</name>
 		<type>model</type>
 		<activated>0</activated>
-		<path>Aircraft/Missions/Generic/Models/hoop-40x40.xml</path>
+		<path>/Missions/Generic/Models/hoop-40x40.xml</path>
 		<orientation>
 			<heading-deg>56.0</heading-deg>
 			<pitch-deg>0.0</pitch-deg>
@@ -335,7 +335,7 @@
 		<name>Hoop2_active</name>
 		<type>model</type>
 		<activated>0</activated>
-		<path>Aircraft/Missions/Generic/Models/Numbers/num_2.xml</path>
+		<path>/Missions/Generic/Models/Numbers/num_2.xml</path>
 		<orientation>
 			<heading-deg>56.0</heading-deg>
 			<pitch-deg>0.0</pitch-deg>
@@ -352,7 +352,7 @@
 		<name>Hoop2_inactive</name>
 		<type>model</type>
 		<activated>0</activated>
-		<path>Aircraft/Missions/Generic/Models/hoop-100x100-red.xml</path>
+		<path>/Missions/Generic/Models/hoop-100x100-red.xml</path>
 		<orientation>
 			<heading-deg>56.0</heading-deg>
 			<pitch-deg>0.0</pitch-deg>
@@ -370,7 +370,7 @@
 		<name>Model_Hoop_3</name>
 		<type>model</type>
 		<activated>0</activated>
-		<path>Aircraft/Missions/Generic/Models/hoop-100x100-red.xml</path>
+		<path>/Missions/Generic/Models/hoop-100x100-red.xml</path>
 		<orientation>
 			<heading-deg>24.0</heading-deg>
 			<pitch-deg>0.0</pitch-deg>
@@ -388,7 +388,7 @@
 		<name>Model_Hoop_4</name>
 		<type>model</type>
 		<activated>0</activated>
-		<path>Aircraft/Missions/Generic/Models/hoop-100x100-red.xml</path>
+		<path>/Missions/Generic/Models/hoop-100x100-red.xml</path>
 		<orientation>
 			<heading-deg>20.0</heading-deg>
 			<pitch-deg>0.0</pitch-deg>
