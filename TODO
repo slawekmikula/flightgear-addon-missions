@@ -1,0 +1,6 @@
+- bug - presets does not work - reloading FG causes whole addon reload and lost of mission state
+- actions documentation
+- fully working all example missions
+- hoops - dynamic mission generator
+- tours - dynamic mission generator
+- skills - dynamic mission generator
