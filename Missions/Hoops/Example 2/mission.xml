@@ -1,27 +1,6 @@
 <?xml version="1.0"?>
 <PropertyList>
-
-	<name>Test mission</name>
-
-	<description>
-		Hoops / gates / checkpoints
-	</description>
-
-	<!--include>timer_trigger.obj</include>
-	<include>object_activation.obj</include>
-	<include>property_trigger.obj</include>
-	<include>point_of_interest.obj</include>
-	<include>proximity_trigger.obj</include>
-	<include>rectangle_area.obj</include>
-	<include>model.obj</include>
-	<include>message.obj</include>
-	<include>single_shot_sound.obj</include>
-	<include>timer.mgr</include>
-	<include>message.mgr</include>
-	<include>mission_compass.mgr</include-->
-
-	<audio-dir>Missions/Hoops-mission</audio-dir>
-
+    
 	<presets>
 		<altitude>-9999</altitude>
 		<altitude-ft>-9999</altitude-ft>

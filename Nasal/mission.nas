@@ -3,13 +3,10 @@ var mission_objects = [];
 var mission_started = 0;
 var mission_node    = props.getNode("/sim/mission/data", 1);
 var mission_root    = "";
-var objects         = [];
-var handlers        = [];
-
 
 var hasmember = view.hasmember;
 
-var load_preferences = func() {
+var preferences_load = func() {
     foreach (var a; directory(mission_root)) {
         if (a == "preferences.xml") {
             io.read_properties(mission_root ~ "/preferences.xml", props.getNode(""));
@@ -28,62 +25,47 @@ var start_mission = func(name) {
 	if (mission_root == "") {
         return;
     }
-
-	load_preferences();
+    # save mission root for repositioning (will reset addon)
+    setprop("/sim/mission/current_mission/path", mission_root);
 
 	mission_node.removeAllChildren();
 	io.read_properties(mission_root ~ "/mission.xml", mission_node);
 
+    # set flightgear main state (location, weather)
 	var presets = mission_node.getChild("presets");
-# causes FG reload and reinit all data
-#	if (presets != nil) {
-#		props.copy(presets, props.getNode("/sim/presets"));
-#		fgcommand("reposition");
-#	}
+	if (presets != nil) {
+		props.copy(presets, props.getNode("/sim/presets"));
+		fgcommand("reposition");
+	}
 
 	var timeofday = mission_node.getChild("timeofday");
 	if (timeofday != nil) {
 		fgcommand("timeofday", props.Node.new({ "timeofday" : timeofday.getValue() }));
     }
 
-	extensions_load();
-
+    # wait for simulator restart & proceed
 	settimer (func _start_mission(), 0);
 }
 
 var _start_mission = func {
+    # wait for splash screen closing
 	if (splash_screen()) {
 		settimer(func _start_mission(), 2);
 		return;
 	}
 
-	foreach (var h; handlers) {
-		if( hasmember(h, "init") ) {
-			h.init();
-        }
-    }
+    # reload data
+    mission_root = getprop("/sim/mission/current_mission/path");
+    print("mission root: " ~ mission_root);
 
-	foreach(var c; mission_node.getChildren("object")) {
-		foreach(var obj; objects) {
-			if (c.getValue("type") == obj.type) {
-				append(mission_objects, obj.new(c));
-            }
-        }
-    }
+	mission_node.removeAllChildren();
+	io.read_properties(mission_root ~ "/mission.xml", mission_node);
 
-	foreach(var obj; mission_objects) {
-		if( hasmember(obj, "init") ) {
-			obj.init();
-        }
-    }
+	preferences_load();
+	extensions_load();
+	extensions_models_init();
 
 	mission_started = 1;
-}
-
-var splash_screen = func {
-	var s = getprop("sim/startup/splash-alpha");
-	if (s == nil) s = 1;
-	return s > 0 ? 1 : 0;
 }
 
 var stop_mission = func {
@@ -94,17 +76,9 @@ var stop_mission = func {
 	foreach(var obj; mission_objects) {
         obj.del();
     }
-
 	setsize(mission_objects, 0);
-	setsize(objects, 0);
 
-	foreach (var h; handlers) {
-		if (hasmember(h, "stop")) {
-			h.stop();
-        }
-    }
-	setsize(handlers, 0);
-
+    extensions_clear();
 	delete(globals, "__mission");
 
 	mission_started = 0;
@@ -127,13 +101,11 @@ var activate_object = func(name, start = 1) {
     }
 }
 
-
 var activate_object_group = func(group, start = 1) {
 	foreach(var ref; group.getChildren("object-reference")) {
 		activate_object(ref.getValue(), start);
     }
 }
-
 
 var get_coord = func(n) {
 	geo.Coord.new().set_latlon (

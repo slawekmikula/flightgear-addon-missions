@@ -1,6 +1,15 @@
+bugs:
 - bug - presets does not work - reloading FG causes whole addon reload and lost of mission state
+
+tasks:
 - actions documentation
 - fully working all example missions
+
+features:
+- weather - set METAR weather in mission.xml
+- canvas map - dynamically extend layers with mission target layer
 - hoops - dynamic mission generator
 - tours - dynamic mission generator
 - skills - dynamic mission generator
+- mission browser - map for mission targets
+- ufo extension/mission for placing objects for new missions

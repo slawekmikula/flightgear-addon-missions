@@ -12,7 +12,7 @@ var main = func( root ) {
     setprop("/sim/mission/root_path", root);
 
     # load scripts
-    foreach(var f; ['mission.nas', 'extensions.nas', 'persistence.nas', 'gui.nas'] ) {
+    foreach(var f; ['mission.nas', 'extensions.nas', 'persistence.nas', 'gui.nas', 'utils.nas'] ) {
         io.load_nasal( root ~ "/Nasal/" ~ f, "mission" );
     }
 }

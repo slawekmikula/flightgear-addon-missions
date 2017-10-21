@@ -1,4 +1,6 @@
 
+var objects         = [];
+var handlers        = [];
 
 var extensions_load = func {
 
@@ -10,18 +12,28 @@ var extensions_load = func {
     #load mission extension
 	foreach(var script; mission_node.getChildren("include")) {
 		globals["__mission"][k = "__" ~ i] = {};
-		load_nasal(mission_root ~ "/extensions/" ~ script.getValue(), k);
+		_load_nasal(mission_root ~ "/extensions/" ~ script.getValue(), k);
 		i += 1;
 	}
 
     #load core extensions
 	foreach(var script; extension_list()) {
 		globals["__mission"][k = "__" ~ i] = {};
-		load_nasal(getprop("/sim/mission/root_path") ~ "/Nasal/extensions/" ~ script, k);
+		_load_nasal(getprop("/sim/mission/root_path") ~ "/Nasal/extensions/" ~ script, k);
 		i += 1;
 	}
 }
 
+var extensions_clear = func {
+	setsize(objects, 0);
+
+	foreach (var h; handlers) {
+		if (hasmember(h, "stop")) {
+			h.stop();
+        }
+    }
+	setsize(handlers, 0);
+}
 
 var extension_add = func (type, h) {
 	if (type == "MissionObject") {
@@ -49,8 +61,29 @@ var extension_list = func {
 	return v;
 }
 
+var extensions_models_init = func() {
+    foreach (var h; handlers) {
+		if( hasmember(h, "init") ) {
+			h.init();
+        }
+    }
 
-var load_nasal = func(file, module) {    # (copy-paste from io.nas)
+	foreach(var c; mission_node.getChildren("object")) {
+		foreach(var obj; objects) {
+			if (c.getValue("type") == obj.type) {
+				append(mission_objects, obj.new(c));
+            }
+        }
+    }
+
+	foreach(var obj; mission_objects) {
+		if( hasmember(obj, "init") ) {
+			obj.init();
+        }
+    }
+}
+
+var _load_nasal = func(file, module) {    # (copy-paste from io.nas)
 	var code = call(func compile(io.readfile(file), file), nil, var err = []);
 	if (size(err)) {
 		if (substr(err[0], 0, 12) == "Parse error:") { # hack around Nasal feature
