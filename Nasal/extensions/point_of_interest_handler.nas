@@ -35,6 +35,8 @@ var update = func {
 }
 
 var check_POI = func {
+	if (!mission.mission_started)
+		return;
 	poi("count", var count = 0);
 	setsize(active_POI, 0);
 	foreach (var p; node.getChildren("point-of-interest"))
