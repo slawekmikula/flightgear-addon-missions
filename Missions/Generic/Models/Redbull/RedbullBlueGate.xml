@@ -10,4 +10,7 @@
   <max-m>8000</max-m>
  </animation>
 
+	<animation>
+		<enable-hot type="bool">false</enable-hot>
+	</animation>
 </PropertyList>
