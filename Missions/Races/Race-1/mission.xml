@@ -1,0 +1,736 @@
+<?xml version="1.0"?>
+<PropertyList>
+
+
+<!-- Models -->
+
+	<object>
+		<name>Pylon1_mdl</name>
+		<type>model</type>
+		<activated>1</activated>
+		<path>/Missions/Generic/Models/Redbull/RedbullBluePylon.xml</path>
+		<orientation>
+			<heading-deg>0.0</heading-deg>
+			<pitch-deg>0.0</pitch-deg>
+			<roll-deg>0.0</roll-deg>
+		</orientation>
+		<world-position>
+			<latitude-deg>54.881072</latitude-deg>
+			<longitude-deg>23.882520</longitude-deg>
+			<altitude-m>0.0</altitude-m>
+			<altitude-is-AGL>1</altitude-is-AGL>
+		</world-position>
+	</object>
+
+	<object>
+		<name>Pylon2_mdl</name>
+		<type>model</type>
+		<activated>1</activated>
+		<path>/Missions/Generic/Models/Redbull/RedbullBluePylon.xml</path>
+		<orientation>
+			<heading-deg>0.0</heading-deg>
+			<pitch-deg>0.0</pitch-deg>
+			<roll-deg>0.0</roll-deg>
+		</orientation>
+		<world-position>
+			<latitude-deg>54.882367</latitude-deg>
+			<longitude-deg>23.882576</longitude-deg>
+			<altitude-m>0.0</altitude-m>
+			<altitude-is-AGL>1</altitude-is-AGL>
+		</world-position>
+	</object>
+
+	<object>
+		<name>Pylon3_mdl</name>
+		<type>model</type>
+		<activated>1</activated>
+		<path>/Missions/Generic/Models/Redbull/RedbullBluePylon.xml</path>
+		<orientation>
+			<heading-deg>0.0</heading-deg>
+			<pitch-deg>0.0</pitch-deg>
+			<roll-deg>0.0</roll-deg>
+		</orientation>
+		<world-position>
+			<latitude-deg>54.883767</latitude-deg>
+			<longitude-deg>23.882619</longitude-deg>
+			<altitude-m>0.0</altitude-m>
+			<altitude-is-AGL>1</altitude-is-AGL>
+		</world-position>
+	</object>
+
+	<object>
+		<name>Pylon4_mdl</name>
+		<type>model</type>
+		<activated>1</activated>
+		<path>/Missions/Generic/Models/Redbull/RedbullBluePylon.xml</path>
+		<orientation>
+			<heading-deg>180.0</heading-deg>
+			<pitch-deg>0.0</pitch-deg>
+			<roll-deg>0.0</roll-deg>
+		</orientation>
+		<world-position>
+			<latitude-deg>54.882836</latitude-deg>
+			<longitude-deg>23.878901</longitude-deg>
+			<altitude-m>0.0</altitude-m>
+			<altitude-is-AGL>1</altitude-is-AGL>
+		</world-position>
+	</object>
+
+	<object>
+		<name>Gate1_mdl</name>
+		<type>model</type>
+		<activated>1</activated>
+		<path>/Missions/Generic/Models/Redbull/RedbullBlueGate.xml</path>
+		<orientation>
+			<heading-deg>180.0</heading-deg>
+			<pitch-deg>0.0</pitch-deg>
+			<roll-deg>0.0</roll-deg>
+		</orientation>
+		<world-position>
+			<latitude-deg>54.884694</latitude-deg>
+			<longitude-deg>23.879046</longitude-deg>
+			<altitude-m>0.0</altitude-m>
+			<altitude-is-AGL>1</altitude-is-AGL>
+		</world-position>
+	</object>
+
+	<object>
+		<name>Gate2_mdl</name>
+		<type>model</type>
+		<activated>1</activated>
+		<path>/Missions/Generic/Models/Redbull/RedbullBlueGate.xml</path>
+		<orientation>
+			<heading-deg>200.0</heading-deg>
+			<pitch-deg>0.0</pitch-deg>
+			<roll-deg>0.0</roll-deg>
+		</orientation>
+		<world-position>
+			<latitude-deg>54.881158</latitude-deg>
+			<longitude-deg>23.878449</longitude-deg>
+			<altitude-m>0.0</altitude-m>
+			<altitude-is-AGL>1</altitude-is-AGL>
+		</world-position>
+	</object>
+
+	<object>
+		<name>Gate3_mdl</name>
+		<type>model</type>
+		<activated>1</activated>
+		<path>/Missions/Generic/Models/Redbull/RedbullBlueGate.xml</path>
+		<orientation>
+			<heading-deg>90.0</heading-deg>
+			<pitch-deg>0.0</pitch-deg>
+			<roll-deg>0.0</roll-deg>
+		</orientation>
+		<world-position>
+			<latitude-deg>54.878796</latitude-deg>
+			<longitude-deg>23.880764</longitude-deg>
+			<altitude-m>0.0</altitude-m>
+			<altitude-is-AGL>1</altitude-is-AGL>
+		</world-position>
+	</object>
+
+	<object>
+		<name>Gate4_mdl</name>
+		<type>model</type>
+		<activated>1</activated>
+		<path>/Missions/Generic/Models/Redbull/RedbullBlueGate.xml</path>
+		<orientation>
+			<heading-deg>0.0</heading-deg>
+			<pitch-deg>0.0</pitch-deg>
+			<roll-deg>0.0</roll-deg>
+		</orientation>
+		<world-position>
+			<latitude-deg>54.885038</latitude-deg>
+			<longitude-deg>23.882623</longitude-deg>
+			<altitude-m>0.0</altitude-m>
+			<altitude-is-AGL>1</altitude-is-AGL>
+		</world-position>
+	</object>
+
+	<object>
+		<name>Gate5_mdl</name>
+		<type>model</type>
+		<activated>1</activated>
+		<path>/Missions/Generic/Models/Redbull/RedbullBlueGate.xml</path>
+		<orientation>
+			<heading-deg>0.0</heading-deg>
+			<pitch-deg>0.0</pitch-deg>
+			<roll-deg>0.0</roll-deg>
+		</orientation>
+		<world-position>
+			<latitude-deg>54.886365</latitude-deg>
+			<longitude-deg>23.882698</longitude-deg>
+			<altitude-m>0.0</altitude-m>
+			<altitude-is-AGL>1</altitude-is-AGL>
+		</world-position>
+	</object>
+
+
+<!-- Points of Interest -->
+
+	<object>
+		<name>POI_point1</name>
+		<type>point-of-interest</type>
+		<selected-model>//Missions/Generic/Models/checkpoint-h50-a.xml</selected-model>
+		<activated>1</activated>
+		<target-name>Start gate</target-name>
+		<attached-world-object>
+			<object-reference>Gate1_mdl</object-reference>
+			<x-offset-m>0.0</x-offset-m>
+			<y-offset-m>0.0</y-offset-m>
+			<z-offset-m>30.0</z-offset-m>
+		</attached-world-object>
+	</object>
+
+	<object>
+		<name>POI_point2</name>
+		<type>point-of-interest</type>
+		<selected-model>//Missions/Generic/Models/checkpoint-h50-a.xml</selected-model>
+		<activated>0</activated>
+		<target-name>Pylon</target-name>
+		<attached-world-object>
+			<object-reference>Pylon4_mdl</object-reference>
+			<x-offset-m>0.0</x-offset-m>
+			<y-offset-m>0.0</y-offset-m>
+			<z-offset-m>30.0</z-offset-m>
+		</attached-world-object>
+	</object>
+
+	<object>
+		<name>POI_point3</name>
+		<type>point-of-interest</type>
+		<selected-model>//Missions/Generic/Models/checkpoint-h50-a.xml</selected-model>
+		<activated>0</activated>
+		<target-name>Gate 2</target-name>
+		<attached-world-object>
+			<object-reference>Gate2_mdl</object-reference>
+			<x-offset-m>0.0</x-offset-m>
+			<y-offset-m>0.0</y-offset-m>
+			<z-offset-m>30.0</z-offset-m>
+		</attached-world-object>
+	</object>
+
+	<object>
+		<name>POI_point4</name>
+		<type>point-of-interest</type>
+		<selected-model>//Missions/Generic/Models/checkpoint-h50-a.xml</selected-model>
+		<activated>0</activated>
+		<target-name>Gate 3</target-name>
+		<attached-world-object>
+			<object-reference>Gate3_mdl</object-reference>
+			<x-offset-m>0.0</x-offset-m>
+			<y-offset-m>0.0</y-offset-m>
+			<z-offset-m>30.0</z-offset-m>
+		</attached-world-object>
+	</object>
+
+	<object>
+		<name>POI_point5</name>
+		<type>point-of-interest</type>
+		<selected-model>//Missions/Generic/Models/checkpoint-h50-a.xml</selected-model>
+		<activated>0</activated>
+		<target-name>Pylon 1/3</target-name>
+		<attached-world-object>
+			<object-reference>Pylon1_mdl</object-reference>
+			<x-offset-m>0.0</x-offset-m>
+			<y-offset-m>0.0</y-offset-m>
+			<z-offset-m>30.0</z-offset-m>
+		</attached-world-object>
+	</object>
+
+	<object>
+		<name>POI_point6</name>
+		<type>point-of-interest</type>
+		<selected-model>//Missions/Generic/Models/checkpoint-h50-a.xml</selected-model>
+		<activated>0</activated>
+		<target-name>Pylon 2/3</target-name>
+		<attached-world-object>
+			<object-reference>Pylon2_mdl</object-reference>
+			<x-offset-m>0.0</x-offset-m>
+			<y-offset-m>0.0</y-offset-m>
+			<z-offset-m>30.0</z-offset-m>
+		</attached-world-object>
+	</object>
+
+	<object>
+		<name>POI_point7</name>
+		<type>point-of-interest</type>
+		<selected-model>//Missions/Generic/Models/checkpoint-h50-a.xml</selected-model>
+		<activated>0</activated>
+		<target-name>Pylon 3/3</target-name>
+		<attached-world-object>
+			<object-reference>Pylon3_mdl</object-reference>
+			<x-offset-m>0.0</x-offset-m>
+			<y-offset-m>0.0</y-offset-m>
+			<z-offset-m>30.0</z-offset-m>
+		</attached-world-object>
+	</object>
+
+	<object>
+		<name>POI_point8</name>
+		<type>point-of-interest</type>
+		<selected-model>//Missions/Generic/Models/checkpoint-h50-a.xml</selected-model>
+		<activated>0</activated>
+		<target-name>Gate 4</target-name>
+		<attached-world-object>
+			<object-reference>Gate4_mdl</object-reference>
+			<x-offset-m>0.0</x-offset-m>
+			<y-offset-m>0.0</y-offset-m>
+			<z-offset-m>30.0</z-offset-m>
+		</attached-world-object>
+	</object>
+
+	<object>
+		<name>POI_point9</name>
+		<type>point-of-interest</type>
+		<selected-model>//Missions/Generic/Models/checkpoint-h50-a.xml</selected-model>
+		<activated>0</activated>
+		<target-name>Gate 5</target-name>
+		<attached-world-object>
+			<object-reference>Gate5_mdl</object-reference>
+			<x-offset-m>0.0</x-offset-m>
+			<y-offset-m>0.0</y-offset-m>
+			<z-offset-m>30.0</z-offset-m>
+		</attached-world-object>
+	</object>
+
+<!-- Object activation actions -->
+
+	<!-- SHOW -->
+	<object>
+		<name>SHOW_POI_point1</name>
+		<type>object-activation-action</type>
+		<object-state>1</object-state>
+		<reference-list>
+			<object-reference>POI_point1</object-reference>
+		</reference-list>
+	</object>
+
+	<object>
+		<name>SHOW_POI_point2</name>
+		<type>object-activation-action</type>
+		<object-state>1</object-state>
+		<reference-list>
+			<object-reference>POI_point2</object-reference>
+		</reference-list>
+	</object>
+
+	<object>
+		<name>SHOW_POI_point3</name>
+		<type>object-activation-action</type>
+		<object-state>1</object-state>
+		<reference-list>
+			<object-reference>POI_point3</object-reference>
+		</reference-list>
+	</object>
+
+	<object>
+		<name>SHOW_POI_point4</name>
+		<type>object-activation-action</type>
+		<object-state>1</object-state>
+		<reference-list>
+			<object-reference>POI_point4</object-reference>
+		</reference-list>
+	</object>
+
+	<object>
+		<name>SHOW_POI_point5</name>
+		<type>object-activation-action</type>
+		<object-state>1</object-state>
+		<reference-list>
+			<object-reference>POI_point5</object-reference>
+		</reference-list>
+	</object>
+
+	<object>
+		<name>SHOW_POI_point6</name>
+		<type>object-activation-action</type>
+		<object-state>1</object-state>
+		<reference-list>
+			<object-reference>POI_point6</object-reference>
+		</reference-list>
+	</object>
+
+	<object>
+		<name>SHOW_POI_point7</name>
+		<type>object-activation-action</type>
+		<object-state>1</object-state>
+		<reference-list>
+			<object-reference>POI_point7</object-reference>
+		</reference-list>
+	</object>
+
+	<object>
+		<name>SHOW_POI_point8</name>
+		<type>object-activation-action</type>
+		<object-state>1</object-state>
+		<reference-list>
+			<object-reference>POI_point8</object-reference>
+		</reference-list>
+	</object>
+
+	<object>
+		<name>SHOW_POI_point9</name>
+		<type>object-activation-action</type>
+		<object-state>1</object-state>
+		<reference-list>
+			<object-reference>POI_point9</object-reference>
+		</reference-list>
+	</object>
+
+	<!-- HIDE -->
+	<object>
+		<name>HIDE_POI_point1</name>
+		<type>object-activation-action</type>
+		<object-state>0</object-state>
+		<reference-list>
+			<object-reference>POI_point1</object-reference>
+		</reference-list>
+	</object>
+
+	<object>
+		<name>HIDE_POI_point2</name>
+		<type>object-activation-action</type>
+		<object-state>0</object-state>
+		<reference-list>
+			<object-reference>POI_point2</object-reference>
+		</reference-list>
+	</object>
+
+	<object>
+		<name>HIDE_POI_point3</name>
+		<type>object-activation-action</type>
+		<object-state>0</object-state>
+		<reference-list>
+			<object-reference>POI_point3</object-reference>
+		</reference-list>
+	</object>
+
+	<object>
+		<name>HIDE_POI_point4</name>
+		<type>object-activation-action</type>
+		<object-state>0</object-state>
+		<reference-list>
+			<object-reference>POI_point4</object-reference>
+		</reference-list>
+	</object>
+
+	<object>
+		<name>HIDE_POI_point5</name>
+		<type>object-activation-action</type>
+		<object-state>0</object-state>
+		<reference-list>
+			<object-reference>POI_point5</object-reference>
+		</reference-list>
+	</object>
+
+	<object>
+		<name>HIDE_POI_point6</name>
+		<type>object-activation-action</type>
+		<object-state>0</object-state>
+		<reference-list>
+			<object-reference>POI_point6</object-reference>
+		</reference-list>
+	</object>
+
+	<object>
+		<name>HIDE_POI_point7</name>
+		<type>object-activation-action</type>
+		<object-state>0</object-state>
+		<reference-list>
+			<object-reference>POI_point7</object-reference>
+		</reference-list>
+	</object>
+
+	<object>
+		<name>HIDE_POI_point8</name>
+		<type>object-activation-action</type>
+		<object-state>0</object-state>
+		<reference-list>
+			<object-reference>POI_point8</object-reference>
+		</reference-list>
+	</object>
+
+	<object>
+		<name>HIDE_POI_point9</name>
+		<type>object-activation-action</type>
+		<object-state>0</object-state>
+		<reference-list>
+			<object-reference>POI_point9</object-reference>
+		</reference-list>
+	</object>
+
+
+<!-- -->
+
+	<object>
+		<name>Enter_msg</name>
+		<type>dialog-action</type>
+		<text>Enter</text>
+		<sound-file>glassbell.wav</sound-file>
+		<delay-sec>3</delay-sec>
+	</object>
+
+	<object>
+		<name>Sound1</name>
+		<type>single-shot-sound-action</type>
+		<sound-file>glassbell.wav</sound-file>
+	</object>
+
+	<object>
+		<name>Penalty_msg</name>
+		<type>dialog-action</type>
+		<text>Penalty</text>
+		<delay-sec>3</delay-sec>
+	</object>
+
+	<object>
+		<name>pylon1</name>
+		<type>pylon-race-point</type>
+		<activated>1</activated>
+		<ignore-distance-m>50</ignore-distance-m>
+		<inside-direction>left</inside-direction>
+		<orientation>
+			<heading-deg>0</heading-deg>
+		</orientation>
+		<world-position>
+			<latitude-deg>54.881072</latitude-deg>
+			<longitude-deg>23.882520</longitude-deg>
+			<altitude-m>0.0</altitude-m>
+			<altitude-is-AGL>1</altitude-is-AGL>
+		</world-position>
+		<on-enter-actions>
+			<object-reference>HIDE_POI_point5</object-reference>
+			<object-reference>SHOW_POI_point6</object-reference>
+			<object-reference>Sound1</object-reference>
+		</on-enter-actions>
+		<on-penalty-actions>
+			<object-reference>Penalty_msg</object-reference>
+		</on-penalty-actions>
+	</object>
+
+	<object>
+		<name>pylon2</name>
+		<type>pylon-race-point</type>
+		<activated>1</activated>
+		<ignore-distance-m>50</ignore-distance-m>
+		<inside-direction>right</inside-direction>
+		<orientation>
+			<heading-deg>0</heading-deg>
+		</orientation>
+		<world-position>
+			<latitude-deg>54.882367</latitude-deg>
+			<longitude-deg>23.882576</longitude-deg>
+			<altitude-m>0.0</altitude-m>
+			<altitude-is-AGL>1</altitude-is-AGL>
+		</world-position>
+		<on-enter-actions>
+			<object-reference>HIDE_POI_point6</object-reference>
+			<object-reference>SHOW_POI_point7</object-reference>
+			<object-reference>Sound1</object-reference>
+		</on-enter-actions>
+		<on-penalty-actions>
+			<object-reference>Penalty_msg</object-reference>
+		</on-penalty-actions>
+	</object>
+
+	<object>
+		<name>pylon3</name>
+		<type>pylon-race-point</type>
+		<activated>1</activated>
+		<ignore-distance-m>50</ignore-distance-m>
+		<inside-direction>left</inside-direction>
+		<orientation>
+			<heading-deg>0</heading-deg>
+		</orientation>
+		<world-position>
+			<latitude-deg>54.883767</latitude-deg>
+			<longitude-deg>23.882619</longitude-deg>
+			<altitude-m>0.0</altitude-m>
+			<altitude-is-AGL>1</altitude-is-AGL>
+		</world-position>
+		<on-enter-actions>
+			<object-reference>HIDE_POI_point7</object-reference>
+			<object-reference>SHOW_POI_point8</object-reference>
+			<object-reference>Sound1</object-reference>
+		</on-enter-actions>
+		<on-penalty-actions>
+			<object-reference>Penalty_msg</object-reference>
+		</on-penalty-actions>
+	</object>
+
+	<object>
+		<name>pylon4</name>
+		<type>pylon-race-point</type>
+		<activated>1</activated>
+		<ignore-distance-m>50</ignore-distance-m>
+		<inside-direction>right</inside-direction>
+		<orientation>
+			<heading-deg>180</heading-deg>
+		</orientation>
+		<world-position>
+			<latitude-deg>54.882836</latitude-deg>
+			<longitude-deg>23.878901</longitude-deg>
+			<altitude-m>0.0</altitude-m>
+			<altitude-is-AGL>1</altitude-is-AGL>
+		</world-position>
+		<on-enter-actions>
+			<object-reference>HIDE_POI_point2</object-reference>
+			<object-reference>SHOW_POI_point3</object-reference>
+			<object-reference>Sound1</object-reference>
+		</on-enter-actions>
+		<on-penalty-actions>
+			<object-reference>Penalty_msg</object-reference>
+		</on-penalty-actions>
+	</object>
+
+	<object>
+		<name>gate1</name>
+		<type>gate-race-point</type>
+		<activated>1</activated>
+		<width-m>20</width-m>
+		<height-m>20</height-m>
+		<orientation>
+			<heading-deg>180</heading-deg>
+		</orientation>
+		<world-position>
+			<latitude-deg>54.884694</latitude-deg>
+			<longitude-deg>23.879046</longitude-deg>
+			<altitude-m>0.0</altitude-m>
+			<altitude-is-AGL>1</altitude-is-AGL>
+		</world-position>
+		<on-enter-actions>
+			<object-reference>HIDE_POI_point1</object-reference>
+			<object-reference>SHOW_POI_point2</object-reference>
+			<object-reference>Sound1</object-reference>
+		</on-enter-actions>
+		<on-penalty-actions>
+			<object-reference>Penalty_msg</object-reference>
+		</on-penalty-actions>
+	</object>
+
+
+	<object>
+		<name>gate2</name>
+		<type>gate-race-point</type>
+		<activated>1</activated>
+		<width-m>20</width-m>
+		<height-m>20</height-m>
+		<orientation>
+			<heading-deg>200</heading-deg>
+		</orientation>
+		<world-position>
+			<latitude-deg>54.881158</latitude-deg>
+			<longitude-deg>23.878449</longitude-deg>
+			<altitude-m>0.0</altitude-m>
+			<altitude-is-AGL>1</altitude-is-AGL>
+		</world-position>
+		<on-enter-actions>
+			<object-reference>HIDE_POI_point3</object-reference>
+			<object-reference>SHOW_POI_point4</object-reference>
+			<object-reference>Sound1</object-reference>
+		</on-enter-actions>
+		<on-penalty-actions>
+			<object-reference>Penalty_msg</object-reference>
+		</on-penalty-actions>
+	</object>
+
+	<object>
+		<name>gate3</name>
+		<type>gate-race-point</type>
+		<activated>1</activated>
+		<width-m>20</width-m>
+		<height-m>20</height-m>
+		<orientation>
+			<heading-deg>90</heading-deg>
+		</orientation>
+		<world-position>
+			<latitude-deg>54.878796</latitude-deg>
+			<longitude-deg>23.880764</longitude-deg>
+			<altitude-m>0.0</altitude-m>
+			<altitude-is-AGL>1</altitude-is-AGL>
+		</world-position>
+		<on-enter-actions>
+			<object-reference>HIDE_POI_point4</object-reference>
+			<object-reference>SHOW_POI_point5</object-reference>
+			<object-reference>Sound1</object-reference>
+		</on-enter-actions>
+		<on-penalty-actions>
+			<object-reference>Penalty_msg</object-reference>
+		</on-penalty-actions>
+	</object>
+
+	<object>
+		<name>gate4</name>
+		<type>gate-race-point</type>
+		<activated>1</activated>
+		<width-m>20</width-m>
+		<height-m>20</height-m>
+		<orientation>
+			<heading-deg>0</heading-deg>
+		</orientation>
+		<world-position>
+			<latitude-deg>54.885038</latitude-deg>
+			<longitude-deg>23.882623</longitude-deg>
+			<altitude-m>0.0</altitude-m>
+			<altitude-is-AGL>1</altitude-is-AGL>
+		</world-position>
+		<on-enter-actions>
+			<object-reference>HIDE_POI_point8</object-reference>
+			<object-reference>SHOW_POI_point9</object-reference>
+			<object-reference>Sound1</object-reference>
+		</on-enter-actions>
+		<on-penalty-actions>
+			<object-reference>Penalty_msg</object-reference>
+		</on-penalty-actions>
+	</object>
+
+	<object>
+		<name>gate5</name>
+		<type>gate-race-point</type>
+		<activated>1</activated>
+		<width-m>20</width-m>
+		<height-m>20</height-m>
+		<orientation>
+			<heading-deg>0</heading-deg>
+		</orientation>
+		<world-position>
+			<latitude-deg>54.886365</latitude-deg>
+			<longitude-deg>23.882698</longitude-deg>
+			<altitude-m>0.0</altitude-m>
+			<altitude-is-AGL>1</altitude-is-AGL>
+		</world-position>
+		<on-enter-actions>
+			<object-reference>HIDE_POI_point9</object-reference>
+			<object-reference>SHOW_POI_point1</object-reference>
+			<object-reference>Sound1</object-reference>
+		</on-enter-actions>
+		<on-penalty-actions>
+			<object-reference>Penalty_msg</object-reference>
+		</on-penalty-actions>
+	</object>
+
+
+	<object>
+		<type>race</type>
+		<name>EYKS race</name>
+		<countdown-sec>5</countdown-sec>
+		<number-of-laps>2</number-of-laps>
+		<lap-distance>100</lap-distance>
+		<clock-start>on-first-race-point</clock-start>
+		<race-course-active>1</race-course-active>
+		<race-course>
+			<object-reference>gate1</object-reference>
+			<object-reference>pylon4</object-reference>
+			<object-reference>gate2</object-reference>
+			<object-reference>gate3</object-reference>
+			<object-reference>pylon1</object-reference>
+			<object-reference>pylon2</object-reference>
+			<object-reference>pylon3</object-reference>
+			<object-reference>gate4</object-reference>
+			<object-reference>gate5</object-reference>
+		</race-course>
+	</object>
+
+</PropertyList>
