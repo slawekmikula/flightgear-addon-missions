@@ -1,6 +1,13 @@
 <?xml version="1.0"?>
 <PropertyList>
 
+    <presets>
+		<airport-id>EYKS</airport-id>
+		<altitude>-9999</altitude>
+		<altitude-ft>-9999</altitude-ft>
+		<latitude-deg>-9999</latitude-deg>
+		<longitude-deg>-9999</longitude-deg>
+	</presets>
 
 <!-- Models -->
 
