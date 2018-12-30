@@ -26,27 +26,45 @@
 
 	<group>
 		<layout>hbox</layout>
-		<list>
-			<name>mission_list</name>
-			<pref-width>300</pref-width>
-			<pref-height>250</pref-height>
-			<halign>fill</halign>
-			<valign>fill</valign>
-			<stretch>true</stretch>
-			<padding>6</padding>
-			<property>/sim/mission/gui/selected-mission</property>
-			<binding>
-				<command>dialog-apply</command>
-			</binding>
-			<binding>
-				<command>nasal</command>
-				<script>
-					select_mission();
-				</script>
-			</binding>
-			<value>...</value>
-			<value>...</value>
-		</list>
+		<group>
+			<layout>vbox</layout>
+			<group>
+				<layout>hbox</layout>
+				<button>
+					<legend>Generic missions</legend>
+					<pref-height>30</pref-height>
+					<binding>
+					</binding>
+				</button>
+				<button>
+					<legend>Aircraft-specific missions</legend>
+					<pref-height>30</pref-height>
+					<binding>
+					</binding>
+				</button>
+			</group>
+			<list>
+				<name>mission_list</name>
+				<pref-width>300</pref-width>
+				<pref-height>250</pref-height>
+				<halign>fill</halign>
+				<valign>fill</valign>
+				<stretch>true</stretch>
+				<padding>6</padding>
+				<property>/sim/mission/gui/selected-mission</property>
+				<binding>
+					<command>dialog-apply</command>
+				</binding>
+				<binding>
+					<command>nasal</command>
+					<script>
+						select_mission();
+					</script>
+				</binding>
+				<value>...</value>
+				<value>...</value>
+			</list>
+		</group>
 
 		<group>
 			<layout>vbox</layout>
@@ -97,7 +115,7 @@
 
 	<nasal>
 		<open> <![CDATA[
-			var list = cmdarg().getNode("group[1]/list");
+			var list = cmdarg().getNode("group[1]/group[0]/list");
 			var mission_root = "";
 			var selected_mission = "";
 			var data_node = props.getNode("sim/mission/gui/data", 1);
