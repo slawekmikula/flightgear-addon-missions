@@ -34,12 +34,22 @@
 					<legend>Generic missions</legend>
 					<pref-height>30</pref-height>
 					<binding>
+						<command>nasal</command>
+						<script>
+							missions_dir = getprop("/sim/mission/root_path") ~ "/Missions";
+							update_list();
+						</script>
 					</binding>
 				</button>
 				<button>
 					<legend>Aircraft-specific missions</legend>
 					<pref-height>30</pref-height>
 					<binding>
+						<command>nasal</command>
+						<script>
+							missions_dir = getprop("/sim/aircraft-dir") ~ "/Missions";
+							update_list();
+						</script>
 					</binding>
 				</button>
 			</group>
@@ -117,6 +127,7 @@
 		<open> <![CDATA[
 			var list = cmdarg().getNode("group[1]/group[0]/list");
 			var mission_root = "";
+			var missions_dir = getprop("/sim/mission/root_path") ~ "/Missions";
 			var selected_mission = "";
 			var data_node = props.getNode("sim/mission/gui/data", 1);
 			data_node.setValues({description: ""});
@@ -134,10 +145,14 @@
 			var update_list = func {
 				list.removeChildren("value");
 
-				var mission_path = getprop("/sim/mission/root_path") ~ "/Missions";
-				foreach (var a; directory(mission_path)) {
+#				var mission_path = "";
+#				if (mode == nil)
+#					mission_path = getprop("/sim/mission/root_path") ~ "/Missions";
+#				else mission_path = getprop("/sim/aircraft-dir") ~ "/Missions";
+
+				foreach (var a; directory(missions_dir)) {
                     if (a != "." and a != ".." and a != "Generic") {
-                        foreach (var b; directory(mission_path ~ "/" ~ a)) {
+                        foreach (var b; directory(missions_dir ~ "/" ~ a)) {
                             if (b != "." and b != "..") {
                                 list.addChild("value").setValue(a ~ "/" ~ b);
                             }
@@ -150,7 +165,7 @@
 
 			var select_mission = func {
 				selected_mission = getprop("/sim/mission/gui/selected-mission");
-				mission_root = getprop("/sim/mission/root_path") ~ "/Missions/" ~ selected_mission;
+				mission_root = missions_dir ~ "/" ~ selected_mission; #getprop("/sim/mission/root_path") ~ "/Missions/" ~ selected_mission;
 
 				data_node.setValues({description: ""});
 				io.read_properties(mission_root ~ "/metadata.xml", data_node);
