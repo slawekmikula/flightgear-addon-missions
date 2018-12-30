@@ -7,8 +7,9 @@
 # Converted to a FlightGear addon by
 # Slawek Mikula, October 2017
 
-var main = func( root ) {
+var main = func( addon ) {
     # setting root path to addon
+    var root = addon.basePath;
     setprop("/sim/mission/root_path", root);
 
     # load scripts
