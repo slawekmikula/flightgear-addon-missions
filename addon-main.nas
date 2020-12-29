@@ -1,13 +1,12 @@
 #
-# Missions addon
+# Protocol KML addon
 #
-# Started by Marius_A
-# Started on November 2016
-#
-# Converted to a FlightGear addon by
-# Slawek Mikula, October 2017
+# Slawek Mikula, December 2019
 
-var main = func( root ) {
+var main = func( addon ) {
+    var root = addon.basePath;
+    var myAddonId  = addon.id;
+    var mySettingsRootPath = "/addons/by-id/" ~ myAddonId;
     # setting root path to addon
     setprop("/sim/mission/root_path", root);
 

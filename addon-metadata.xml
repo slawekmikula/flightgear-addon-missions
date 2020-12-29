@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<PropertyList>
+    <meta>
+        <file-type type="string">FlightGear add-on metadata</file-type>
+        <format-version type="int">1</format-version>
+    </meta>
+
+    <addon>
+        <identifier type="string">com.slawekmikula.flightgear.Missions</identifier>
+        <name type="string">Missions &amp; Adventures</name>
+        <version type="string">0.0.1</version>
+
+        <authors>
+            <author>
+                <name type="string">slawekmikula from the FlightGear forum</name>
+                <email type="string">slawek.mikula@gmail.com</email>
+                <url type="string"></url>
+            </author>
+        </authors>
+
+        <maintainers>
+            <maintainer>
+                <name type="string">slawekmikula from the FlightGear forum</name>
+                <email type="string">slawek.mikula@gmail.com</email>
+                <url type="string"></url>
+            </maintainer>
+        </maintainers>
+
+        <short-description type="string">FlightGear missions addon. Adds ability to perform mutliple missions/tasks.</short-description>
+        <long-description type="string">Addon for FlightGear that adds new missions &amp; tasks to perform during flight </long-description>
+
+        <localized>
+            <pl>
+                <name>Misje i przygody</name>
+                <short-description type="string">Dodatek misji do FlightGear. Dodaje możliwość wykonywania różnych misji/zadań.</short-description>
+                <long-description type="string">Rozszerzenie do FlightGear, które dodaje nowe misje i zadania do wykonania podczas lotu</long-description>
+            </pl>
+        </localized>
+
+        <license>
+            <designation type="string">GNU GPL version 2 or later</designation>
+            <file type="string">LICENSE</file>
+            <url type="string">https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html</url>
+        </license>
+
+        <min-FG-version type="string">2018.3.5</min-FG-version>
+        <max-FG-version type="string">none</max-FG-version>
+
+        <urls>
+            <home-page type="string"><![CDATA[ http://wiki.flightgear.org/FlightGear_Missions_and_Adventures ]]></home-page>
+            <download type="string">https://github.com/slawekmikula/fg-addon-missions/download</download>
+            <support type="string">https://github.com/slawekmikula/fg-addon-missions/issues</support>
+            <code-repository type="string">https://github.com/slawekmikula/fg-addon-missions</code-repository>
+        </urls>
+
+        <tags>
+            <tag type="string">missions</tag>
+            <tag type="string">adventures</tag>
+            <tag type="string">fun</tag>
+        </tags>
+    </addon>
+</PropertyList>
