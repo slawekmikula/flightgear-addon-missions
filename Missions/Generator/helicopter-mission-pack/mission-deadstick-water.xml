@@ -1,0 +1,189 @@
+<?xml version="1.0"?>
+<PropertyList>
+
+    <nasal>
+        <file>Nasal/mission-generator-deadstick.nas</file>
+    </nasal>
+
+<!-- Timers -->
+
+    <object>
+        <name>TIMER_MSG_intro-1</name>
+        <type>timer-trigger</type>
+        <activated>1</activated>
+        <single-shot>1</single-shot>
+        <stop-time>2.0</stop-time>
+        <actions>
+            <object-reference>MSG_intro-1</object-reference>
+            <object-reference>TIMER_SHOW_POI_landing_site</object-reference>
+            <object-reference>ENABLE_proximity_trigger</object-reference>
+        </actions>
+    </object>
+
+    <object>
+        <name>timer_onscreen</name>
+        <type>timer-trigger</type>
+        <activated>0</activated>
+        <on-screen-timer>1</on-screen-timer>
+        <single-shot>1</single-shot>
+        <start-time>15</start-time>
+        <stop-time>0</stop-time>
+    </object>
+
+    <object>
+        <name>TIMER_SHOW_POI_landing_site</name>
+        <type>timer-trigger</type>
+        <activated>0</activated>
+        <single-shot>1</single-shot>
+        <stop-time>2.0</stop-time>
+        <actions>
+            <object-reference>SHOW_POI_landing_site</object-reference>
+        </actions>
+    </object>
+
+    <object>
+        <name>RESET_onscreen_timer</name>
+        <type>reset-timer-action</type>
+        <triggers>
+            <object-reference>timer_onscreen</object-reference>
+        </triggers>
+    </object>
+
+<!-- Messages -->
+
+    <object>
+        <name>MSG_intro-1</name>
+        <type>dialog-action</type>
+        <text>...</text>
+        <delay-sec>4.5</delay-sec>
+    </object>
+
+
+<!-- Object activation actions -->
+
+    <object>
+        <name>SHOW_POI_landing_site</name>
+        <type>object-activation-action</type>
+        <object-state>1</object-state>
+        <reference-list>
+            <object-reference>POI_landing_site</object-reference>
+        </reference-list>
+    </object>
+
+    <object>
+        <name>SHOW_onscreen_timer</name>
+        <type>object-activation-action</type>
+        <object-state>1</object-state>
+        <reference-list>
+            <object-reference>timer_onscreen</object-reference>
+        </reference-list>
+    </object>
+
+    <object>
+        <name>HIDE_onscreen_timer</name>
+        <type>object-activation-action</type>
+        <object-state>0</object-state>
+        <reference-list>
+            <object-reference>timer_onscreen</object-reference>
+        </reference-list>
+    </object>
+
+    <object>
+        <name>ENABLE_proximity_trigger</name>
+        <type>object-activation-action</type>
+        <object-state>1</object-state>
+        <reference-list>
+            <object-reference>area_hover_trigger</object-reference>
+        </reference-list>
+    </object>
+
+
+
+	<object>
+		<name>POI_landing_site</name>
+		<type>point-of-interest</type>
+		<activated>0</activated>
+		<target-name>Landing site</target-name>
+		<attached-world-object>
+            <object-reference>Pilot</object-reference>
+            <x-offset-m>0.0</x-offset-m>
+            <y-offset-m>0.0</y-offset-m>
+            <z-offset-m>6.0</z-offset-m>
+		</attached-world-object>
+	</object>
+
+	<object>
+		<name>Aircraft</name>
+		<type>model</type>
+		<activated>1</activated>
+		<path>Cessna172_red.xml</path>
+		<orientation>
+			<heading-deg></heading-deg>
+			<pitch-deg>0.0</pitch-deg>
+			<roll-deg>0.0</roll-deg>
+		</orientation>
+		<world-position>
+			<latitude-deg></latitude-deg>
+			<longitude-deg></longitude-deg>
+			<altitude-m>0.0</altitude-m>
+			<altitude-is-AGL>1</altitude-is-AGL>
+		</world-position>
+	</object>
+
+	<object>
+		<name>Pilot</name>
+		<type>model</type>
+		<activated>1</activated>
+		<path>pilot.xml</path>
+		<orientation>
+			<heading-deg></heading-deg>
+			<pitch-deg>0.0</pitch-deg>
+			<roll-deg>0.0</roll-deg>
+		</orientation>
+		<world-position>
+			<latitude-deg></latitude-deg>
+			<longitude-deg></longitude-deg>
+			<altitude-m>0.5</altitude-m>
+			<altitude-is-AGL>1</altitude-is-AGL>
+		</world-position>
+	</object>
+
+<!-- Areas -->
+
+    <object>
+        <type>rectangle-area</type>
+        <name>area_landing_site</name>
+		<width>30.0</width>
+		<height>30.0</height>
+		<length>30.0</length>
+		<orientation>
+            <heading-deg/>
+            <pitch-deg>0.0</pitch-deg>
+			<roll-deg>0.0</roll-deg>
+		</orientation>
+		<attached-world-position>
+            <latitude-deg/>
+            <longitude-deg/>
+			<altitude-m>0</altitude-m>
+			<altitude-is-AGL>1</altitude-is-AGL>
+		</attached-world-position>
+    </object>
+
+<!-- Triggers -->
+
+    <object>
+        <type>proximity-trigger</type>
+        <name>area_hover_trigger</name>
+        <areas>
+            <object-reference>area_landing_site</object-reference>
+        </areas>
+        <on-enter-actions>
+            <object-reference>SHOW_onscreen_timer</object-reference>
+        </on-enter-actions>
+        <on-exit-actions>
+            <object-reference>HIDE_onscreen_timer</object-reference>
+            <object-reference>RESET_onscreen_timer</object-reference>
+        </on-exit-actions>
+    </object>
+
+</PropertyList>

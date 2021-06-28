@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<PropertyList>
+
+	<sim>
+		<fuel-fraction>0.1</fuel-fraction>
+		<model>
+			<ec135>
+				<door-positions>
+					<rightFrontDoor>
+						<position-norm type="double">1.0</position-norm>
+					</rightFrontDoor>
+					<leftFrontDoor>
+						<position-norm type="double">1.0</position-norm>
+					</leftFrontDoor>
+				</door-positions>
+			</ec135>
+		</model>
+	</sim>
+
+</PropertyList>

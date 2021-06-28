@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+
+    <path>pilot1.ac</path>
+
+    <animation>
+        <type>billboard</type>
+        <object-name>Pilot_1</object-name>
+        <spherical type="bool">false</spherical>
+    </animation>
+
+</PropertyList>

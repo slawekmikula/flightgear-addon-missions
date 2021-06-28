@@ -1,0 +1,168 @@
+<?xml version="1.0"?>
+<PropertyList>
+
+    <nasal>
+        <file>Nasal/mission-generator-deadstick-ground.nas</file>
+    </nasal>
+
+<!-- Timers -->
+
+    <object>
+        <name>TIMER_MSG_intro-1</name>
+        <type>timer-trigger</type>
+        <activated>1</activated>
+        <single-shot>1</single-shot>
+        <stop-time>2.0</stop-time>
+        <actions>
+            <object-reference>MSG_intro-1</object-reference>
+            <object-reference>TIMER_SHOW_POI_landing_site</object-reference>
+        </actions>
+    </object>
+
+
+    <object>
+        <name>TIMER_SHOW_POI_landing_site</name>
+        <type>timer-trigger</type>
+        <activated>0</activated>
+        <single-shot>1</single-shot>
+        <stop-time>2.0</stop-time>
+        <actions>
+            <object-reference>SHOW_POI_landing_site</object-reference>
+            <object-reference>ENABLE_landing_trigger</object-reference>
+        </actions>
+    </object>
+
+<!-- Messages -->
+
+    <object>
+        <name>MSG_intro-1</name>
+        <type>dialog-action</type>
+        <text>...</text>
+        <delay-sec>4.5</delay-sec>
+    </object>
+
+<!-- Object activation actions -->
+
+    <object>
+        <name>SHOW_POI_landing_site</name>
+        <type>object-activation-action</type>
+        <object-state>1</object-state>
+        <reference-list>
+            <object-reference>POI_landing_site</object-reference>
+        </reference-list>
+    </object>
+
+	<object>
+		<name>POI_landing_site</name>
+		<type>point-of-interest</type>
+		<activated>0</activated>
+		<target-name>Landing site</target-name>
+		<attached-world-object>
+            <object-reference>Pilot</object-reference>
+            <x-offset-m>0.0</x-offset-m>
+            <y-offset-m>0.0</y-offset-m>
+            <z-offset-m>5.0</z-offset-m>
+		</attached-world-object>
+	</object>
+
+    <object>
+        <name>ENABLE_landing_trigger</name>
+        <type>object-activation-action</type>
+        <object-state>1</object-state>
+        <reference-list>
+            <object-reference>area_landing_trigger</object-reference>
+        </reference-list>
+    </object>
+
+<!-- Models -->
+
+	<object>
+		<name>Aircraft</name>
+		<type>model</type>
+		<activated>1</activated>
+		<path>pa181.xml</path>
+		<orientation>
+			<heading-deg></heading-deg>
+			<pitch-deg>0.0</pitch-deg>
+			<roll-deg>0.0</roll-deg>
+		</orientation>
+		<world-position>
+			<latitude-deg></latitude-deg>
+			<longitude-deg></longitude-deg>
+			<altitude-m>0.0</altitude-m>
+			<altitude-is-AGL>1</altitude-is-AGL>
+		</world-position>
+	</object>
+
+	<object>
+		<name>Pilot</name>
+		<type>model</type>
+		<activated>1</activated>
+		<path>pilot.xml</path>
+		<orientation>
+			<heading-deg></heading-deg>
+			<pitch-deg>0.0</pitch-deg>
+			<roll-deg>0.0</roll-deg>
+		</orientation>
+		<world-position>
+			<latitude-deg></latitude-deg>
+			<longitude-deg></longitude-deg>
+			<altitude-m>0.0</altitude-m>
+			<altitude-is-AGL>1</altitude-is-AGL>
+		</world-position>
+	</object>
+
+<!-- Areas -->
+
+    <object>
+        <type>rectangle-area</type>
+        <name>area_landing_site</name>
+		<width>50.0</width>
+		<height>50.0</height>
+		<length>50.0</length>
+		<orientation>
+            <heading-deg/>
+            <pitch-deg>0.0</pitch-deg>
+			<roll-deg>0.0</roll-deg>
+		</orientation>
+		<attached-world-position>
+            <latitude-deg/>
+            <longitude-deg/>
+			<altitude-m>0</altitude-m>
+			<altitude-is-AGL>1</altitude-is-AGL>
+		</attached-world-position>
+    </object>
+
+<!-- Triggers -->
+
+    <object>
+        <type>area-landing-trigger</type>
+        <name>area_landing_trigger</name>
+        <landing-type>full stop</landing-type>
+        <areas>
+            <object-reference>area_landing_site</object-reference>
+        </areas>
+        <actions>
+            <object-reference>COMPLETE_goal_landing</object-reference>
+        </actions>
+    </object>
+
+<!-- Goals -->
+
+    <object>
+        <type>goal</type>
+        <name>goal_land</name>
+        <text>Land near the aircraft</text>
+        <goal-state>pending</goal-state>
+    </object>
+
+    <object>
+        <type>goal-resolution-action</type>
+        <name>COMPLETE_goal_landing</name>
+        <goal-resolution>completed</goal-resolution>
+        <goals>
+            <object-reference>goal_land</object-reference>
+        </goals>
+    </object>
+
+</PropertyList>

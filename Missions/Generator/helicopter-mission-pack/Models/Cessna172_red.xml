@@ -1,0 +1,23 @@
+<PropertyList>
+
+  <path>Cessna172_red.ac</path>
+
+<offsets>
+    <pitch-deg>15</pitch-deg>   
+    <roll-deg>10</roll-deg>
+    <x-m>0</x-m>
+    <y-m>0</y-m>
+    <z-m>-1.5</z-m>
+</offsets>
+
+  <animation>
+    <type>material</type>
+    <object-name>jour</object-name>
+    <emission>
+      <red>   0.1 </red>
+      <green> 0.1 </green>
+      <blue>  0.1 </blue>
+    </emission>
+  </animation>
+	
+</PropertyList>

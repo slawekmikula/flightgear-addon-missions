@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<PropertyList>
+
+    <path>pa181.ac</path>
+
+    <model>
+        <path>smoke_small_slow5000.xml</path>
+    </model>
+
+    <animation>
+        <object-name>object</object-name>
+        <type>rotate</type>
+        <property>sim/mission/generator/pitch-deg</property>
+        <axis>
+            <x>1</x>
+            <y>0</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>material</type>
+        <object-name>object</object-name>
+        <emission>
+            <red>   0.1 </red>
+            <green> 0.1 </green>
+            <blue>  0.1 </blue>
+        </emission>
+    </animation>
+
+    <animation>
+        <object-name>object</object-name>
+        <type>rotate</type>
+        <property>sim/mission/generator/roll-deg</property>
+        <axis>
+            <x>0</x>
+            <y>1</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+</PropertyList>
