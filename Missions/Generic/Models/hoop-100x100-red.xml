@@ -2,6 +2,10 @@
 
 <PropertyList>
   <path type="string">hoop-100x100-red.ac</path>
+    <effect>
+        <inherits-from>Effects/exterior-glass-reflection</inherits-from>
+        <object-name>hoop-green</object-name>
+    </effect>
 	<animation>
 		<enable-hot type="string">false</enable-hot>
 	</animation>

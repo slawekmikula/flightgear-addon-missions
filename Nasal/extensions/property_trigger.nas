@@ -45,6 +45,6 @@ mission.extension_add("MissionObject", {
 
 	stop: func me._timer.stop(),
 
-	del: func,
+	del: func me.stop(),
 
 });

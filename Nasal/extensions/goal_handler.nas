@@ -1,7 +1,7 @@
 var state_changed = 0;
 
 var w = 250;
-var h = 40;
+var h = 60;
 
 var window = canvas.Window.new([w, h],"dialog").set('title', "Mission Resolution");
 window.hide();
@@ -23,14 +23,19 @@ var myText = myCanvas.createGroup().createChild("text")
 	.setFont("LiberationFonts/LiberationSans-Bold.ttf")
 ;
 
+#var draw_message = func (s = 1) {
+#	var color = s ? [0,1,0] : [0,0,0];
+#	var txt = s ? "Success!" : "Mission failed";
+#	window.set("tf/t[0]", _scr_x() / 2 - w / 2);
+#	window.set("tf/t[1]", _scr_y() / 5);
+#	myText.setText(txt).setColor(color);
+#	window.setFocus();
+#	window.show();
+#}
 var draw_message = func (s = 1) {
-	var color = s ? [0,1,0] : [0,0,0];
-	var txt = s ? "Success!" : "Mission failed";
-	window.set("tf/t[0]", _scr_x() / 2 - w / 2);
-	window.set("tf/t[1]", _scr_y() / 5);
-	myText.setText(txt).setColor(color);
-	window.setFocus();
-	window.show();
+    var txt = s ? "Mission completed!" : "Mission failed";
+    var icon = s ? "info" : "error";
+    mission.show_msgbox(txt, icon);
 }
 
 mission.extension_add("Handler", {

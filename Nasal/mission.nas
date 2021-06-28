@@ -3,33 +3,39 @@ var mission_objects = [];
 var mission_started = 0;
 var mission_node    = props.getNode("/sim/mission/data", 1);
 var mission_root    = "";
+var mission_is_generated = 0;
 
 var hasmember = view.hasmember;
 
 var preferences_load = func() {
     foreach (var a; directory(mission_root)) {
-        if (a == "preferences.xml") {
-            io.read_properties(mission_root ~ "/preferences.xml", props.getNode(""));
+        if (a == "mission-preferences.xml") {
+            io.read_properties(mission_root ~ "/mission-preferences.xml", props.getNode(""));
             break;
         }
     }
+	var f = mission_node.getChild("preferences-file");
+	if (f != nil)
+        io.read_properties(mission_root ~ "/" ~ f.getValue(), props.getNode(""));
 }
 
-var start_mission = func(name) {
+var start_mission = func(path, filename = "mission.xml") {
+    mission_root = path;
 	if (mission_started) {
         return;
     }
 
     # FIXME - FIX ResourceLoader in FG Source
-	mission_root = resolvepath("/Aircraft/Missions/" ~ name);
+	#mission_root = resolvepath("/Aircraft/Missions/" ~ name);
 	if (mission_root == "") {
         return;
     }
     # save mission root for repositioning (will reset addon)
     setprop("/sim/mission/current_mission/path", mission_root);
+    setprop("/sim/mission/current_mission/file-name", filename);
 
 	mission_node.removeAllChildren();
-	io.read_properties(mission_root ~ "/mission.xml", mission_node);
+	io.read_properties(mission_root ~ "/" ~ filename, mission_node);
 
     # set flightgear main state (location, weather)
 	var presets = mission_node.getChild("presets");
@@ -56,16 +62,37 @@ var _start_mission = func {
 
     # reload data
     mission_root = getprop("/sim/mission/current_mission/path");
+    var filename = getprop("/sim/mission/current_mission/file-name");
+    if (filename == nil)
+        filename = "mission.xml";
     print("mission root: " ~ mission_root);
+    print("mission file: " ~ filename);
 
 	mission_node.removeAllChildren();
-	io.read_properties(mission_root ~ "/mission.xml", mission_node);
+	io.read_properties(mission_root ~ "/" ~ filename, mission_node);
+
+
+    #
+	var n = mission_node.getChild("nasal");
+    globals.__mission_nasal = {};
+	if (n != nil) {
+        if ( (var f = n.getChild("file")) != nil )
+            io.load_nasal(mission_root ~ "/" ~ f.getValue(), "__mission_nasal");
+    }
+
 
 	preferences_load();
 	extensions_load();
-	extensions_models_init();
+	mission_objects_init();
 
 	mission_started = 1;
+}
+
+var restart_mission = func {
+	if (!mission_started)
+        return;
+    stop_mission();
+    start_mission(getprop("/sim/mission/current_mission/path"));
 }
 
 var stop_mission = func {
@@ -80,8 +107,17 @@ var stop_mission = func {
 
     extensions_clear();
 	delete(globals, "__mission");
+	delete(globals, "__mission_nasal");
 
 	mission_started = 0;
+}
+
+
+var object_by_name = func(name) {
+    foreach(var obj; mission_node.getChildren("object"))
+        if (obj.getValue("name") == name)
+            return obj;
+    nil
 }
 
 

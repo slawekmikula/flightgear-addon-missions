@@ -1,152 +1,411 @@
 <?xml version="1.0"?>
 
 <PropertyList>
-	<name>mission-browser</name>
-	<layout>vbox</layout>
+    <name>mission-browser</name>
+    <layout>vbox</layout>
 
-	<group>
-		<layout>hbox</layout>
-		<empty><stretch>1</stretch></empty>
-		<text>
-			<label>Mission browser</label>
-		</text>
-		<empty><stretch>1</stretch></empty>
-		<button>
-			<legend> </legend>
-			<halign>right</halign>
-			<pref-width>20</pref-width>
-			<pref-height>20</pref-height>
-			<binding>
-				<command>dialog-close</command>
-			</binding>
-		</button>
-	</group>
+    <group>
+        <layout>hbox</layout>
+        <empty><stretch>1</stretch></empty>
+        <text>
+            <label>Mission browser</label>
+        </text>
+        <empty><stretch>1</stretch></empty>
+        <button>
+            <legend> </legend>
+            <halign>right</halign>
+            <pref-width>20</pref-width>
+            <pref-height>20</pref-height>
+            <binding>
+                <command>dialog-close</command>
+            </binding>
+        </button>
+    </group>
 
-	<hrule/>
+    <hrule/>
 
-	<group>
-		<layout>hbox</layout>
-		<list>
-			<name>mission_list</name>
-			<pref-width>300</pref-width>
-			<pref-height>250</pref-height>
-			<halign>fill</halign>
-			<valign>fill</valign>
-			<stretch>true</stretch>
-			<padding>6</padding>
-			<property>/sim/mission/gui/selected-mission</property>
-			<binding>
-				<command>dialog-apply</command>
-			</binding>
-			<binding>
-				<command>nasal</command>
-				<script>
-					select_mission();
-				</script>
-			</binding>
-			<value>...</value>
-			<value>...</value>
-		</list>
+    <group>
+        <layout>hbox</layout>
+        <group>
+            <layout>vbox</layout>
+            <padding>6</padding>
+			<group>
+				<layout>hbox</layout>
+				<combo>
+					<name>mission-categories</name>
+					<halign>fill</halign>
+					<stretch>1</stretch>
+					<property>/sim/mission/gui/selected-category</property>
+					<binding>
+						<command>dialog-apply</command>
+						<object-name>mission-categories</object-name>
+					</binding>
+					<binding>
+					    <command>nasal</command>
+					    <script>
+					        generate_mission_list(mode);
+					        #print(selected_category());
+					    </script>
+					</binding>
+					<value>all</value>
+					<value>Hoops</value>
+					<value>Mach Loop</value>
+				</combo>
+                <text>
+                    <label>Category</label>
+                </text>
+			</group>
+            <group>
+                <layout>hbox</layout>
+                <button>
+                    <!--enable>
+                        <property>/sim/mission/gui/aircraft-missions</property>
+                    </enable-->
+                    <legend>Generic missions</legend>
+                    <pref-height>30</pref-height>
+                    <halign>fill</halign>
+                    <padding>0</padding>
+                    <binding>
+                        <command>property-assign</command>
+                        <property>/sim/mission/gui/generic-missions</property>
+                        <value>1</value>
+                    </binding>
+                    <binding>
+                        <command>property-assign</command>
+                        <property>/sim/mission/gui/aircraft-missions</property>
+                        <value>0</value>
+                    </binding>
+                    <binding>
+                        <command>nasal</command>
+                        <script>
+                            selected_category("all");
+                            generate_mission_list(mode = 0);
+                            categories_list_update();
+                        </script>
+                    </binding>
+                </button>
+                <button>
+                    <!--enable>
+                        <property>/sim/mission/gui/generic-missions</property>
+                    </enable-->
+                    <legend>Aircraft-specific missions</legend>
+                    <pref-height>30</pref-height>
+                    <halign>fill</halign>
+                    <padding>0</padding>
+                    <binding>
+                        <command>property-assign</command>
+                        <property>/sim/mission/gui/generic-missions</property>
+                        <value>0</value>
+                    </binding>
+                    <binding>
+                        <command>property-assign</command>
+                        <property>/sim/mission/gui/aircraft-missions</property>
+                        <value>1</value>
+                    </binding>
+                    <binding>
+                        <command>nasal</command>
+                        <script>
+                            selected_category("all");
+                            generate_mission_list(mode = 1);
+                            categories_list_update();
+                        </script>
+                    </binding>
+                </button>
+            </group>
+            <list>
+                <name>mission_list</name>
+                <pref-width>200</pref-width>
+                <!--pref-height>50</pref-height-->
+                <halign>fill</halign>
+                <valign>fill</valign>
+                <stretch>true</stretch>
+                <padding>0</padding>
+                <property>/sim/mission/gui/selected-mission</property>
+                <binding>
+                    <command>dialog-apply</command>
+                </binding>
+                <binding>
+                    <command>nasal</command>
+                    <script>
+                        select_mission();
+                    </script>
+                </binding>
+                <value>...</value>
+                <value>...</value>
+            </list>
+        </group>
 
-		<group>
-			<layout>vbox</layout>
-			<canvas>
-				<name>mission-image</name>
-				<valign>fill</valign>
-				<halign>fill</halign>
-				<pref-width>250</pref-width>
-				<pref-height>250</pref-height>
-				<nasal>
-					<load> <![CDATA[
-						var myCanvas1 = canvas.get( cmdarg() );
-						myCanvas1.setColorBackground(1,1,1,0);
-						var img = myCanvas1.createGroup().createChild("image");
-					]]> </load>
-				</nasal>
-			</canvas>
-		</group>
-	</group>
+        <group>
+            <layout>vbox</layout>
+            <group>
+                <layout>vbox</layout>
+                <canvas>
+                    <name>mission-image</name>
+                    <valign>fill</valign>
+                    <halign>fill</halign>
+                    <pref-width>400</pref-width>
+                    <pref-height>250</pref-height>
+                    <nasal>
+                        <load> <![CDATA[
+                            var myCanvas1 = canvas.get( cmdarg() );
+                            myCanvas1.setColorBackground(1,1,1,0);
+                            var group = myCanvas1.createGroup();
+                            var img = group.createChild("image").setSize(450,253);
+                            var txt_title = group.createChild("text")
+                                                 .setTranslation(10, 210)
+                                                 .setText("")
+                                                 .setFontSize(25)
+                                                 .set('stroke', 'rgb(0,0,0)')
+                                                 .setFont("LiberationFonts/LiberationSans-BoldItalic.ttf");
+                            var txt_authors = group.createChild("text")
+                                                   .setTranslation(10, 230)
+                                                   .setText("")
+                                                   .setFontSize(12)
+                                                   .set('stroke', 'rgb(0,0,0)')
+                                                   .setMaxWidth(430)
+                                                   .setFont("LiberationFonts/LiberationSans-BoldItalic.ttf");
+                        ]]> </load>
+                    </nasal>
+                </canvas>
+            </group>
+            <textbox>
+                <name>mission_description</name>
+                <halign>fill</halign>
+                <valign>fill</valign>
+                <stretch>true</stretch>
+                <pref-width>450</pref-width>
+                <pref-height>150</pref-height>
+                <padding>6</padding>
+                <slider>20</slider>
+                <editable>false</editable>
+                <wrap>true</wrap>
+                <property>/sim/mission/gui/data/selected-mission/description</property>
+            </textbox>
+        </group>
+    </group>
 
-	<textbox>
-		<name>mission_description</name>
-		<halign>fill</halign>
-		<valign>fill</valign>
-		<stretch>true</stretch>
-		<pref-width>600</pref-width>
-		<pref-height>200</pref-height>
-		<padding>6</padding>
-		<slider>20</slider>
-		<editable>false</editable>
-		<wrap>false</wrap>
-		<property>/sim/mission/gui/data/description</property>
-	</textbox>
+    <hrule/>
 
-	<hrule/>
-
-	<button>
-		<legend>Start mission</legend>
-		<pref-height>30</pref-height>
-		<binding>
-			<command>nasal</command>
-			<script>
+    <button>
+        <legend>Start mission</legend>
+        <pref-height>30</pref-height>
+        <binding>
+            <command>nasal</command>
+            <script>
                 fgcommand("dialog-close", {"dialog-name" : "mission-browser"});
-                mission.start_mission(selected_mission);
+                mission.start_mission( getprop("/sim/mission/gui/data/selected-mission/path") );
             </script>
-		</binding>
-	</button>
+        </binding>
+    </button>
 
-	<nasal>
-		<open> <![CDATA[
-			var list = cmdarg().getNode("group[1]/list");
-			var mission_root = "";
-			var selected_mission = "";
-			var data_node = props.getNode("sim/mission/gui/data", 1);
-			data_node.setValues({description: ""});
+    <nasal>
+        <open> <![CDATA[
+            var list = cmdarg().getNode("group[1]/group[0]/list");
+            var combo = cmdarg().getNode("group[1]/group[0]/group[0]/combo");
+            var categories_vector = std.Vector.new(["all"]);
+            var data_node = props.getNode("sim/mission/gui/data", 1);
+            var selected_mission_node = data_node.getNode("selected-mission", 1);
+            var missions_data_node = data_node.getNode("missions", 1);
+            var missions_vector = std.Vector.new();
+            var mode = 0; #0 - generic missions, 1 - aircraft specific missions
+            var default_img = getprop("/sim/mission/root_path") ~ "/GUI/Fg_wings_large.png";
+            setprop("/sim/mission/gui/selected-category", "all");
 
-			var dialog_update = func () {
-				forindex (var i; arg) {
-					var hash = {
-						"object-name" : arg[i],
-						"dialog-name" : "mission-browser"
-					};
-					fgcommand( "dialog-update", props.Node.new(hash) );
-				}
-			}
+            var selected_category = func (v = nil) {
+                if (v == nil)
+                    return getprop("/sim/mission/gui/selected-category");
+                else
+                    setprop("/sim/mission/gui/selected-category", v);
+            }
 
-			var update_list = func {
-				list.removeChildren("value");
+            var mission_info = {
+                authorsN: props.getNode("sim/mission/gui/data/selected-mission/authors"     , 1),
+                titleN  : props.getNode("sim/mission/gui/data/selected-mission/name"        , 1),
+                descN   : props.getNode("sim/mission/gui/data/selected-mission/description" , 1),
+                pathN   : props.getNode("sim/mission/gui/data/selected-mission/path"        , 1),
 
-				var mission_path = getprop("/sim/mission/root_path") ~ "/Missions";
-				foreach (var a; directory(mission_path)) {
-                    if (a != "." and a != ".." and a != "Generic") {
-                        foreach (var b; directory(mission_path ~ "/" ~ a)) {
-                            if (b != "." and b != "..") {
-                                list.addChild("value").setValue(a ~ "/" ~ b);
-                            }
-                        }
+                init: func {
+                    me.image = img;
+                    me.title = txt_title;
+                    me.authors = txt_authors;
+                    me.titleN.setValue("");
+                },
+
+                update: func {
+                    me.title.setText(me._title());
+                    me.authors.setText(me._authors());
+                    me._desc_update();
+                    me._image_update();
+                    me
+                },
+
+                show: func (v = 1) {
+                    v = (v <= 0 ? 0 : 1);
+                    foreach (var a; [me.title, me.authors, me.image])
+                        a.set("visible", v);
+                    me._desc_update(v);
+                    me
+                },
+
+                _authors: func {
+                    var s = "by ";
+                    var i = 0;
+                    foreach (var a; me.authorsN.getChildren("author")) {
+                        s ~= (i == 0 ? "" : ", ") ~ a.getValue("name");
+                        i += 1;
+                    }
+                    i ? s : "";
+                },
+
+                _title: func {
+                    me.titleN.getValue();
+                },
+
+                _image_update: func {
+                    var path = me.pathN.getValue() ~ "/mission-image.png";
+                    if (mission.file_found(path))
+                        me.image.set("src", path);
+                    else me.image.set("src", default_img);
+                },
+
+                _desc_update: func (show = 1) {
+                    if (!show)
+                        me.descN.setValue("");
+                    dialog_update("mission_description");
+                },
+            };
+
+            var _directory = func (dir) {
+                var v = std.Vector.new(directory(dir));
+                foreach (var a; [".", ".."])
+                    if (v.contains(a))
+                        v.remove(a);
+                return v.vector;
+            }
+
+            var read_file = func(file, node) {
+                if (!mission.file_found(file))
+                    return;
+                io.read_properties(file, node);
+            }
+
+            var is_mission = func (path) {
+                foreach (var f; ["/mission-metadata.xml", "/mission.xml"])
+                    if (!mission.file_found(path ~ f)) return 0;
+                return 1;
+            }
+
+            var contains_missions = func (dir) {
+                foreach (var a; _directory(dir)) {
+                    if (is_mission(dir ~ "/" ~ a)) return 1;
+                }
+                return 0;
+            }
+
+            var missions_list = func (path) {
+                var missions = [];
+                foreach (var a; _directory(path))
+                    if (is_mission(var b = path ~ "/" ~ a))
+                        append(missions, b);
+                return missions;
+            }
+
+            var categories_list = func (path) {
+                var categories = [];
+                foreach (var c; _directory(path)) {
+                    if (contains_missions(path ~ "/" ~ c))
+                        append(categories, c);
+                }
+                return categories;
+            }
+
+            var missions_vector_update = func (path, filter = nill) {
+                missions_vector.clear();
+                categories_vector.clear();
+                if (filter == nil)
+                    filter = "all";
+                categories_vector.append("all");
+                foreach (var c; categories_list(path)) {
+                    categories_vector.append(c);
+                    if (c == filter or filter == "all") {
+                        missions_vector.extend(missions_list(path ~ "/" ~ c));
                     }
                 }
+            }
 
-				dialog_update("mission_list");
-			}
+            var categories_list_update = func {
+                combo.removeChildren("value");
+                foreach(var c; categories_vector.vector)
+                    combo.addChild("value").setValue(c);
+                dialog_update("mission-categories");
+            }
 
-			var select_mission = func {
-				selected_mission = getprop("/sim/mission/gui/selected-mission");
-				mission_root = getprop("/sim/mission/root_path") ~ "/Missions/" ~ selected_mission;
+            var missions_data_node_update = func {
+                missions_data_node.removeAllChildren();
+                var i = 1;
+                foreach (var a; missions_vector.vector) {
+                    var c = missions_data_node.addChild("mission");
+                    read_file(a ~ "/mission-metadata.xml", c);
+                    c.addChild("list-name").setValue(i ~ ". " ~ c.getValue("name"));
+                    c.addChild("path").setValue(a);
+                    i += 1;
+                }
+            }
 
-				data_node.setValues({description: ""});
-				io.read_properties(mission_root ~ "/metadata.xml", data_node);
-				dialog_update("mission_description");
+            var dialog_update = func () {
+                forindex (var i; arg) {
+                    var hash = {
+                        "object-name" : arg[i],
+                        "dialog-name" : "mission-browser"
+                    };
+                    fgcommand( "dialog-update", props.Node.new(hash) );
+                }
+            }
 
-				img.set("src", mission_root ~ "/image.png").setSize(250, 250);
-			}
+            var update_list = func (path) {
+                missions_vector_update(path, selected_category());
+                missions_data_node_update();
+                list.removeChildren("value");
+                foreach (var c; missions_data_node.getChildren("mission"))
+                    list.addChild("value").setValue(c.getValue("list-name"));
+                dialog_update("mission_list");
+                mission_info.show(0);
+            }
 
-			update_list();
-		]]> </open>
 
-		<close>
-			#
-		</close>
-	</nasal>
+            var select_mission = func {
+                var list_selected = getprop("/sim/mission/gui/selected-mission");
+                foreach (var a; missions_data_node.getChildren("mission")) {
+                    if (a.getValue("list-name") == list_selected) {
+                        selected_mission_node.getNode("authors", 1).removeChildren("author");
+                        props.copy(a, selected_mission_node);
+                        mission_info.update().show();
+                        break;
+                    }
+                } #foreach
+            } #func
+
+
+            var generate_mission_list = func (aircraft = 0, type = nil) {
+                var path = "";
+                if (aircraft == 0)
+                    path = getprop("/sim/mission/root_path") ~ "/Missions";
+                else
+                    path = getprop("/sim/aircraft-dir") ~ "/Missions";
+                update_list(path);
+                #categories_list_update();
+            }
+
+            settimer(func {
+                mission_info.init();
+                generate_mission_list();
+                categories_list_update();
+            }, 0);
+        ]]> </open>
+
+        <close>
+            #
+        </close>
+    </nasal>
 
 </PropertyList>

@@ -78,8 +78,11 @@ mission.extension_add("Handler", {
 			if (!me.node.getValue("stop-timer"))
 				return;
 			me.timer.stop();
-			me.window.set("visible", 0);
 			me.node.setValue("stop-timer", 0);
+            if (!me.node.getValue("hide-timer"))
+                return;
+			me.window.set("visible", 0);
+			me.node.setValue("hide-timer", 0);
 		}
 		#me.timer.start();
 	},

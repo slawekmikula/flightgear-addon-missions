@@ -13,6 +13,9 @@ var init_gui = func {
 	gui.Dialog.new("/sim/gui/dialogs/mission-browser/dialog",
         getprop("/sim/mission/root_path") ~ "/GUI/mission_browser.xml");
 
+	gui.Dialog.new("/sim/gui/dialogs/mission-message-box/dialog",
+        getprop("/sim/mission/root_path") ~ "/GUI/mission_message_box.xml");
+
 	var h = {
 		label: "Missions",
 		item: [
@@ -30,11 +33,34 @@ var init_gui = func {
 					script: "mission.stop_mission()",
 				},
 			},
+			{ #2
+				label: "Restart mission",
+				binding: {
+					command: "nasal",
+					script: "mission.restart_mission()",
+				},
+			},
+			{ #3
+				label: "msgbox",
+				binding: {
+					command: "nasal",
+					script: "gui.showDialog('mission-message-box')",
+				},
+			},
 		],
 	};
 	props.getNode("/sim/menubar/default").addChild("menu").setValues(h);
 	fgcommand("gui-redraw");
 }
+
+
+var show_msgbox = func(msg, type = "info") {
+    setprop('/sim/mission/gui/msgbox-text', msg);
+    setprop('/sim/mission/gui/msgbox-icon-path',
+        getprop('/sim/mission/root_path') ~ '/GUI/Dialog-' ~ type ~ '.png');
+    gui.showDialog('mission-message-box');
+}
+
 
 var fdm_init_listener = _setlistener("/sim/signals/fdm-initialized", func {
 	removelistener(fdm_init_listener);
@@ -44,6 +70,6 @@ var fdm_init_listener = _setlistener("/sim/signals/fdm-initialized", func {
 
     init_gui();
 
-    print("Mission initalized");
+    print("Mission initialized");
 });
 

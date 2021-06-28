@@ -18,7 +18,12 @@ mission.extension_add("MissionObject", {
 		#m.object_N = props.getNode("/sim/mission/objects", 1).addChild("model");
 		#m.position_N = n.getNode("world-position");
 
-		m.model = mission.put_model(getprop("/sim/mission/root_path") ~ m._path, m._coord, m._heading, m._pitch, m._roll);
+        var filepath = mission.mission_root ~ "/Models/";
+        if (!mission.file_found(filepath ~ m._path)) {
+            filepath = getprop("/sim/mission/root_path") ~ "/Missions/Generic/Models/";
+        }
+
+		m.model = mission.put_model(filepath ~ m._path, m._coord, m._heading, m._pitch, m._roll);
 
 		if (!m._activated)
 			m._hide();
