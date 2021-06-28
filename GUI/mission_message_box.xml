@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+    <name>mission-message-box</name>
+    <layout>vbox</layout>
+    <width>300</width>
+
+    <group>
+        <layout>hbox</layout>
+        <default-padding>2</default-padding>
+        <group>
+            <layout>vbox</layout>
+            <default-padding>0</default-padding>
+        <canvas>
+            <name>msgbox-icon</name>
+            <valign>fill</valign>
+            <halign>left</halign>
+            <pref-width>40</pref-width>
+            <pref-height>40</pref-height>
+            <nasal>
+                <load> <![CDATA[
+                    var myCanvas = canvas.get(cmdarg());
+                    myCanvas.setColorBackground(0,0,0,0);
+                    var group = myCanvas.createGroup();
+                    var img = group.createChild("image").setSize(40, 40);
+                    img.set("src", getprop("/sim/mission/gui/msgbox-icon-path"));
+                    #img.set("visible", 1).set("slice", "5% 5% fill");
+                ]]> </load>
+            </nasal>
+        </canvas>
+        </group>
+        <text>
+            <halign>left</halign>
+            <label>Mission completed.</label>
+            <property>/sim/mission/gui/msgbox-text</property>
+        </text>
+        <empty><stretch>1</stretch></empty>
+    </group>
+
+    <button>
+      <halign>right</halign>
+      <legend>Ok</legend>
+      <default>true</default>
+      <key>Esc</key>
+      <binding>
+        <command>dialog-close</command>
+      </binding>
+    </button>
+
+</PropertyList>

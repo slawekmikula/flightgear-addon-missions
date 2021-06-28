@@ -1,6 +1,7 @@
 
 var objects         = [];
 var handlers        = [];
+var exclude_list    = [];
 
 var extensions_load = func {
 
@@ -12,7 +13,7 @@ var extensions_load = func {
     #load mission extension
 	foreach(var script; mission_node.getChildren("include")) {
 		globals["__mission"][k = "__" ~ i] = {};
-		_load_nasal(mission_root ~ "/extensions/" ~ script.getValue(), k);
+		_load_nasal(mission_root ~ "/Nasal/extensions/" ~ script.getValue(), k);
 		i += 1;
 	}
 
@@ -61,7 +62,7 @@ var extension_list = func {
 	return v;
 }
 
-var extensions_models_init = func() {
+var mission_objects_init = func() {
     foreach (var h; handlers) {
 		if( hasmember(h, "init") ) {
 			h.init();

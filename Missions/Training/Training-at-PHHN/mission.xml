@@ -1,0 +1,344 @@
+<?xml version="1.0"?>
+<PropertyList>
+
+	<presets>
+        <airport-id>PHHN</airport-id>
+        <on-ground>1</on-ground>
+		<altitude>-9999</altitude>
+		<altitude-ft>-9999</altitude-ft>
+		<heading-deg>350</heading-deg>
+		<latitude-deg>20.79461333</latitude-deg>
+		<longitude-deg>-156.0144894</longitude-deg>
+        <airspeed-kt>0</airspeed-kt>
+        <glideslope-deg>0</glideslope-deg>
+        <offset-azimuth-deg>0</offset-azimuth-deg>
+        <offset-distance-nm>0</offset-distance-nm>
+        <airport-requested>true</airport-requested>
+        <runway-requested>true</runway-requested>
+        <parking-requested>true</parking-requested>
+	</presets>
+
+	<timeofday>morning</timeofday>
+
+
+<!-- Timers -->
+
+    <object>
+        <name>TIMER_MSG_intro-1</name>
+        <type>timer-trigger</type>
+        <activated>1</activated>
+        <single-shot>1</single-shot>
+        <stop-time>2.0</stop-time>
+        <actions>
+            <object-reference>MSG_intro-1</object-reference>
+            <object-reference>TIMER_MSG_intro-2</object-reference>
+        </actions>
+    </object>
+
+    <object>
+        <name>TIMER_MSG_intro-2</name>
+        <type>timer-trigger</type>
+        <activated>0</activated>
+        <single-shot>1</single-shot>
+        <stop-time>4.5</stop-time>
+        <actions>
+            <object-reference>MSG_intro-2</object-reference>
+            <object-reference>ENABLE_PROP_TRIGGER_engine_running</object-reference>
+        </actions>
+    </object>
+
+    <object>
+        <name>TIMER_MSG_intro-3</name>
+        <type>timer-trigger</type>
+        <activated>0</activated>
+        <single-shot>1</single-shot>
+        <stop-time>5</stop-time>
+        <actions>
+            <object-reference>MSG_intro-3</object-reference>
+            <object-reference>ENABLE_PROP_TRIGGER_taxiing</object-reference>
+        </actions>
+    </object>
+
+    <object>
+        <name>TIMER_SHOW_POI_runway_08</name>
+        <type>timer-trigger</type>
+        <activated>0</activated>
+        <single-shot>1</single-shot>
+        <stop-time>15</stop-time>
+        <actions>
+            <object-reference>SHOW_POI_runway_08</object-reference>
+        </actions>
+    </object>
+
+<!-- Messages -->
+
+    <object>
+        <name>MSG_intro-1</name>
+        <type>dialog-action</type>
+        <text>We're good to go. You do the flying, and I'll handle the radios.</text>
+        <sound-file>message-intro-1.wav</sound-file>
+        <delay-sec>4.5</delay-sec>
+    </object>
+
+    <object>
+        <name>MSG_intro-2</name>
+        <type>dialog-action</type>
+        <text>Go ahead and start the engine.</text>
+        <sound-file>message-intro-2.wav</sound-file>
+        <delay-sec>2</delay-sec>
+    </object>
+
+    <object>
+        <name>MSG_intro-3</name>
+        <type>dialog-action</type>
+        <text>This is an uncontrolled airport, so there's nobody to grant taxi clearance. Taxi to runway 08 whenever you ready.</text>
+        <sound-file>message-intro-3.wav</sound-file>
+        <delay-sec>9</delay-sec>
+    </object>
+
+    <object>
+        <name>MSG_taxiing_rwy08</name>
+        <type>dialog-action</type>
+        <text>Hana traffic, Skyhawk 73429, at the ramp, taxiing to runway 08 for departure, Hana.</text>
+        <sound-file>taxiing-rwy-08.wav</sound-file>
+        <delay-sec>6</delay-sec>
+    </object>
+
+    <object>
+        <name>MSG_back_taxiing_rwy08</name>
+        <type>dialog-action</type>
+        <text>Hana traffic, Skyhawk 73429, back-taxiing runway 08 for departure, Hana.</text>
+        <sound-file>back-taxiing-rwy-08.wav</sound-file>
+        <delay-sec>6</delay-sec>
+    </object>
+
+    <object>
+        <name>ENABLE_PROP_TRIGGER_engine_running</name>
+        <type>object-activation-action</type>
+        <object-state>1</object-state>
+        <reference-list>
+            <object-reference>PROP_TRIGGER_engine_running</object-reference>
+        </reference-list>
+    </object>
+
+
+<!-- Object activation actions -->
+
+    <object>
+        <name>ENABLE_PROP_TRIGGER_taxiing</name>
+        <type>object-activation-action</type>
+        <object-state>1</object-state>
+        <reference-list>
+            <object-reference>PROP_TRIGGER_taxiing</object-reference>
+        </reference-list>
+    </object>
+
+    <object>
+        <name>ENABLE_PROXIMITY_TRIGGER_holding_point</name>
+        <type>object-activation-action</type>
+        <object-state>1</object-state>
+        <reference-list>
+            <object-reference>PROXIMITY_TRIGGER_holding_point</object-reference>
+        </reference-list>
+    </object>
+
+    <object>
+        <name>ENABLE_PROXIMITY_TRIGGER_runway_08</name>
+        <type>object-activation-action</type>
+        <object-state>1</object-state>
+        <reference-list>
+            <object-reference>PROXIMITY_TRIGGER_runway_08</object-reference>
+        </reference-list>
+    </object>
+
+    <object>
+        <name>DISABLE_PROXIMITY_TRIGGER_runway_08</name>
+        <type>object-activation-action</type>
+        <object-state>0</object-state>
+        <reference-list>
+            <object-reference>PROXIMITY_TRIGGER_runway_08</object-reference>
+        </reference-list>
+    </object>
+
+    <object>
+        <name>DISABLE_PROXIMITY_TRIGGER_holding_point</name>
+        <type>object-activation-action</type>
+        <object-state>0</object-state>
+        <reference-list>
+            <object-reference>PROXIMITY_TRIGGER_holding_point</object-reference>
+        </reference-list>
+    </object>
+
+    <object>
+        <name>SHOW_POI_runway_08</name>
+        <type>object-activation-action</type>
+        <object-state>1</object-state>
+        <reference-list>
+            <object-reference>POI_runway_08</object-reference>
+        </reference-list>
+    </object>
+
+    <object>
+        <name>HIDE_POI_runway_08</name>
+        <type>object-activation-action</type>
+        <object-state>0</object-state>
+        <reference-list>
+            <object-reference>POI_runway_08</object-reference>
+        </reference-list>
+    </object>
+
+<!-- Property triggers -->
+
+    <object>
+        <name>PROP_TRIGGER_engine_running</name>
+        <type>property-trigger</type>
+        <activated>0</activated>
+        <condition>
+            <or>
+                <property>/engines/engine/running</property>
+                <property>/engines/engine[1]/running</property>
+                <property>/engines/engine[2]/running</property>
+            </or>
+        </condition>
+        <actions>
+            <object-reference>TIMER_MSG_intro-3</object-reference>
+            <object-reference>TIMER_SHOW_POI_runway_08</object-reference>
+        </actions>
+    </object>
+
+    <object>
+        <name>PROP_TRIGGER_taxiing</name>
+        <type>property-trigger</type>
+        <activated>0</activated>
+        <condition>
+            <greater-than>
+                <property>/velocities/groundspeed-kt</property>
+                <value>2</value>
+            </greater-than>
+        </condition>
+        <actions>
+            <object-reference>MSG_taxiing_rwy08</object-reference>
+            <object-reference>ENABLE_PROXIMITY_TRIGGER_holding_point</object-reference>
+        </actions>
+    </object>
+
+
+<!-- Proximity triggers -->
+
+    <object>
+        <name>PROXIMITY_TRIGGER_holding_point</name>
+        <type>proximity-trigger</type>
+        <activated>0</activated>
+        <areas>
+            <object-reference>area_holding_point</object-reference>
+        </areas>
+        <on-enter-actions>
+            <object-reference>MSG_back_taxiing_rwy08</object-reference>
+            <object-reference>DISABLE_PROXIMITY_TRIGGER_holding_point</object-reference>
+            <object-reference>ENABLE_PROXIMITY_TRIGGER_runway_08</object-reference>
+        </on-enter-actions>
+    </object>
+
+    <object>
+        <name>PROXIMITY_TRIGGER_runway_08</name>
+        <type>proximity-trigger</type>
+        <activated>0</activated>
+        <areas>
+            <object-reference>area_rwy_08</object-reference>
+        </areas>
+        <on-enter-actions>
+            <object-reference>HIDE_POI_runway_08</object-reference>
+            <object-reference>DISABLE_PROXIMITY_TRIGGER_runway_08</object-reference>
+        </on-enter-actions>
+    </object>
+
+<!-- Areas -->
+
+	<object>
+		<name>area_holding_point</name>
+		<type>rectangle-area</type>
+		<width>300.0</width>
+		<height>30.0</height>
+		<length>20.0</length>
+		<orientation>
+			<heading-deg>0.0</heading-deg>
+			<pitch-deg>0.0</pitch-deg>
+			<roll-deg>0.0</roll-deg>
+		</orientation>
+		<attached-world-position>
+			<latitude-deg>20.79518964</latitude-deg>
+			<longitude-deg>-156.0147943</longitude-deg>
+			<altitude-m>0</altitude-m>
+			<altitude-is-AGL>1</altitude-is-AGL>
+		</attached-world-position>
+	</object>
+
+	<object>
+		<name>area_rwy_08</name>
+		<type>rectangle-area</type>
+		<width>150.0</width>
+		<height>30.0</height>
+		<length>150.0</length>
+		<orientation>
+			<heading-deg>0.0</heading-deg>
+			<pitch-deg>0.0</pitch-deg>
+			<roll-deg>0.0</roll-deg>
+		</orientation>
+		<attached-world-position>
+			<latitude-deg>20.79563303</latitude-deg>
+			<longitude-deg>-156.019419</longitude-deg>
+			<altitude-m>0.0</altitude-m>
+			<altitude-is-AGL>1</altitude-is-AGL>
+		</attached-world-position>
+	</object>
+
+	<object>
+		<name>POI_runway_08</name>
+		<type>point-of-interest</type>
+		<activated>0</activated>
+		<target-name>Runway 08</target-name>
+		<attached-world-position>
+			<latitude-deg>20.79563303</latitude-deg>
+			<longitude-deg>-156.019419</longitude-deg>
+			<altitude-m>1.0</altitude-m>
+			<altitude-is-AGL>1</altitude-is-AGL>
+		</attached-world-position>
+	</object>
+
+	<object>
+		<name>Hoop1_active</name>
+		<type>model</type>
+		<activated>1</activated>
+		<path>/Missions/Generic/Models/hoop-40x40.xml</path>
+		<orientation>
+			<heading-deg>0.0</heading-deg>
+			<pitch-deg>0.0</pitch-deg>
+			<roll-deg>0.0</roll-deg>
+		</orientation>
+		<world-position>
+			<latitude-deg>20.79518964</latitude-deg>
+			<longitude-deg>-156.0147943</longitude-deg>
+			<altitude-m>200</altitude-m>
+			<altitude-is-AGL>1</altitude-is-AGL>
+		</world-position>
+	</object>
+
+	<object>
+		<name>Hoop1_active</name>
+		<type>model</type>
+		<activated>1</activated>
+		<path>/Missions/Generic/Models/Numbers/num_1.xml</path>
+		<orientation>
+			<heading-deg>0.0</heading-deg>
+			<pitch-deg>0.0</pitch-deg>
+			<roll-deg>0.0</roll-deg>
+		</orientation>
+		<world-position>
+			<latitude-deg>20.79518964</latitude-deg>
+			<longitude-deg>-156.0147943</longitude-deg>
+			<altitude-m>200</altitude-m>
+			<altitude-is-AGL>1</altitude-is-AGL>
+		</world-position>
+	</object>
+
+</PropertyList>

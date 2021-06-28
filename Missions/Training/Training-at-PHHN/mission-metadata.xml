@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<PropertyList>
+        <name>Flight training at PHHN</name>
+        <skill-level>2</skill-level>
+
+        <authors>
+            <author>
+                <name>Marius_A</name>
+            </author>
+        </authors>
+
+        <description>This is a trainig flight. We'll start at Hana Airport (PHHN) and do traffic patterns.</description>
+</PropertyList>
