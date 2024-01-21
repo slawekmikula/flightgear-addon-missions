@@ -1,0 +1,54 @@
+
+
+var objectiveItem = {
+    new: func(root, n) {
+        var m = {parents: [objectiveItem, __mission.canvas.style.new()]};
+
+        m.node = n;
+
+        m.style = {
+            activeColor:    "#ffffff",
+            canceledColor:  "#777777",
+            completedColor: "#ffffff",
+            failedColor:    "#ffffff",
+            checkboxHeight: 20,
+            textFont:       "LiberationFonts/LiberationSans-Regular.ttf",
+            textFontSize:   22,
+        };
+
+        m.group = root.createChild("group");
+
+        var h = m.style.checkboxHeight;
+
+        m._el = {
+            checkbox:         m.group.createChild("path"),
+            completed_symbol: m.group.createChild("path"),
+            cancel_symbol:    canvas.draw.circle(m.group, h/2, 0, 0),
+            failed_symbol:    m.group.createChild("path"),
+            text:             m.group.createChild("text"),
+        };
+
+        m._el.checkbox.setColor("#ffffff")
+                      .lineTo(h, 0)
+                      .lineTo(h, h)
+                      .lineTo(0, h)
+                      .close()
+                      .setStrokeLineWidth(2);
+
+        m._el.completed_symbol.moveTo(-h/2, -h/2)
+                              .lineTo(0, 0)
+                              .lineTo(h, -h)
+                              .setColor("#00bb00")
+                              .setTranslation(math.ceil(h/5*2), math.ceil(h/5*3))
+                              .setStrokeLineWidth(4);
+
+        m._el.cancel_symbol.setColor("#ff0000")
+                           .moveTo(-8, 8)
+                           .lineTo(8, -8)
+                           .setStrokeLineWidth(4)
+                           .setTranslation(10, 10);
+
+
+        return m;
+    },
+};
