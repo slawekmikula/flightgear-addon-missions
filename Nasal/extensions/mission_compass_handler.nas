@@ -1,3 +1,5 @@
+var x_size = getprop("/sim/startup/xsize"); # revise: update globally
+var y_size = getprop("/sim/startup/ysize");
 
 
 mission.extension_add("Handler", {
@@ -7,22 +9,36 @@ mission.extension_add("Handler", {
 		me.toggle_timer = maketimer(1, func me.toggle_compass());
 		#me.toggle_timer.start();
 
-		var w = 130;
-		var h = 1.22*w;
-		var bg_color = [0.2, 0.4, 0.7, 0.9];
-		var line_color = [1, 1, 1, 0.8];
+		var w = 0.078 * x_size; #130;
+		var h = 1.4*w; #1.22*w;
+        var m = w/20;
+        var window_color = "#282c34aa";
+		var bg_color = [0.2, 0.4, 0.7, 0.8];
+		var line_color = [1, 1, 1, 0.75];
 
 		me.window = canvas.Window.new([w,h]);
 		me.window.set("visible", 0);
 		me.canvas = me.window.createCanvas();
 		me.canvas.setColorBackground(0,0,0,0);
-		foreach (var k; ["Compass", "Pointer", "Aircraft", "Table"])
+		foreach (var k; ["bg", "Table", "Compass", "Pointer", "Aircraft"])
 			me[k] = me.canvas.createGroup();
-		#me.AircraftSVG = me.canvas.createGroup();
-		#canvas.parsesvg(me.AircraftSVG, "Nasal/mission/drawing.svg");
-		#me.AircraftSVG.setScale(1);
 
-		var cw = 0.6 * w; #compass width (diameter)
+
+        var bg_cfg = {
+            "border-top-radius":    w/10,
+            "border-bottom-radius": w/10,
+        };
+
+        me.bg.createChild("path")
+          .rect(1, 1, w-2, h-2, bg_cfg)
+          .setColor("#282c34ff")
+          .setColorFill(window_color)
+          .setStrokeLineWidth(1);
+
+
+
+
+		var cw = 0.7 * w; #compass width (diameter)
 		me.Compass.createChild("path")
 			.moveTo(-cw/2, -cw/2 * 0)
 			.arcSmallCWTo(cw/2, cw/2, 0, cw/2, 0)
@@ -30,118 +46,148 @@ mission.extension_add("Handler", {
 			.close()
 			.setColor(line_color)
 			.setColorFill(bg_color)
-			.setStrokeLineWidth(2);
+			.setStrokeLineWidth(1);
+
 
 		for (var i = 0; i < 8; i += 1)
 			me.Compass.createChild("path")
 				.moveTo(0, -cw/2*0.95)
-				.lineTo(0, -cw/2 * 0.8)
-				.setColor(line_color)
+				.lineTo(0, -cw/2 * 0.85)
+				.setColor("#ffffffff")
+                .set("blend-source-alpha", "one")
+                #.set("blend-destination-alpha", "zero")
 				.setStrokeLineWidth(2)
 				.setRotation(i * 45 * D2R);
 
 		var font_size = 0.15 * cw;
-		forindex (var i; var v = ["N", "E", "S", "W"]) {
-			var a = i * 90 * D2R;
+		#forindex (var i; var v = ["N", "•", "E", "•", "S", "•", "W", "•"]) {
+        forindex (var i; var v = ["N", "", "E", "", "S", "", "W", ""]) {#FIX
+			var a = i * 45 * D2R;
 			var r = -cw / 2 * 0.7;
 			me.Compass.createChild("text")
 				.setTranslation(-math.sin(a) * r, math.cos(a) * r)
 				.setText(v[i])
 				.setAlignment("center-top")
-				.setFontSize(font_size)
+				.setFontSize(font_size * 1.0)
+                #.set('stroke',  'rgb(0,0,0)')
 				.setFont("LiberationFonts/LiberationSans-Bold.ttf")
+                .set("blend-source-alpha", "one")
 				.setColor(1,1,1)
-				.setRotation(i * 90 * D2R);
+				.setRotation(i * 45 * D2R);
 		}
-		me.Compass.setTranslation(w/2, w/2);
+		me.Compass.setTranslation(w/2, h/2);
 
 		var arrow_size = 0.12 * cw;
 		var arrow_width = 0.15 * cw;
-		var r = -cw/2 * 1.025;
-		me.Pointer.createChild("path")
-			.moveTo(0, r - arrow_size)
-			.lineTo(arrow_width/2, r)
-			.lineTo(-arrow_width/2, r)
-			.close()
-			.setColor(0,1,0,0.8)
-			.setColorFill(1,1,0,0.98)
-			.setStrokeLineWidth(0);
-		me.Pointer.setTranslation(w/2, w/2);
+		var r = -cw/2 * 0.95;
+		me.Pointer.createChild("text")
+   				.setTranslation(0, r - arrow_size)
+				.setText("") #.setText("ˆ")
+				.setAlignment("center-center")
+				.setFontSize(arrow_size * 2.5)
+                #.set('stroke',  'rgb(0,0,0)')
+                .set("blend-source-alpha", "one")
+				.setFont("mononokiBoldItalic.ttf")
+				.setColor(1,1,0,0.9)
+				.setRotation(0 * D2R);
+		me.Pointer.setTranslation(w/2, h/2);
 
-		var fuselage_length = cw*0.38;
-		var fuselage_width = 0.15 * fuselage_length;
-		var wing_span = cw*0.35;
-		var wing_chord = [0.37 * fuselage_length, 0.12 * fuselage_length];
-		var wing_chord_dist = [0.3 * fuselage_length, 0.6 * fuselage_length];
-		var tail_span = 0.5 * wing_span;
-		var tail_chord = [0.18 * fuselage_length, 0.07 * fuselage_length];
-		me.Aircraft.createChild("path")
-			.moveTo(0, -fuselage_length/2)
-			.lineTo(fuselage_width/2, -fuselage_length/2 + fuselage_width/2)
-			.lineTo(fuselage_width/2, -fuselage_length/2 + wing_chord_dist[0])
-			.lineTo(wing_span/2, -fuselage_length/2 + wing_chord_dist[1])
-			.lineTo(wing_span/2, -fuselage_length/2 + wing_chord_dist[1] + wing_chord[1])
-			.lineTo(fuselage_width/2, -fuselage_length/2 + wing_chord_dist[0] + wing_chord[0])
-			.lineTo(fuselage_width/2, fuselage_length/2 - tail_chord[0])
-			.lineTo(tail_span/2, fuselage_length/2 - tail_chord[1])
-			.lineTo(tail_span/2, fuselage_length/2)  #
-			.lineTo(-tail_span/2, fuselage_length/2) #
-			.lineTo(-tail_span/2, fuselage_length/2 - tail_chord[1])
-			.lineTo(-fuselage_width/2, fuselage_length/2 - tail_chord[0])
-			.lineTo(-fuselage_width/2, -fuselage_length/2 + wing_chord_dist[0] + wing_chord[0])
-			.lineTo(-wing_span/2, -fuselage_length/2 + wing_chord_dist[1] + wing_chord[1])
-			.lineTo(-wing_span/2, -fuselage_length/2 + wing_chord_dist[1])
-			.lineTo(-fuselage_width/2, -fuselage_length/2 + wing_chord_dist[0])
-			.lineTo(-fuselage_width/2, -fuselage_length/2 + fuselage_width/2)
-			.close()
+		me.Aircraft.createChild("text")
+			.setText("") #.setText("↑")
+			.setAlignment("center-center")
+			.setFontSize(font_size * 2.)
+            #.set('stroke',  'rgb(0,0,0)')
+            .set("blend-source-alpha", "one")
+			.setFont("mononokiBoldItalic.ttf")
 			.setColor(line_color)
-			.setStrokeLineWidth(2);
-		me.Aircraft.setTranslation(w/2, w/2);
+			.setRotation(0 * D2R);
+		me.Aircraft.setTranslation(w/2, h/2);
 
 		var th = 0.45 * cw;
 		var x_left = 0.05 * w;
 		var x_right = w - x_left;
 		var y_top = h - th - x_left;
 		var y_bottom = h - x_left;
-		me.Table.createChild("path")
-			.moveTo(x_left, y_top)
-			.horizTo(x_right)
-			.vertTo(y_bottom)
-			.horizTo(x_left)
-			.close()
-			.moveTo(x_left, y_bottom - th/2)
-			.horizTo(x_right)
-			#.moveTo((x_right - x_left)/2 + x_left, y_bottom - th/2)
-			#.vertTo(y_top)
-			.setColor(line_color)
-			.setColorFill(bg_color)
-			.setStrokeLineWidth(2);
-		me.Pointer.setTranslation(w/2, w/2);
 
-		var font_size = 0.7 * th/2;
+        #var m = 1;
+        var row_h = 0.21 * cw;
+        var row_spacing = row_h * 0.4;
+        var row_w = (w - row_spacing - 2 * m) / 2;
+
+
+        var x1 = m;
+        var x2 = m + row_w + row_spacing;
+        var y1 = m; #h - 2 * row_h - row_spacing - m;
+        var y2 = h - row_h - m; #y1 + row_h + row_spacing;
+
+
+
+        var table_cfg = {
+            "border-top-radius":    row_h/2.5,
+            "border-bottom-radius": row_h/2.5,
+        };
+
+
+		me.Table.createChild("path")
+          .rect(x1, y1, row_w, row_h, table_cfg)
+          .setColor(line_color)
+          .setColorFill(bg_color)
+          .set("blend-source-alpha", "one")
+          .setStrokeLineWidth(1).hide();
+
+		me.Table.createChild("path")
+          .rect(x2, y1, row_w, row_h, table_cfg)
+          .setColor(line_color)
+          .setColorFill(bg_color)
+          .set("blend-source-alpha", "one")
+          .setStrokeLineWidth(1).hide();
+
+		me.Table.createChild("path")
+          .rect(x1, y2, w - 2*m, row_h, table_cfg)
+          .setColor(line_color)
+          .setColorFill(bg_color)
+          .set("blend-source-alpha", "one")
+          .setStrokeLineWidth(1);
+
+
+		me.Table.createChild("path")
+          .rect(x1, y1+row_h+row_spacing, w - 2*m, y2-row_h-2*row_spacing-m, table_cfg)
+          .setColor(line_color)
+          .setColorFill(bg_color)
+          .set("blend-source-alpha", "one")
+          .setStrokeLineWidth(1).hide();
+
+
+		var font_size = 0.7 * row_h;
 		var _step = (x_right - x_left)/4;
 		me.Dist = me.Table.createChild("text")
-			.setTranslation(_step + x_left, y_top + th/4)
+			.setTranslation(m + row_w/2, y1 + row_h/2)
 			.setText("...")
 			.setAlignment("center-center")
 			.setFontSize(font_size)
-			.setFont("LiberationFonts/LiberationSans-Regular.ttf")
+            .set('stroke',  'rgb(0,0,0)')
+            .set("blend-source-alpha", "one")
+			.setFont("LiberationFonts/LiberationSans-Bold.ttf")
 			.setColor(1,1,1);
 
 		me.Alt = me.Table.createChild("text")
-			.setTranslation(_step*3 + x_left, y_top + th/4)
+			.setTranslation(x1 + 1.5*row_w + row_spacing, y1 + row_h/2)
 			.setText("...")
 			.setAlignment("center-center")
 			.setFontSize(font_size)
-			.setFont("LiberationFonts/LiberationSans-Regular.ttf")
+            .set('stroke',  'rgb(0,0,0)')
+            .set("blend-source-alpha", "one")
+			.setFont("LiberationFonts/LiberationSans-Bold.ttf")
 			.setColor(1,1,1);
 
 		me.Name = me.Table.createChild("text")
-			.setTranslation((x_right - x_left)/2 + x_left, y_bottom - th/4)
+			.setTranslation(w/2, y2 + row_h/2)
 			.setText("...")
 			.setAlignment("center-center")
-			.setFontSize(font_size)
-			.setFont("LiberationFonts/LiberationSans-Regular.ttf")
+			.setFontSize(0.7 * row_h)
+            #.set('stroke',  'rgb(0,0,0)')
+            .set("blend-source-alpha", "one")
+			.setFont("LiberationFonts/LiberationSans-Bold.ttf")
 			.setColor(1,1,1);
 
 		# Draw arrows
@@ -189,6 +235,7 @@ mission.extension_add("Handler", {
 
 		me._visible = 0;
 
+
 		me.show_compass = func {
 			if (!me.node.getValue("show-compass"))
 				return;
@@ -196,6 +243,7 @@ mission.extension_add("Handler", {
 			me.window.set("visible", me._visible = 1);
 			me.node.setValue("show-compass", 0);
 			compass_visible(1);
+            #me.window.clearFocus();
 		}
 
 		me.hide_compass = func {
@@ -205,6 +253,7 @@ mission.extension_add("Handler", {
 			me.window.set("visible", me._visible = 0);
 			me.node.setValue("hide-compass", 0);
 			compass_visible(0);
+            #me.window.clearFocus();
 		}
 
 		me.show_arrows = func(show = 1) {
