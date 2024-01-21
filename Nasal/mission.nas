@@ -102,6 +102,8 @@ var stop_mission = func {
 
 	foreach(var obj; mission_objects) {
         obj.del();
+        #print(id(obj));
+        #settimer(func obj.parents = nil, 0);
     }
 	setsize(mission_objects, 0);
 
@@ -207,7 +209,7 @@ var file_found = func(filename) {
     return call(io.readfile, [filename], nil, nil, var err=[]);
 }
 
-var play_sound = func (file) {
+var play_sound = func (file, vol = 1.0) {
 
     var filepath = mission_root ~ "/Sounds/";
     if (!file_found(filepath ~ "/" ~ file)) {
@@ -217,13 +219,62 @@ var play_sound = func (file) {
 	var sound = {
 		path : filepath,
 		file : file,
-		volume : 1
+		volume : vol
 	};
 	fgcommand("play-audio-sample", props.Node.new(sound));
 }
 
 var speak = func (text) {
     setprop("/sim/sound/voices/atc", text);
+}
+
+
+var sim =
+{
+
+listeners: [
+    setlistener("/sim/startup/xsize", func sim._update_xy_size()),
+    setlistener("/sim/startup/ysize", func sim._update_xy_size()),
+],
+
+
+x_size: func ()
+{
+    me._x_size;
+},
+
+
+y_size: func ()
+{
+    me._y_size;
+},
+
+
+init: func ()
+{
+    me._update_xy_size();
+},
+
+_update_xy_size: func ()
+{
+    me._x_size = getprop("/sim/startup/xsize");
+    me._y_size = getprop("/sim/startup/ysize");
+    setprop("/sim/mission/signals/xy-size-updated", 1);
+},
+
+}; #sim
+
+sim.init();
+
+
+# Scaling for other resolutions
+var scale = func (v, dim = "w")
+{
+    if ( dim == "w" ) {
+        v/1920 * sim.x_size();
+    } elsif ( dim == "h" ) {
+        v/1080 * sim.y_size();
+    }
 }
 
 print("Mission loaded");
