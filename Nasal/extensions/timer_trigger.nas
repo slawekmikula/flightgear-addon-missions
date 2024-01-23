@@ -46,8 +46,11 @@ mission.extension_add("MissionObject", {
 	stop: func {
 		me.timer.stop();
 
-		if (me._on_scr_timer)
+		if (me._on_scr_timer) {
+		    if (!me._stays_visible)
+			    setprop("/sim/mission/timer/hide-timer", 1);
 			setprop("/sim/mission/timer/stop-timer", 1);
+        }
 	},
 
 	del: func me.stop(),

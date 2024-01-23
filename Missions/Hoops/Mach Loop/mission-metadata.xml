@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<PropertyList>
+        <name>Mach Loop Challenge</name>
+        <skill-level>2</skill-level>
+
+        <authors>
+            <author>
+                <name>FGUK team (original AI scenario)</name>
+            </author>
+            <author>
+                <name>Slawek Mikula (mission conversion)</name>
+            </author>
+            <author>
+                <name>Marius_A (mission conversion)</name>
+            </author>
+        </authors>
+
+        <description>Mach Loop Challenge</description>
+</PropertyList>

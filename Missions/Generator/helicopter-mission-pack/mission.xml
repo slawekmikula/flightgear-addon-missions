@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+
+
+<PropertyList>
+
+    <include>load-mission-action.nas</include>
+
+    <nasal>
+        <file>Nasal/mission-generator.nas</file>
+    </nasal>
+
+    <object>
+        <name>TIMER_start_mission</name>
+        <type>timer-trigger</type>
+        <activated>1</activated>
+        <single-shot>1</single-shot>
+        <stop-time>1.0</stop-time>
+        <actions>
+            <object-reference>start_mission</object-reference>
+        </actions>
+    </object>
+
+
+    <object>
+        <name>start_mission</name>
+        <type>object-activation-action</type>
+        <object-state>1</object-state>
+        <reference-list>
+            <object-reference>mission_engine_out_landing</object-reference>
+        </reference-list>
+    </object>
+
+
+	<object>
+		<name>mission_engine_out_landing</name>
+		<type>load-mission-action</type>
+        <mission-file/>
+	</object>
+
+</PropertyList>

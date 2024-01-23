@@ -1,6 +1,8 @@
 
 var objects         = [];
 var handlers        = [];
+var generators      = [];
+var exclude_list    = [];
 
 var extensions_load = func {
 
@@ -9,10 +11,16 @@ var extensions_load = func {
     var i = 0;
 	var k = "";
 
+    #load canvas tools
+    globals["__mission"]["canvas"] = {};
+	foreach(var script; canvas_list()) {
+		_load_nasal(getprop("/sim/mission/root_path") ~ "/Nasal/extensions/canvas/" ~ script, "canvas");
+	}
+
     #load mission extension
 	foreach(var script; mission_node.getChildren("include")) {
 		globals["__mission"][k = "__" ~ i] = {};
-		_load_nasal(mission_root ~ "/extensions/" ~ script.getValue(), k);
+		_load_nasal(mission_root ~ "/Nasal/extensions/" ~ script.getValue(), k);
 		i += 1;
 	}
 
@@ -25,6 +33,7 @@ var extensions_load = func {
 }
 
 var extensions_clear = func {
+    setsize(generators, 0);
 	setsize(objects, 0);
 
 	foreach (var h; handlers) {
@@ -40,6 +49,8 @@ var extension_add = func (type, h) {
 		append (objects, h);
 	} elsif (type == "Handler") {
 		append (handlers, h);
+    } elsif (type == "ObjectGenerator") {
+        append (generators, h);
     }
 }
 
@@ -61,7 +72,32 @@ var extension_list = func {
 	return v;
 }
 
-var extensions_models_init = func() {
+var canvas_list = func {
+    var v = [];
+	var path = getprop("/sim/mission/root_path") ~ "/Nasal/extensions/canvas";
+	if((var dir = directory(path)) == nil) {
+        return;
+    }
+
+	foreach(var file; sort(dir, cmp)) {
+		if(size(file) > 4) {
+			if (substr(file, -4) == ".nas") {
+				append(v, file);
+            }
+        }
+    }
+
+	return v;
+
+}
+
+var mission_objects_init = func() {
+    foreach (var h; generators) {
+		if( hasmember(h, "init") ) {
+			h.init();
+        }
+    }
+
     foreach (var h; handlers) {
 		if( hasmember(h, "init") ) {
 			h.init();

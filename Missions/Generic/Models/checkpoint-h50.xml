@@ -2,6 +2,12 @@
 
 <PropertyList>
 	<path>checkpoint-h50.ac</path>
+
+    <effect>
+        <inherits-from>Effects/exterior-glass-reflection</inherits-from>
+        <object-name>pointer</object-name>
+    </effect>
+
 	<animation>
 		<type>rotate</type>
 		<object-name>pointer</object-name>
@@ -44,5 +50,19 @@
 		<object-name>pointer</object-name>
 		<enable-hot type="bool">false</enable-hot>
 	</animation>
-
+    <animation>
+        <type>blend</type>
+        <expression>
+            <value>0.5</value>
+        </expression>
+    </animation>
+    <animation>
+        <type>material</type> 
+         <object-name>pointer</object-name>
+         <emission>
+             <red>0</red>
+             <green>1</green>
+             <blue>0</blue>
+         </emission>
+    </animation>
 </PropertyList>
