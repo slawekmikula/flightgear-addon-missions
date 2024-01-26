@@ -50,6 +50,7 @@ mission.extension_add("MissionObject", {
 		    if (!me._stays_visible)
 			    setprop("/sim/mission/timer/hide-timer", 1);
 			setprop("/sim/mission/timer/stop-timer", 1);
+            setprop("/sim/mission/timer/current-time", me.current_time);
         }
 	},
 

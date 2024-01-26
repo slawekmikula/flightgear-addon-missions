@@ -1,47 +1,17 @@
 <?xml version="1.0"?>
 
 <PropertyList>
+
+
+
   <object>
     <type type="string">timer-trigger</type>
-    <activated type="double">1</activated>
+    <activated type="double">0</activated>
     <single-shot type="double">1</single-shot>
     <actions>
-      <object-reference type="string">SHOW_Hoop2_inactive</object-reference>
-      <object-reference n="1" type="string">SHOW_Hoop3_inactive</object-reference>
-      <object-reference n="2" type="string">SHOW_Hoop4_inactive</object-reference>
-      <object-reference n="3" type="string">SHOW_Hoop5_inactive</object-reference>
-      <object-reference n="4" type="string">SHOW_Hoop6_inactive</object-reference>
-      <object-reference n="5" type="string">SHOW_Hoop7_inactive</object-reference>
-      <object-reference n="6" type="string">SHOW_Hoop8_inactive</object-reference>
-      <object-reference n="7" type="string">SHOW_Hoop9_inactive</object-reference>
-      <object-reference n="8" type="string">SHOW_Hoop10_inactive</object-reference>
-      <object-reference n="9" type="string">SHOW_Hoop11_inactive</object-reference>
-      <object-reference n="10" type="string">SHOW_Hoop12_inactive</object-reference>
-      <object-reference n="11" type="string">SHOW_Hoop13_inactive</object-reference>
-      <object-reference n="12" type="string">SHOW_Hoop14_inactive</object-reference>
-      <object-reference n="13" type="string">SHOW_Hoop15_inactive</object-reference>
-      <object-reference n="14" type="string">SHOW_Hoop16_inactive</object-reference>
-      <object-reference n="15" type="string">SHOW_Hoop17_inactive</object-reference>
-      <object-reference n="16" type="string">SHOW_Hoop18_inactive</object-reference>
-      <object-reference n="17" type="string">SHOW_Hoop19_inactive</object-reference>
-      <object-reference n="18" type="string">SHOW_Hoop20_inactive</object-reference>
-      <object-reference n="19" type="string">SHOW_Hoop21_inactive</object-reference>
-      <object-reference n="20" type="string">SHOW_Hoop22_inactive</object-reference>
-      <object-reference n="21" type="string">SHOW_Hoop23_inactive</object-reference>
-      <object-reference n="22" type="string">SHOW_Hoop24_inactive</object-reference>
-      <object-reference n="23" type="string">SHOW_Hoop25_inactive</object-reference>
-      <object-reference n="24" type="string">SHOW_Hoop26_inactive</object-reference>
-      <object-reference n="25" type="string">SHOW_Hoop27_inactive</object-reference>
-      <object-reference n="26" type="string">SHOW_Hoop28_inactive</object-reference>
-      <object-reference n="27" type="string">SHOW_Hoop29_inactive</object-reference>
-      <object-reference n="28" type="string">SHOW_Hoop30_inactive</object-reference>
-      <object-reference n="29" type="string">SHOW_Hoop31_inactive</object-reference>
-      <object-reference n="30" type="string">SHOW_Hoop32_inactive</object-reference>
-      <object-reference n="31" type="string">SHOW_Hoop1_active</object-reference>
-      <object-reference n="32" type="string">ENABLE_Proximity_Hoop1</object-reference>
-      <object-reference n="33" type="string">ENABLE_POI_Hoop1</object-reference>
+      <object-reference type="string">RESET-mission</object-reference>
     </actions>
-    <stop-time type="double">2</stop-time>
+    <stop-time type="double">2.0</stop-time>
     <name type="string">Startup-timer</name>
   </object>
   <object n="1">
@@ -56,13 +26,14 @@
     <stop-time type="double">999999</stop-time>
     <name type="string">Timer-Onscreen</name>
     <on-screen-timer type="double">1</on-screen-timer>
+    <stays-visible>1</stays-visible>
   </object>
   <object n="3">
     <type type="string">object-activation-action</type>
     <reference-list>
       <object-reference type="string">Timer-Onscreen</object-reference>
     </reference-list>
-    <name type="string">HIDE_Timer</name>
+    <name type="string">STOP_Timer</name>
     <object-state type="double">0</object-state>
   </object>
   <object n="4">
@@ -4723,7 +4694,9 @@
       <object-reference n="2" type="string">SHOW_Hoop32_inactive</object-reference>
       <object-reference n="3" type="string">DISABLE_Proximity_Hoop32</object-reference>
       <object-reference n="4" type="string">DISABLE_POI_Hoop32</object-reference>
-      <object-reference n="5" type="string">HIDE_Timer</object-reference>
+      <object-reference n="5" type="string">STOP_Timer</object-reference>
+      <object-reference>STOP_Timer</object-reference>
+      <object-reference>SHOW-menu-end</object-reference>
     </on-enter-actions>
     <areas>
       <object-reference type="string">Area_Hoop32</object-reference>
@@ -4775,4 +4748,441 @@
     <name type="string">DISABLE_POI_Hoop32</name>
     <object-state type="double">0</object-state>
   </object>
+
+  <!--
+      =================================================
+  -->
+
+
+  <!--
+       Timers
+  -->
+
+  <object>
+    <name>SHOW-Briefing-timer</name>
+    <type>timer-trigger</type>
+    <single-shot>1</single-shot>
+    <activated>1</activated>
+    <stop-time>1.0</stop-time>
+    <actions>
+      <object-reference>SHOW-Mission-briefing</object-reference>
+    </actions>
+  </object>
+
+  <!--
+      Actions
+  -->
+
+  <object>
+    <name>SHOW-Mission-briefing</name>
+    <type>object-activation-action</type>
+    <object-state>1</object-state>
+    <reference-list>
+      <object-reference>Mission briefing</object-reference>
+    </reference-list>
+  </object>
+
+  <object>
+    <name>DISABLE-prop-triggers</name>
+    <type>object-activation-action</type>
+    <object-state>0</object-state>
+    <reference-list>
+      <object-reference>PROP-trigger-complete-0</object-reference>
+      <object-reference>PROP-trigger-complete-1</object-reference>
+      <object-reference>PROP-trigger-complete-2</object-reference>
+      <object-reference>PROP-trigger-fail-1</object-reference>
+      <object-reference>PROP-trigger-fail-2</object-reference>
+    </reference-list>
+  </object>
+
+  <object>
+    <name>ENABLE-prop-triggers</name>
+    <type>object-activation-action</type>
+    <object-state>1</object-state>
+    <reference-list>
+      <object-reference>PROP-trigger-complete-0</object-reference>
+      <object-reference>PROP-trigger-complete-1</object-reference>
+      <object-reference>PROP-trigger-complete-2</object-reference>
+      <object-reference>PROP-trigger-fail-1</object-reference>
+      <object-reference>PROP-trigger-fail-2</object-reference>
+    </reference-list>
+  </object>
+
+
+
+
+
+
+  <object>
+    <name>SET-Difficulty-Easy</name>
+    <type>run-binding-action</type>
+    <binding>
+      <command>property-assign</command>
+      <property>/sim/mission/current_mission/difficulty</property>
+      <value>0</value>
+    </binding>
+  </object>
+
+  <object>
+    <name>SET-Difficulty-Normal</name>
+    <type>run-binding-action</type>
+    <binding>
+      <command>property-assign</command>
+      <property>/sim/mission/current_mission/difficulty</property>
+      <value>1</value>
+    </binding>
+  </object>
+
+  <object>
+    <name>SET-Difficulty-Hard</name>
+    <type>run-binding-action</type>
+    <binding>
+      <command>property-assign</command>
+      <property>/sim/mission/current_mission/difficulty</property>
+      <value>2</value>
+    </binding>
+  </object>
+
+  <object>
+    <name>START-Mission</name>
+    <type>object-activation-action</type>
+    <object-state>1</object-state>
+    <reference-list>
+      <object-reference>Startup-timer</object-reference>
+    </reference-list>
+  </object>
+
+
+  <object>
+    <type>mission-briefing-action</type>
+    <name>Mission briefing</name>
+    <mission-title>Mach Loop challenge</mission-title>
+
+    <difficulty>
+      <difficulty-label>
+        Easy
+      </difficulty-label>
+      <objectives>
+        <object-reference>Objective-0</object-reference>
+      </objectives>
+      <actions>
+        <object-reference>SET-Difficulty-Easy</object-reference>
+        <object-reference>START-Mission</object-reference>
+      </actions>
+    </difficulty>
+
+    <difficulty>
+      <difficulty-label>
+        Normal
+      </difficulty-label>
+      <objectives>
+        <object-reference>Objective-1</object-reference>
+      </objectives>
+      <actions>
+        <object-reference>START-Mission</object-reference>
+        <object-reference>SET-Difficulty-Normal</object-reference>
+      </actions>
+    </difficulty>
+
+    <difficulty>
+      <difficulty-label>
+        Hard
+      </difficulty-label>
+      <objectives>
+        <object-reference>Objective-2</object-reference>
+      </objectives>
+      <actions>
+        <object-reference>START-Mission</object-reference>
+        <object-reference>SET-Difficulty-Hard</object-reference>
+      </actions>
+    </difficulty>
+  </object>
+
+
+  <!-- Property triggers -->
+
+  <object>
+    <name>PROP-trigger-complete-0</name>
+    <type>property-trigger</type>
+    <update-interval>1</update-interval>
+    <condition>
+      <equals>
+        <property>/sim/mission/current_mission/difficulty</property>
+        <value>0</value>
+      </equals>
+    </condition>
+    <actions>
+      <object-reference>DISABLE-prop-triggers</object-reference>
+      <object-reference>COMPLETE-Objective-0</object-reference>
+    </actions>
+  </object>
+
+
+  <object>
+    <name>PROP-trigger-complete-1</name>
+    <type>property-trigger</type>
+    <update-interval>1</update-interval>
+    <condition>
+      <equals>
+        <property>/sim/mission/current_mission/difficulty</property>
+        <value>1</value>
+      </equals>
+      <less-than>
+        <property>/sim/mission/timer/current-time</property>
+        <value>300</value>
+      </less-than>
+    </condition>
+    <actions>
+      <object-reference>DISABLE-prop-triggers</object-reference>
+      <object-reference>COMPLETE-Objective-1</object-reference>
+    </actions>
+  </object>
+
+  <object>
+    <name>PROP-trigger-complete-2</name>
+    <type>property-trigger</type>
+    <update-interval>1</update-interval>
+    <condition>
+      <equals>
+        <property>/sim/mission/current_mission/difficulty</property>
+        <value>2</value>
+      </equals>
+      <less-than>
+        <property>/sim/mission/timer/current-time</property>
+        <value>180</value>
+      </less-than>
+    </condition>
+    <actions>
+      <object-reference>DISABLE-prop-triggers</object-reference>
+      <object-reference>COMPLETE-Objective-2</object-reference>
+    </actions>
+  </object>
+
+  <object>
+    <name>PROP-trigger-fail-1</name>
+    <type>property-trigger</type>
+    <update-interval>1</update-interval>
+    <condition>
+      <equals>
+        <property>/sim/mission/current_mission/difficulty</property>
+        <value>1</value>
+      </equals>
+      <greater-than-equals>
+        <property>/sim/mission/timer/current-time</property>
+        <value>300</value>
+      </greater-than-equals>
+    </condition>
+    <actions>
+      <object-reference>DISABLE-prop-triggers</object-reference>
+      <object-reference>FAIL-Objective-1</object-reference>
+    </actions>
+  </object>
+
+  <object>
+    <name>PROP-trigger-fail-2</name>
+    <type>property-trigger</type>
+    <update-interval>1</update-interval>
+    <condition>
+      <equals>
+        <property>/sim/mission/current_mission/difficulty</property>
+        <value>2</value>
+      </equals>
+      <greater-than-equals>
+        <property>/sim/mission/timer/current-time</property>
+        <value>180</value>
+      </greater-than-equals>
+    </condition>
+    <actions>
+      <object-reference>DISABLE-prop-triggers</object-reference>
+      <object-reference>FAIL-Objective-2</object-reference>
+    </actions>
+  </object>
+
+
+
+
+
+  <!-- Objectives -->
+
+  <object>
+    <name>Objective-0</name>
+    <type>objective</type>
+    <text>
+      Fly around the Mach Loop.
+    </text>
+    <optional>0</optional>
+  </object>
+
+  <object>
+    <name>Objective-1</name>
+    <type>objective</type>
+    <text>
+      Fly around the Mach Loop in less than 5 min.
+    </text>
+    <optional>0</optional>
+  </object>
+
+  <object>
+    <name>Objective-2</name>
+    <type>objective</type>
+    <text>
+      Fly around the Mach Loop in less than 3 min.
+    </text>
+    <optional>0</optional>
+  </object>
+
+
+
+
+  <object>
+    <name>COMPLETE-Objective-0</name>
+    <type>objective-status-action</type>
+    <objective-status>completed</objective-status>
+    <objectives>
+      <object-reference>Objective-0</object-reference>
+    </objectives>
+  </object>
+
+  <object>
+    <name>COMPLETE-Objective-1</name>
+    <type>objective-status-action</type>
+    <objective-status>completed</objective-status>
+    <objectives>
+      <object-reference>Objective-1</object-reference>
+    </objectives>
+  </object>
+
+  <object>
+    <name>COMPLETE-Objective-2</name>
+    <type>objective-status-action</type>
+    <objective-status>completed</objective-status>
+    <objectives>
+      <object-reference>Objective-2</object-reference>
+    </objectives>
+  </object>
+
+
+  <object>
+    <name>FAIL-Objective-1</name>
+    <type>objective-status-action</type>
+    <objective-status>failed</objective-status>
+    <objectives>
+      <object-reference>Objective-1</object-reference>
+    </objectives>
+  </object>
+
+  <object>
+    <name>FAIL-Objective-2</name>
+    <type>objective-status-action</type>
+    <objective-status>failed</objective-status>
+    <objectives>
+      <object-reference>Objective-2</object-reference>
+    </objectives>
+  </object>
+
+
+
+  <object>
+    <name>SHOW-menu-end</name>
+    <type>object-activation-action</type>
+    <object-state>1</object-state>
+    <reference-list>
+      <object-reference>Menu-end</object-reference>
+    </reference-list>
+  </object>
+
+
+  <object>
+	<type>menu-prompt-trigger</type>
+	<name>Menu-end</name>
+	<activated>0</activated>
+	<text>Improve time:</text>
+	<menu-item>
+	  <text>YES</text>
+	  <actions>
+		<object-reference>RESET-mission</object-reference>
+        <object-reference>HIDE-timer</object-reference>
+        <object-reference>RESET-timer</object-reference>
+	  </actions>
+	</menu-item>
+    <menu-item>
+      <text>NO</text>
+      <actions>
+        <object-reference>ENABLE-prop-triggers</object-reference>
+      </actions>
+    </menu-item>
+  </object>
+
+
+
+
+
+  <object>
+    <name>RESET-timer</name>
+    <type>reset-timer-action</type>
+    <triggers>
+      <object-reference>Timer-Onscreen</object-reference>
+    </triggers>
+  </object>
+
+  <object>
+    <name>HIDE-timer</name>
+    <type>run-binding-action</type>
+    <binding>
+      <command>property-assign</command>
+      <property>/sim/mission/timer/hide-timer</property>
+      <value>1</value>
+    </binding>
+    <binding>
+      <command>property-assign</command>
+      <property>/sim/mission/timer/stop-timer</property>
+      <value>1</value>
+    </binding>
+  </object>
+
+
+  <object>
+    <name>RESET-mission</name>
+    <type>object-activation-action</type>
+    <object-state>1</object-state>
+    <reference-list>
+      <object-reference>SHOW_Hoop2_inactive</object-reference>
+      <object-reference>SHOW_Hoop3_inactive</object-reference>
+      <object-reference>SHOW_Hoop4_inactive</object-reference>
+      <object-reference>SHOW_Hoop5_inactive</object-reference>
+      <object-reference>SHOW_Hoop6_inactive</object-reference>
+      <object-reference>SHOW_Hoop7_inactive</object-reference>
+      <object-reference>SHOW_Hoop8_inactive</object-reference>
+      <object-reference>SHOW_Hoop9_inactive</object-reference>
+      <object-reference>SHOW_Hoop10_inactive</object-reference>
+      <object-reference>SHOW_Hoop11_inactive</object-reference>
+      <object-reference>SHOW_Hoop12_inactive</object-reference>
+      <object-reference>SHOW_Hoop13_inactive</object-reference>
+      <object-reference>SHOW_Hoop14_inactive</object-reference>
+      <object-reference>SHOW_Hoop15_inactive</object-reference>
+      <object-reference>SHOW_Hoop16_inactive</object-reference>
+      <object-reference>SHOW_Hoop17_inactive</object-reference>
+      <object-reference>SHOW_Hoop18_inactive</object-reference>
+      <object-reference>SHOW_Hoop19_inactive</object-reference>
+      <object-reference>SHOW_Hoop20_inactive</object-reference>
+      <object-reference>SHOW_Hoop21_inactive</object-reference>
+      <object-reference>SHOW_Hoop22_inactive</object-reference>
+      <object-reference>SHOW_Hoop23_inactive</object-reference>
+      <object-reference>SHOW_Hoop24_inactive</object-reference>
+      <object-reference>SHOW_Hoop25_inactive</object-reference>
+      <object-reference>SHOW_Hoop26_inactive</object-reference>
+      <object-reference>SHOW_Hoop27_inactive</object-reference>
+      <object-reference>SHOW_Hoop28_inactive</object-reference>
+      <object-reference>SHOW_Hoop29_inactive</object-reference>
+      <object-reference>SHOW_Hoop30_inactive</object-reference>
+      <object-reference>SHOW_Hoop31_inactive</object-reference>
+      <object-reference>SHOW_Hoop32_inactive</object-reference>
+      <object-reference>HIDE_Hoop1_inactive</object-reference>
+      <object-reference>SHOW_Hoop1_active</object-reference>
+      <object-reference>ENABLE_Proximity_Hoop1</object-reference>
+      <object-reference>ENABLE_POI_Hoop1</object-reference>
+    </reference-list>
+  </object>
+
+
 </PropertyList>

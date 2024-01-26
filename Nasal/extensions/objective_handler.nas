@@ -62,17 +62,19 @@ mission.extension_add("Handler", {
 
 	check_objectives: func ()
     {
+        #setprop("/sim/mission/signals/objectives-changed", 1);
+        print(size(__mission.objectives));
 		var failed = 0;
 		var completed = 0;
-		var objectives = me.node.getChildren("objective");
-		foreach (var g; objectives)
-			if ((var state = g.getValue("status")) == "failed")
+		#var objectives = me.node.getChildren("objective");
+		foreach (var g; __mission.objectives)
+			if ((var state = g.status()) == "failed")
 				failed += 1;
-			elsif (state == "completed")
+			elsif (state == "completed") # or "hidden" -- ?
 				completed += 1;
 		if (failed)
 			mission_completed(0);
-		elsif (completed == size(objectives))
+		elsif (completed == size(__mission.objectives))
 			mission_completed(1);
 		state_changed = 0;
         settimer(func setprop("/sim/mission/signals/objectives-changed", 1), 1);
