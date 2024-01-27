@@ -4,13 +4,15 @@ mission.extension_add("Handler", {
 		me.timer = maketimer(0.02, func me._loop());
 
 		#me._margin = 5;
-		me._offset = 5;
 
-		var w = 200;
-		var h = 33;
-		var bg_color = [0.2, 0.4, 0.7, 0.9];
+
+		var w = mission.scale(200, "w");
+		var h = mission.scale(35, "h");
+		#var bg_color = [0.2, 0.4, 0.7, 0.9];
+        var bg_color = "#282c34aa";
 		var line_color = [1, 1, 1, 0.8];
 
+        me._offset = 0.15 * h;
 		me.window = canvas.Window.new([w,h]);
 
 		me._scr_x = func getprop("/sim/startup/xsize");
@@ -29,21 +31,25 @@ mission.extension_add("Handler", {
 		var x_right = w - x_left;
 		var y_top = x_left;
 		var y_bottom = th + x_left;
+        var bg_cfg = {
+            "border-top-radius":    th/2.1,
+            "border-bottom-radius": th/2.1,
+        };
+
 		me.MsgBox.createChild("path")
-			.moveTo(x_left, y_top)
-			.horizTo(x_right)
-			.vertTo(y_bottom)
-			.horizTo(x_left)
-			.close()
-			.setColor(line_color)
+            .rect(x_left, y_top, x_right - x_left - 2, th, bg_cfg )
+            .setColor("#282c34ff")
+			#.setColor(line_color)
 			.setColorFill(bg_color)
-			.setStrokeLineWidth(2);
+            .set("blend-source-alpha", "one")
+			.setStrokeLineWidth(1);
 
 		me.Text = me.MsgBox.createChild("text")
 			.setTranslation(w/2, h/2)
 			.setText("00:00:00.0")
 			.setAlignment("center-center")
 			.setFontSize(0.8 * th)
+            .set("blend-source-alpha", "one")
 			.setFont("LiberationFonts/LiberationSans-Bold.ttf")
 			.setColor(1,1,1);
 
