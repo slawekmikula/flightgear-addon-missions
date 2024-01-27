@@ -8,12 +8,14 @@
                 <name>FGUK team (original AI scenario)</name>
             </author>
             <author>
-                <name>Slawek Mikula (mission conversion)</name>
+                <name>Sławek Mikuła (mission conversion)</name>
             </author>
             <author>
                 <name>Marius_A (mission conversion)</name>
             </author>
         </authors>
 
-        <description>Mach Loop Challenge</description>
+        <description>Test your low-level flying skills around the series of valleys in the United Kingdom in west-central Wales.
+
+Before flying this mission, start at Llanbedr (EGOD) airport.</description>
 </PropertyList>

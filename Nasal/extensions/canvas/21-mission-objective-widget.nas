@@ -22,6 +22,7 @@ widgets.missionObjective = {
             boxStrokeLineWidth:    2,
             checkStrokeLineWidth:  4,
             cancelStrokeLineWidth: 4,
+            failedStrokeLineWidth: 4,
             pendingTextColor:      "#ffffff",
             canceledTextColor:     "#555555",
             boxColor:              "#ffffff",
@@ -38,6 +39,7 @@ widgets.missionObjective = {
         m._h = 20; # checkbox height
 
         var h = m._h;
+        var h2 = h * 1.4;
         m.symbols = {
             box:    canvas.draw.rectangle(m.root, h, h, 0, 0),
             check:  m.root.createChild("path").moveTo(-h/2, -h/2)
@@ -49,7 +51,11 @@ widgets.missionObjective = {
                                                          .lineTo(h/2, 0)
                                                          .setRotation(-45 * D2R)
                                                          .setTranslation(h/2, h/2),
-            failed: m.root.createChild("path"),
+            failed: m.root.createChild("path").moveTo(-h2/2, -h2/2)
+                                              .lineTo(h2/2, h2/2)
+                                              .moveTo(h2/2, -h2/2)
+                                              .lineTo(-h2/2, h2/2)
+                                              .setTranslation(h/2,h/2),
         };
         m.text = m.root.createChild("text").setAlignment("left-top");
 
@@ -58,34 +64,50 @@ widgets.missionObjective = {
         return m;
 
     },
-    status: func(s = nil) {
+
+    status: func (s = nil)
+    {
         if (s == nil)
             return (me.node.getValue("status"));
         me.node.setValue("status", s);
         me.redraw();
     },
 
-    cancel: func {
+    cancel: func ()
+    {
         me.text.setColor(me.cfg.canceledTextColor);
         me.symbols.check.hide();
         me.symbols.cancel.show();
     },
 
-    setTranslation: func(x, y) {
+    setTranslation: func (x, y)
+    {
         me.translation = [x, y];
         me.root.setTranslation(me.translation[0], me.translation[1]);
         return me;
     },
 
-    pending: func {
+    pending: func ()
+    {
         me.symbols.cancel.hide();
         me.symbols.check.hide();
+        me.symbols.failed.hide();
     },
 
-    complete: func {
+    complete: func ()
+    {
         me.symbols.cancel.hide();
         me.symbols.check.show();
     },
+
+    fail: func ()
+    {
+        me.symbols.cancel.hide();
+        me.symbols.check.hide();
+        me.symbols.failed.show();
+    },
+
+
 
 
 hide: func ()
@@ -106,6 +128,8 @@ update_status: func ()
 
     if (s == "pending")
         me.pending();
+    elsif (s == "failed")
+        me.fail();
     elsif (s == "canceled")
         me.cancel();
     elsif (s == "completed")
@@ -124,6 +148,10 @@ update_status: func ()
 
         me.symbols.cancel.setColor(me.cfg.cancelColor)
                          .setStrokeLineWidth(me.cfg.cancelStrokeLineWidth);
+
+        me.symbols.failed.setColor(me.cfg.failedColor)
+                         .setStrokeLineWidth(me.cfg.failedStrokeLineWidth);
+
 
         me.text.setMaxWidth(me.data.width * me.cfg.widthRatio - 2 * me._h)
                .setColor(me.cfg.pendingTextColor)

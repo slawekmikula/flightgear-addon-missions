@@ -7,7 +7,7 @@ var skill_level = -1;
 
 var objectivesN = props.getNode("/sim/mission/objectives", 1);
 var _objectives = [];
-var objectives = [];
+__mission.objectives = [];
 
 var objectives_mode_enabled = 0;
 
@@ -185,7 +185,7 @@ var show_objectives = func ()
 }
 
 var filter_objectives = func(skill) {
-    setsize(objectives, 0);
+    setsize(__mission.objectives, 0);
     foreach(var obj; _objectives) {
         #obj.status("hidden").hide();
         obj.hide();
@@ -193,7 +193,7 @@ var filter_objectives = func(skill) {
             if (obj.name == a) {
                 #obj.status("pending");
                 if (obj.status() != "hidden")
-                    append(objectives, obj);
+                    append(__mission.objectives, obj);
             }
         }
     }
@@ -344,7 +344,7 @@ var show_briefing = func(b) {
         scrollDownButton: arrowDown,
         scrollArea: [0.82, 0.62],
         movement:   [0.08, 0.22],
-        items: objectives,
+        items: __mission.objectives,
     });
 
     cycle_difficulty(mission_briefing.label);
