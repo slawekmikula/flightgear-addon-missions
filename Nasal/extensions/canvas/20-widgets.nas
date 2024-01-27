@@ -71,7 +71,7 @@ new: func(root, data, cfg = nil)
             func ()
             {
                 call(m.cfg.clickedFunc, []);
-                ui_sound("click2");
+                mission.ui_sound("click2");
             }
         );
 
@@ -79,7 +79,7 @@ new: func(root, data, cfg = nil)
             func ()
             {
                 m.text.setColor(m.cfg.mouseoverColor);
-                ui_sound("click");
+                mission.ui_sound("click");
             }
         );
 

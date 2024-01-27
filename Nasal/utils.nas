@@ -31,9 +31,9 @@ var repair_str = func(s) {
 var sound_library = {
     _playing: 0,
 
-    "click": ["click.wav", 0.2, 0.0],
-    "click2": ["appear-online.wav", 1.0, 0.3],
-    "click4": ["click4.wav", 0.25, 0.18],
+    "click": ["ui/click.wav", 0.2, 0.0],
+    "click2": ["ui/appear-online.wav", 1.0, 0.3],
+    "click4": ["ui/click4.wav", 0.25, 0.18],
     "message1": ["ui/message1.wav", 1.0, 0.8],
 };
 
