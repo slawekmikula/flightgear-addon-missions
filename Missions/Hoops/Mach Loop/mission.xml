@@ -4696,7 +4696,7 @@
       <object-reference n="4" type="string">DISABLE_POI_Hoop32</object-reference>
       <object-reference n="5" type="string">STOP_Timer</object-reference>
       <object-reference>STOP_Timer</object-reference>
-      <object-reference>SHOW-menu-end</object-reference>
+      <object-reference>DELAY-SHOW-menu-end</object-reference>
     </on-enter-actions>
     <areas>
       <object-reference type="string">Area_Hoop32</object-reference>
@@ -4768,6 +4768,76 @@
       <object-reference>SHOW-Mission-briefing</object-reference>
     </actions>
   </object>
+
+
+  <object>
+    <name>DELAY-COMPLETE-Objective-0</name>
+    <type>timer-trigger</type>
+    <single-shot>1</single-shot>
+    <activated>0</activated>
+    <stop-time>1.0</stop-time>
+    <actions>
+      <object-reference>COMPLETE-Objective-0</object-reference>
+    </actions>
+  </object>
+
+  <object>
+    <name>DELAY-COMPLETE-Objective-1</name>
+    <type>timer-trigger</type>
+    <single-shot>1</single-shot>
+    <activated>0</activated>
+    <stop-time>1.0</stop-time>
+    <actions>
+      <object-reference>COMPLETE-Objective-1</object-reference>
+    </actions>
+  </object>
+
+  <object>
+    <name>DELAY-COMPLETE-Objective-2</name>
+    <type>timer-trigger</type>
+    <single-shot>1</single-shot>
+    <activated>0</activated>
+    <stop-time>1.0</stop-time>
+    <actions>
+      <object-reference>COMPLETE-Objective-2</object-reference>
+    </actions>
+  </object>
+
+
+  <object>
+    <name>DELAY-FAIL-Objective-1</name>
+    <type>timer-trigger</type>
+    <single-shot>1</single-shot>
+    <activated>0</activated>
+    <stop-time>1.0</stop-time>
+    <actions>
+      <object-reference>FAIL-Objective-1</object-reference>
+    </actions>
+  </object>
+
+  <object>
+    <name>DELAY-FAIL-Objective-2</name>
+    <type>timer-trigger</type>
+    <single-shot>1</single-shot>
+    <activated>0</activated>
+    <stop-time>1.0</stop-time>
+    <actions>
+      <object-reference>FAIL-Objective-2</object-reference>
+    </actions>
+  </object>
+
+  <object>
+    <name>DELAY-SHOW-menu-end</name>
+    <type>timer-trigger</type>
+    <single-shot>1</single-shot>
+    <activated>0</activated>
+    <stop-time>1.0</stop-time>
+    <actions>
+      <object-reference>SHOW-menu-end</object-reference>
+    </actions>
+  </object>
+
+
 
   <!--
       Actions
@@ -4913,7 +4983,7 @@
     </condition>
     <actions>
       <object-reference>DISABLE-prop-triggers</object-reference>
-      <object-reference>COMPLETE-Objective-0</object-reference>
+      <object-reference>DELAY-COMPLETE-Objective-0</object-reference>
     </actions>
   </object>
 
@@ -4934,7 +5004,7 @@
     </condition>
     <actions>
       <object-reference>DISABLE-prop-triggers</object-reference>
-      <object-reference>COMPLETE-Objective-1</object-reference>
+      <object-reference>DELAY-COMPLETE-Objective-1</object-reference>
     </actions>
   </object>
 
@@ -4954,7 +5024,7 @@
     </condition>
     <actions>
       <object-reference>DISABLE-prop-triggers</object-reference>
-      <object-reference>COMPLETE-Objective-2</object-reference>
+      <object-reference>DELAY-COMPLETE-Objective-2</object-reference>
     </actions>
   </object>
 
@@ -4974,7 +5044,7 @@
     </condition>
     <actions>
       <object-reference>DISABLE-prop-triggers</object-reference>
-      <object-reference>FAIL-Objective-1</object-reference>
+      <object-reference>DELAY-FAIL-Objective-1</object-reference>
     </actions>
   </object>
 
@@ -4994,7 +5064,7 @@
     </condition>
     <actions>
       <object-reference>DISABLE-prop-triggers</object-reference>
-      <object-reference>FAIL-Objective-2</object-reference>
+      <object-reference>DELAY-FAIL-Objective-2</object-reference>
     </actions>
   </object>
 
@@ -5017,7 +5087,7 @@
     <name>Objective-1</name>
     <type>objective</type>
     <text>
-      Fly around the Mach Loop in less than 5 min.
+      Fly around the Mach Loop in less than 5 min
     </text>
     <optional>0</optional>
   </object>
@@ -5026,7 +5096,7 @@
     <name>Objective-2</name>
     <type>objective</type>
     <text>
-      Fly around the Mach Loop in less than 3 min.
+      Fly around the Mach Loop in less than 3 min
     </text>
     <optional>0</optional>
   </object>
@@ -5096,7 +5166,7 @@
 	<type>menu-prompt-trigger</type>
 	<name>Menu-end</name>
 	<activated>0</activated>
-	<text>Improve time:</text>
+	<text>Improve time?</text>
 	<menu-item>
 	  <text>YES</text>
 	  <actions>
@@ -5122,6 +5192,7 @@
     <type>reset-timer-action</type>
     <triggers>
       <object-reference>Timer-Onscreen</object-reference>
+      <object-reference>DELAY-SHOW-menu-end</object-reference>
     </triggers>
   </object>
 
